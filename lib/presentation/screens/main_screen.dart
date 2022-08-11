@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hungryzone/screens/chat_screen.dart';
-import 'package:hungryzone/screens/profile_screen.dart';
 
 import '../widgets/bottom_navigator.dart';
 import 'bag_screen.dart';
+import 'chat_screen.dart';
 import 'home_screen.dart';
 import 'location_screen.dart';
+import 'profile_screen.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);

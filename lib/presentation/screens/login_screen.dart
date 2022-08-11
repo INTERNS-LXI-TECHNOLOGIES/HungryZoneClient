@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hungryzone/const/const.dart';
-import 'package:hungryzone/screens/signup_screen.dart';
 
 import 'main_screen.dart';
+import 'signup_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

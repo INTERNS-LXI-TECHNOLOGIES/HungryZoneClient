@@ -1,14 +1,25 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: unnecessary_const
 
-import '../const/const.dart';
+import 'package:flutter/material.dart';
+import 'package:hungryzone/database/model/operations.dart';
+import 'package:hungryzone/database/model/user_model.dart';
+
+import '../../const/const.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String id = "sign_up_page";
-  const SignUpPage({Key? key}) : super(key: key);
+
+  SignUpPage({Key? key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
+
+TextEditingController firstNameController = TextEditingController();
+TextEditingController lastNameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
+TextEditingController phoneNumberController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
 
 class _SignUpPageState extends State<SignUpPage> {
   @override
@@ -90,62 +101,67 @@ class _SignUpPageState extends State<SignUpPage> {
                           ]),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           TextField(
-                            decoration: InputDecoration(
+                            controller: firstNameController,
+                            decoration: const InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 border: InputBorder.none,
                                 hintText: "First Name",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                                hintStyle: const TextStyle(color: Colors.grey)),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 0.5,
                             height: 10,
                           ),
                           TextField(
-                            decoration: InputDecoration(
+                            controller: lastNameController,
+                            decoration: const InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 10),
                                 border: InputBorder.none,
                                 hintText: "Last Name",
                                 hintStyle: TextStyle(color: Colors.grey)),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 0.5,
                             height: 10,
                           ),
                           TextField(
-                            decoration: InputDecoration(
+                            controller: emailController,
+                            decoration: const InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 10),
                                 border: InputBorder.none,
                                 hintText: "Email",
                                 hintStyle: TextStyle(color: Colors.grey)),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 0.5,
                             height: 10,
                           ),
                           TextField(
-                            decoration: InputDecoration(
+                            controller: phoneNumberController,
+                            decoration: const InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 border: InputBorder.none,
                                 hintText: "Phone",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                                hintStyle: const TextStyle(color: Colors.grey)),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 0.5,
                             height: 10,
                           ),
                           TextField(
-                            decoration: InputDecoration(
+                            controller: passwordController,
+                            decoration: const InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 border: InputBorder.none,
                                 hintText: "Password",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                                hintStyle: const TextStyle(color: Colors.grey)),
                           ),
                         ],
                       ),
@@ -156,7 +172,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                     // #signup_button
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        onUserAdd();
+                      },
                       height: 45,
                       minWidth: 240,
                       shape: const StadiumBorder(),
@@ -200,5 +218,28 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  Future<void> onUserAdd() async {
+    final _firstName = firstNameController.text;
+    final _lastName = lastNameController.text;
+    final _emailId = emailController.text;
+    final _phoneNumber = phoneNumberController.text;
+    final _passwords = passwordController.text;
+    if (_firstName.isEmpty ||
+        _lastName.isEmpty ||
+        _emailId.isEmpty ||
+        _phoneNumber.isEmpty ||
+        _passwords.isEmpty) {
+      return;
+    } else {
+      final _user = UserModel(
+          firstName: _firstName,
+          lastName: _lastName,
+          emailId: _emailId,
+          phoneNumber: _phoneNumber,
+          passwords: _passwords);
+      addUser(_user);
+    }
   }
 }
