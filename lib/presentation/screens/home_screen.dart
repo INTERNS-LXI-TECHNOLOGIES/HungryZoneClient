@@ -1,5 +1,6 @@
 import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 import 'package:flutter/material.dart';
+import 'package:hungryzone/database/model/operations.dart';
 
 import '../../const/const.dart';
 
@@ -16,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getAllUser();
     return Scaffold(
       drawer: CurvedDrawer(
         color: Colors.white,

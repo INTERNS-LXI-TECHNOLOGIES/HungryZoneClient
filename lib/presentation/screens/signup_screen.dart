@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
 import 'package:hungryzone/database/model/operations.dart';
@@ -174,6 +174,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     MaterialButton(
                       onPressed: () {
                         onUserAdd();
+                        firstNameController.clear();
+                        lastNameController.clear();
+                        emailController.clear();
+                        phoneNumberController.clear();
+                        passwordController.clear();
                       },
                       height: 45,
                       minWidth: 240,
