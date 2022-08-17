@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hungryzone/database/model/user_model.dart';
+import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
 
-import 'presentation/blocs/bloc/auth_bloc.dart';
+import 'presentation/bloc/authentication_bloc/auth_bloc.dart';
+
 import 'presentation/screens/splash_screen.dart';
 
 Future<void> main() async {
@@ -21,8 +23,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => HomeScreenBloc(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

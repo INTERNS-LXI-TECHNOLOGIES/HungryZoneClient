@@ -1,6 +1,8 @@
 import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryzone/database/model/operations.dart';
+import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
 
 import '../../const/const.dart';
 
@@ -90,21 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container catgoryStatusList(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: MediaQuery.of(context).size.height / 5.5,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: categoryList.length,
-        itemBuilder: (ctx, i) {
+        itemBuilder: (ctx, cateIndex) {
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    currentSelected = i;
+                    currentSelected = cateIndex;
                   });
                 },
                 child: Column(
@@ -114,14 +116,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 100,
                       width: 80,
                       decoration: BoxDecoration(
-                        color:
-                            currentSelected == i ? Colors.black : Colors.blue,
+                        color: currentSelected == cateIndex
+                            ? Colors.black
+                            : Colors.blue,
                         borderRadius: BorderRadius.circular(15),
                         image: DecorationImage(
                           image: const AssetImage('assets/images/logo.jpg'),
                           fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
-                            currentSelected == i
+                            currentSelected == cateIndex
                                 ? Colors.black.withOpacity(.5)
                                 : Colors.black.withOpacity(.85),
                             BlendMode.darken,
@@ -142,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "Category",
                       style: TextStyle(
-                        fontWeight: currentSelected == i
+                        fontWeight: currentSelected == cateIndex
                             ? FontWeight.bold
                             : FontWeight.normal,
                       ),

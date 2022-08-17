@@ -19,9 +19,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text("Image Picker"),
-        // ),
         body: SafeArea(
       child: Container(
           child: imageFile == null
