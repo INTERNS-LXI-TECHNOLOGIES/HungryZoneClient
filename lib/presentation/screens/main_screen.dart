@@ -32,14 +32,3 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
- 
-// Widget blocLodded(context){
-//        BlocProvider.of<AuthBloc>(context).add(AppStartedEvent());
-//        return BlocBuilder<AuthBloc,AuthState>(builder:((context, state) {
-//          if(state is AuthInitial){ Navigator.of(context).push(MaterialPageRoute(
-//                               builder: (context) => SplashScreen()),);}
-//                               else if(state is )
-
-//        },)
-// }
-        

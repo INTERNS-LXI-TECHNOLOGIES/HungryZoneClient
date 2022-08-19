@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hungryzone/const/const.dart';
+import 'package:openapi/openapi.dart';
 
 import 'main_screen.dart';
 import 'signup_screen.dart';
@@ -193,4 +194,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  // void loginUser({required String username,required String password}){
+  //   Openapi().getUserResourceApi().getUser(login: login)
+  // }
 }

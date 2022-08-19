@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hungryzone/database/model/operations.dart';
 import 'package:hungryzone/database/model/user_model.dart';
+import 'package:openapi/openapi.dart';
 
 import '../../const/const.dart';
 
@@ -81,23 +82,24 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 120,
+                      height: 70,
                     ),
 
                     // #text_field
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      height: MediaQuery.of(context).size.height * 0.5,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.grey.shade300,
-                                blurRadius: 20,
-                                spreadRadius: 10,
-                                offset: const Offset(0, 10))
+                              color: Colors.grey.shade300,
+                              blurRadius: 20,
+                              spreadRadius: 10,
+                            )
+                            // offset: const Offset(0, 10))
                           ]),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

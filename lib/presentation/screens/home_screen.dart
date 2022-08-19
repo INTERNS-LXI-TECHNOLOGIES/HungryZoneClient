@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryzone/database/model/operations.dart';
 import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
+import 'package:hungryzone/presentation/screens/profile_screen.dart';
+import 'package:openapi/openapi.dart';
 
 import '../../const/const.dart';
 
@@ -21,28 +23,51 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     getAllUser();
     return Scaffold(
-      drawer: CurvedDrawer(
-        color: Colors.white,
-        labelColor: Colors.black54,
-        width: 75.0,
-        items: const <DrawerItem>[
-          DrawerItem(icon: Icon(Icons.shopping_bag)),
-          //Optional Label Text
-          DrawerItem(icon: Icon(Icons.shopping_bag)),
-        ],
-        onTap: (index) {
-          //Handle button tap
-        },
-      ),
+      drawer: sideDrawer(context),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(Icons.menu_outlined),
-          onPressed: () {},
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.menu_outlined),
+        //   onPressed: () {
+        //     drawerWidget();
+        //   },
+        // ),
         backgroundColor: kGreen,
-        title: const Text('Food ResQ'),
+        title: const Text('Hungry Zone'),
       ),
+      //drawer:,
+      //
+      //
+      //
+      //
+      //
+      ///
+      /////
+      ///
+      /////
+      /////
+      ///
+      ///
+      ///
+
+      ///
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+
+      //
+      ///
+      //
+      ///
+      ///
+      //
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -87,6 +112,84 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       // bottomNavigationBar: BottombarWidgets(),
+    );
+  }
+
+  Drawer sideDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: const EdgeInsets.all(0),
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: kGreen,
+            ), //BoxDecoration
+            child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.green),
+              accountName: Text(
+                "Ajil sajeev",
+                style: TextStyle(fontSize: 18),
+              ),
+              accountEmail: Text("ajilsajeev@gmail.com"),
+              currentAccountPictureSize: Size.square(50),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 165, 255, 137),
+                child: Text(
+                  "A",
+                  style: TextStyle(fontSize: 30.0, color: Colors.blue),
+                ), //Text
+              ), //circleAvatar
+            ), //UserAccountDrawerHeader
+          ), //DrawerHeader
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text(' My Profile '),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_cart),
+            title: const Text('Cart '),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(Icons.edit),
+            title: const Text(' Edit Profile '),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('LogOut'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  CurvedDrawer drawerWidget() {
+    return CurvedDrawer(
+      color: Colors.white,
+      labelColor: Colors.black54,
+      width: 100,
+      items: const <DrawerItem>[
+        DrawerItem(icon: Icon(Icons.shopping_bag)),
+        //Optional Label Text
+        DrawerItem(icon: Icon(Icons.shopping_bag)),
+      ],
+      onTap: (index) {
+        //Handle button tap
+      },
     );
   }
 
