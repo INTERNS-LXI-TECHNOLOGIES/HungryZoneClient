@@ -248,5 +248,12 @@ class _SignUpPageState extends State<SignUpPage> {
           passwords: _passwords);
       addUser(_user);
     }
+    ManagedUserVMBuilder userBuilder = ManagedUserVMBuilder();
+    userBuilder.firstName = _firstName;
+    userBuilder.lastName = _lastName;
+    userBuilder.email = _emailId;
+    userBuilder.password = _passwords;
+
+    ManagedUserVM user = userBuilder.build();
   }
 }

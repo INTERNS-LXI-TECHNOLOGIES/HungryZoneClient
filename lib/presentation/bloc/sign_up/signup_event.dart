@@ -1,8 +1,13 @@
 part of 'signup_bloc.dart';
 
-abstract class SignupEvent extends Equatable {
+class SignupEvent extends Equatable {
   const SignupEvent();
 
   @override
   List<Object> get props => [];
+}
+
+class RegisterUserEvent extends SignupEvent {
+  ManagedUserVM? user;
+  RegisterUserEvent({required ManagedUserVM user});
 }
