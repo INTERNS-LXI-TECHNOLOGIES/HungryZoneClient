@@ -9,8 +9,9 @@ class AppStartedEvent extends AuthEvent {
 }
 
 class LogedInEvent extends AuthEvent {
-  final String token;
-  LogedInEvent({required this.token});
+  //final String token;
+  LoginVM? userLogin;
+  LogedInEvent({required this.userLogin});
 
   @override
   List<Object?> get props => [toString()];

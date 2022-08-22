@@ -25,6 +25,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
               .getAccountResourceApi()
               .registerAccount(managedUserVM: user);
           emit(RegisterLoaded());
+
+          // Openapi().getUserJwtControllerApi().authorize(loginVM: loginVM)
         } else {
           (emit(RegisterLoading()));
         }
