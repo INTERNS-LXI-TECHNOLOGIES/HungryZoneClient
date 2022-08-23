@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:openapi/openapi.dart';
 
@@ -31,7 +32,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           (emit(RegisterLoading()));
         }
       } catch (e) {
-        emit(RegisterLoadError());
+        emit(RegisterLoadError(error: e.toString()));
       }
     });
   }

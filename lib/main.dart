@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hungryzone/database/model/user_model.dart';
 import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
+import 'package:hungryzone/presentation/bloc/sign_up/signup_bloc.dart';
 import 'package:hungryzone/presentation/screens/home_screen.dart';
+import 'package:hungryzone/presentation/screens/login_screen.dart';
 
 import 'presentation/bloc/authentication_bloc/auth_bloc.dart';
 
@@ -30,19 +32,23 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthBloc(),
         ),
         BlocProvider(
+          create: (context) => SignupBloc(),
+        ),
+        BlocProvider(
           create: (context) => HomeScreenBloc(),
         ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Hungry Zone',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
           home: const SplashScreen(),
           routes: {
-            'initial': ((context) => const SplashScreen()),
-            'first': (context) => const HomeScreen(),
+            'splashscreen': ((context) => const SplashScreen()),
+            'homescreen': (context) => const HomeScreen(),
+            'loginscreen': (context) => const LoginPage(),
           }),
     );
   }

@@ -13,4 +13,7 @@ class RegisterLoading extends SignupState {}
 
 class RegisterLoaded extends SignupState {}
 
-class RegisterLoadError extends SignupState {}
+class RegisterLoadError extends SignupState {
+  String? error;
+  RegisterLoadError({required this.error});
+}
