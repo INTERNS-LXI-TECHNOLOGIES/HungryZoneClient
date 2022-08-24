@@ -11,6 +11,7 @@ import 'presentation/bloc/authentication_bloc/auth_bloc.dart';
 
 import 'presentation/screens/splash_screen.dart';
 
+const SHARED_PREFERENCES_KEY = 'User login auth';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Hive.initFlutter();

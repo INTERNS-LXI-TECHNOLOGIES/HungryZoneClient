@@ -14,7 +14,7 @@ class AuthLaodingState extends AuthState {
 }
 
 class AuthSuccessState extends AuthState {
-  Future<Response<JWTToken>>? token;
+  Response<JWTToken>? token;
   AuthSuccessState({required this.token});
   @override
   List<Object?> get props => [toString()];
@@ -23,6 +23,21 @@ class AuthSuccessState extends AuthState {
 class AuthErrorState extends AuthState {
   String? error;
   AuthErrorState({required this.error});
+  @override
+  List<Object?> get props => [toString()];
+}
+
+class ForgetPasswordLoading extends AuthState {
+  @override
+  List<Object?> get props => [toString()];
+}
+
+class ForgetPasswordLoaded extends AuthState {
+  @override
+  List<Object?> get props => [toString()];
+}
+
+class ForgetPasswordLoadError extends AuthState {
   @override
   List<Object?> get props => [toString()];
 }

@@ -17,6 +17,11 @@ class LogedInEvent extends AuthEvent {
   List<Object?> get props => [toString()];
 }
 
+class ForgetPasswordEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [toString()];
+}
+
 class LogedOutEvent extends AuthEvent {
   @override
   List<Object?> get props => [toString()];

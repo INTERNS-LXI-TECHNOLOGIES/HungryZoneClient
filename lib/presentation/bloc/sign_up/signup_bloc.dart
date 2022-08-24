@@ -13,14 +13,20 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       try {
         if (event.user!.firstName!.isNotEmpty ||
             event.user!.email!.isNotEmpty ||
-            event.user!.password!.isNotEmpty) {
+            event.user!.password!.isNotEmpty ||
+            event.user!.login.isNotEmpty) {
           ManagedUserVMBuilder userBuilder = ManagedUserVMBuilder();
           userBuilder.firstName = event.user!.firstName;
           userBuilder.lastName = event.user!.lastName;
           userBuilder.email = event.user!.email;
           userBuilder.password = event.user!.password;
+          userBuilder.login = event.user!.login;
+          userBuilder.activated = true;
 
           ManagedUserVM user = userBuilder.build();
+
+          // Openapi().getAccountResourceApi().requestPasswordReset(body: event.user!.email!
+          // );
 
           final response = Openapi()
               .getAccountResourceApi()

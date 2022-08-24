@@ -19,11 +19,13 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+final _validKey = GlobalKey<FormState>();
 TextEditingController firstNameController = TextEditingController();
 TextEditingController lastNameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
 TextEditingController phoneNumberController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
+bool isValid = false;
 
 class _SignUpPageState extends State<SignUpPage> {
   @override
@@ -135,75 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               )
                               // offset: const Offset(0, 10))
                             ]),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextField(
-                              controller: firstNameController,
-                              decoration: const InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  border: InputBorder.none,
-                                  hintText: "First Name",
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey)),
-                            ),
-                            const Divider(
-                              thickness: 0.5,
-                              height: 10,
-                            ),
-                            TextField(
-                              controller: lastNameController,
-                              decoration: const InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
-                                  border: InputBorder.none,
-                                  hintText: "Last Name",
-                                  hintStyle: TextStyle(color: Colors.grey)),
-                            ),
-                            const Divider(
-                              thickness: 0.5,
-                              height: 10,
-                            ),
-                            TextField(
-                              controller: emailController,
-                              decoration: const InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 10),
-                                  border: InputBorder.none,
-                                  hintText: "Email",
-                                  hintStyle: TextStyle(color: Colors.grey)),
-                            ),
-                            const Divider(
-                              thickness: 0.5,
-                              height: 10,
-                            ),
-                            TextField(
-                              controller: phoneNumberController,
-                              decoration: const InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  border: InputBorder.none,
-                                  hintText: "Phone",
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey)),
-                            ),
-                            const Divider(
-                              thickness: 0.5,
-                              height: 10,
-                            ),
-                            TextField(
-                              controller: passwordController,
-                              decoration: const InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  border: InputBorder.none,
-                                  hintText: "Password",
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey)),
-                            ),
-                          ],
-                        ),
+                        child: textFields(),
                       ),
                       const SizedBox(
                         height: 15,
@@ -212,14 +146,31 @@ class _SignUpPageState extends State<SignUpPage> {
                       // #signup_button
                       MaterialButton(
                         onPressed: () {
-                          final registerUser = onUserAdd();
-                          BlocProvider.of<SignupBloc>(context)
-                              .add(RegisterUserEvent(user: registerUser));
-                          firstNameController.clear();
-                          lastNameController.clear();
-                          emailController.clear();
-                          phoneNumberController.clear();
-                          passwordController.clear();
+                          _validKey.currentState!.validate();
+                          if (isValid == true) {
+                            final registerUser = onUserAdd();
+                            BlocProvider.of<SignupBloc>(context)
+                                .add(RegisterUserEvent(user: registerUser));
+                            firstNameController.clear();
+                            lastNameController.clear();
+                            emailController.clear();
+                            phoneNumberController.clear();
+                            passwordController.clear();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("signup not done"),
+                                backgroundColor: Colors.red,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                            // debugPrint("signup not done");
+                            // firstNameController.clear();
+                            // lastNameController.clear();
+                            // emailController.clear();
+                            // phoneNumberController.clear();
+                            // passwordController.clear();
+                          }
                         },
                         height: 45,
                         minWidth: 240,
@@ -267,6 +218,121 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  Form textFields() {
+    return Form(
+      key: _validKey,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              controller: firstNameController,
+              validator: (value) {
+                if (value!.isEmpty || value == null) {
+                  return 'enter your name';
+                } else {
+                  isValid = true;
+
+                  return '';
+                }
+              },
+              decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  border: InputBorder.none,
+                  hintText: "First Name",
+                  hintStyle: const TextStyle(color: Colors.grey)),
+            ),
+            const Divider(
+              thickness: 0.5,
+              height: 10,
+            ),
+            TextFormField(
+              controller: lastNameController,
+              decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  border: InputBorder.none,
+                  hintText: "Last Name",
+                  hintStyle: TextStyle(color: Colors.grey)),
+            ),
+            const Divider(
+              thickness: 0.5,
+              height: 10,
+            ),
+            TextFormField(
+              controller: emailController,
+              validator: (value) {
+                String pattern =
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                RegExp regExp = RegExp(pattern);
+                if (value!.isEmpty || value == null) {
+                  return 'enter your mail id';
+                } else if ((!regExp.hasMatch(value))) {
+                  return 'enter valid mail id';
+                } else {
+                  isValid = true;
+
+                  return '';
+                }
+              },
+              decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  border: InputBorder.none,
+                  hintText: "Email",
+                  hintStyle: TextStyle(color: Colors.grey)),
+            ),
+            const Divider(
+              thickness: 0.5,
+              height: 10,
+            ),
+            TextFormField(
+              controller: phoneNumberController,
+              validator: (value) {
+                String pattern =
+                    r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
+                RegExp regExp = RegExp(pattern);
+                if (value!.isEmpty || value == null) {
+                  return 'enter your mail id';
+                } else if ((!regExp.hasMatch(value))) {
+                  return 'enter valid phone number';
+                } else {
+                  isValid = true;
+
+                  return '';
+                }
+              },
+              decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  border: InputBorder.none,
+                  hintText: "Phone",
+                  hintStyle: const TextStyle(color: Colors.grey)),
+            ),
+            const Divider(
+              thickness: 0.5,
+              height: 10,
+            ),
+            TextFormField(
+              controller: passwordController,
+              validator: (value) {
+                if (value!.isEmpty || value == null) {
+                  return 'enter your password';
+                } else {
+                  isValid = true;
+
+                  return '';
+                }
+              },
+              decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  border: InputBorder.none,
+                  hintText: "Password",
+                  hintStyle: const TextStyle(color: Colors.grey)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   ManagedUserVM onUserAdd() {
     final _firstName = firstNameController.text;
     final _lastName = lastNameController.text;
@@ -293,6 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
     userBuilder.lastName = _lastName;
     userBuilder.email = _emailId;
     userBuilder.password = _passwords;
+    userBuilder.login = _phoneNumber;
 
     ManagedUserVM signupUser = userBuilder.build();
     return signupUser;

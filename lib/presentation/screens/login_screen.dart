@@ -31,8 +31,8 @@ class _LoginPageState extends State<LoginPage> {
           if (state is AuthSuccessState) {
             final token = state.token;
             debugPrint(token.toString());
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => MainScreen()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => MainScreen()));
           } else if (state is AuthLaodingState) {
           } else if (state is AuthErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -118,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                 TextFormField(
                                   style: const TextStyle(fontSize: 15),
                                   keyboardType: TextInputType.phone,
+                                  controller: phoneNumberController,
                                   decoration: const InputDecoration(
                                       contentPadding:
                                           EdgeInsets.symmetric(horizontal: 10),
@@ -145,8 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                                 const Divider(color: Colors.black54, height: 1),
 
                                 /// PASSWORD
-                                const TextField(
-                                  decoration: InputDecoration(
+                                TextField(
+                                  controller: passwordController,
+                                  decoration: const InputDecoration(
                                       contentPadding:
                                           EdgeInsets.symmetric(horizontal: 10),
                                       border: InputBorder.none,

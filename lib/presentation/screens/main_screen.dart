@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openapi/openapi.dart';
 
 import '../widgets/bottom_navigator.dart';
 import 'bag_screen.dart';
@@ -17,6 +18,7 @@ class MainScreen extends StatelessWidget {
     const BagScreen(),
     const ProfileScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

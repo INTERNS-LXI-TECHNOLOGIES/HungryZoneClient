@@ -72,11 +72,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              height: 150,
-              color: Color.fromARGB(255, 255, 215, 97),
-              child: const Center(
-                child: Text('food'),
-              ),
+              height: 300,
+              color: Color.fromARGB(255, 94, 182, 254),
+              child: GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemCount: 11,
+                  itemBuilder: ((context, index) => Card(
+                        color: Color.fromARGB(255, 3, 96, 172),
+                      ))),
             ),
           ],
         ),
