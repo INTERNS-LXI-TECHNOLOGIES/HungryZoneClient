@@ -42,24 +42,24 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             catgoryStatusList(context),
-            SizedBox(
-              height: 45,
-              child: Row(
-                children: const [
-                  Text(
-                    'Special Offers',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              height: 150,
-              color: Color.fromARGB(255, 255, 215, 97),
-              child: const Center(
-                child: Text('food'),
-              ),
-            ),
+            // SizedBox(
+            //   height: 45,
+            //   child: Row(
+            //     children: const [
+            //       Text(
+            //         'Special Offers',
+            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // Container(
+            //   height: 150,
+            //   color: Color.fromARGB(255, 255, 215, 97),
+            //   child: const Center(
+            //     child: Text('food'),
+            //   ),
+            // ),
             SizedBox(
               height: 45,
               child: Row(
@@ -72,16 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              height: 300,
-              color: Color.fromARGB(255, 94, 182, 254),
+              height: 500,
+              color: Color.fromARGB(255, 249, 251, 252),
               child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemCount: 11,
-                  itemBuilder: ((context, index) => Card(
-                        color: Color.fromARGB(255, 3, 96, 172),
-                      ))),
+                  itemBuilder: ((context, index) =>
+                      Card(color: Color.fromARGB(255, 218, 218, 218)))),
             ),
           ],
         ),

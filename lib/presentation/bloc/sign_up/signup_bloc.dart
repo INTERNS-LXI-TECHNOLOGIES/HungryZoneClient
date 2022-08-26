@@ -9,37 +9,42 @@ part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc() : super(SignupInitial()) {
-    on<RegisterUserEvent>((event, emit) {
-      try {
-        if (event.user!.firstName!.isNotEmpty ||
-            event.user!.email!.isNotEmpty ||
-            event.user!.password!.isNotEmpty ||
-            event.user!.login.isNotEmpty) {
-          ManagedUserVMBuilder userBuilder = ManagedUserVMBuilder();
-          userBuilder.firstName = event.user!.firstName;
-          userBuilder.lastName = event.user!.lastName;
-          userBuilder.email = event.user!.email;
-          userBuilder.password = event.user!.password;
-          userBuilder.login = event.user!.login;
-          userBuilder.activated = true;
+    on<RegisterUserEvent>(_regesterUser);
+  }
+  _regesterUser(RegisterUserEvent event, Emitter<SignupState> emit) async {
+    try {
+      if (event.user!.firstName!.isNotEmpty ||
+          event.user!.email!.isNotEmpty ||
+          event.user!.password!.isNotEmpty ||
+          event.user!.login.isNotEmpty) {
+        ManagedUserVMBuilder userBuilder = ManagedUserVMBuilder();
+        userBuilder.firstName = event.user!.firstName;
+        userBuilder.lastName = event.user!.lastName;
+        userBuilder.email = event.user!.email;
+        userBuilder.password = event.user!.password;
+        userBuilder.login = event.user!.login;
+        userBuilder.activated = true;
 
-          ManagedUserVM user = userBuilder.build();
+        ManagedUserVM user = userBuilder.build();
 
-          // Openapi().getAccountResourceApi().requestPasswordReset(body: event.user!.email!
-          // );
+        // Openapi().getAccountResourceApi().requestPasswordReset(body: event.user!.email!
+        // );
 
-          final response = Openapi()
-              .getAccountResourceApi()
-              .registerAccount(managedUserVM: user);
+        final response = await Openapi()
+            .getAccountResourceApi()
+            .registerAccount(managedUserVM: user);
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
           emit(RegisterLoaded());
-
-          // Openapi().getUserJwtControllerApi().authorize(loginVM: loginVM)
         } else {
-          (emit(RegisterLoading()));
+          emit(RegisterLoadError(error: response.statusMessage));
         }
-      } catch (e) {
-        emit(RegisterLoadError(error: e.toString()));
+        // Openapi().getUserJwtControllerApi().authorize(loginVM: loginVM)
+      } else {
+        (emit(RegisterLoading()));
       }
-    });
+    } catch (e) {
+      emit(RegisterLoadError(error: e.toString()));
+    }
   }
 }

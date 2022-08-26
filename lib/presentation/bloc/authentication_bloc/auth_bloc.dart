@@ -32,12 +32,15 @@ _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
           .authorize(loginVM: event.userLogin!);
       debugPrint("token--$token");
 
-      if (token.data!.idToken!.isNotEmpty || token.data!.idToken != null) {
-        final _sharedPreference = await SharedPreferences.getInstance();
-        _sharedPreference.setBool(SHARED_PREFERENCES_KEY, true);
+      if (token.statusCode == 200 || token.statusCode == 201) {
+        if (token.data!.idToken!.isNotEmpty || token.data!.idToken != null) {
+          final sharedPreference = await SharedPreferences.getInstance();
+          sharedPreference.setBool(SHARED_PREFERENCES_KEY, true);
+          emit(AuthSuccessState(token: token));
+        }
+      } else {
+        (emit(AuthErrorState(error: token.statusMessage)));
       }
-
-      emit(AuthSuccessState(token: token));
     } else {
       emit(AuthLaodingState());
     }

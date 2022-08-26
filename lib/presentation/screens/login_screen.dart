@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hungryzone/const/const.dart';
 import 'package:hungryzone/presentation/bloc/sign_up/signup_bloc.dart';
+import 'package:hungryzone/presentation/screens/forgot_password_screen.dart';
 import 'package:openapi/openapi.dart';
 
 import '../bloc/authentication_bloc/auth_bloc.dart';
@@ -209,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                MainScreen()));
+                                                ForgotPasswordScreen()));
                                   },
                                   child: const Center(
                                     child: Text('Forget password ?'),

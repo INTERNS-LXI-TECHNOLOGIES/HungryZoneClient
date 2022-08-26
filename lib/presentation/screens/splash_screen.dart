@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:hungryzone/main.dart';
 import 'package:hungryzone/presentation/screens/home_screen.dart';
@@ -48,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (context) => const LoginPage()));
     } else {
       await Future.delayed(const Duration(seconds: 2));
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => MainScreen()));
     }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hungryzone/database/model/user_model.dart';
 import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
+import 'package:hungryzone/presentation/bloc/password/password_bloc.dart';
 import 'package:hungryzone/presentation/bloc/sign_up/signup_bloc.dart';
 import 'package:hungryzone/presentation/screens/home_screen.dart';
 import 'package:hungryzone/presentation/screens/login_screen.dart';
@@ -17,6 +19,10 @@ Future<void> main() async {
   Hive.initFlutter();
   if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());
+    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    //     statusBarColor: Colors.transparent,
+    //     statusBarBrightness: Brightness.dark,
+    //     statusBarIconBrightness: Brightness.dark));
   }
   runApp(const MyApp());
 }
@@ -37,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeScreenBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PasswordBloc(),
         ),
       ],
       child: MaterialApp(

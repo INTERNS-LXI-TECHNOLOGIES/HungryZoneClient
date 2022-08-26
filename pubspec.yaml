@@ -41,8 +41,8 @@ dependencies:
   #geocoding:  
   location:  
   google_maps_flutter:  
-  flutter_bloc: ^8.0.1
-  equatable: ^2.0.3
+  flutter_bloc:  
+  equatable:  
   image_picker: ^0.8.5+3
   http:
   json_serializable:
@@ -55,6 +55,7 @@ dependencies:
    path: ./openapi
   built_collection: ^5.1.1
   shared_preferences: ^2.0.15
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:
