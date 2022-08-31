@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryzone/database/model/operations.dart';
 import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
+import 'package:hungryzone/presentation/screens/add_food_screen.dart';
 import 'package:hungryzone/presentation/screens/profile_screen.dart';
 import 'package:openapi/openapi.dart';
 
 import '../../const/const.dart';
+import '../widgets/bottom_navigator.dart';
 import '../widgets/side_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: sideDrawer(context),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        centerTitle: true,
         // leading: IconButton(
         //   icon: const Icon(Icons.menu_outlined),
         //   onPressed: () {
@@ -36,37 +39,18 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: kGreen,
         title: const Text('Hungry Zone'),
       ),
-      //drawer:,
 
       body: SingleChildScrollView(
         child: Column(
           children: [
             catgoryStatusList(context),
-            // SizedBox(
-            //   height: 45,
-            //   child: Row(
-            //     children: const [
-            //       Text(
-            //         'Special Offers',
-            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            // Container(
-            //   height: 150,
-            //   color: Color.fromARGB(255, 255, 215, 97),
-            //   child: const Center(
-            //     child: Text('food'),
-            //   ),
-            // ),
             SizedBox(
               height: 45,
               child: Row(
                 children: const [
                   Text(
-                    'Bestsellers',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    'Fresh recommendations',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   )
                 ],
               ),
@@ -85,7 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottombarWidgets(),
+      //bottomNavigationBar: BottombarWidgets(),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kGreen,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => AddFoodScreen()),
+          );
+        },
+      ),
     );
   }
 
