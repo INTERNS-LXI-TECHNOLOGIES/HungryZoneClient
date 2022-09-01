@@ -4,7 +4,7 @@ import 'package:openapi/openapi.dart';
 
 import '../widgets/bottom_navigator.dart';
 import 'bag_screen.dart';
-import 'chat_screen.dart';
+import 'chat/chat_screen.dart';
 import 'home_screen.dart';
 import 'location_screen.dart';
 import 'profile_screen.dart';

@@ -1,8 +1,6 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:hungryzone/const/const.dart';
-import 'package:hungryzone/presentation/screens/single_chat_screen.dart';
+import 'package:hungryzone/presentation/screens/chat/single_chat_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);

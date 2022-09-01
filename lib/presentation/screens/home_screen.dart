@@ -1,14 +1,9 @@
 import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryzone/database/model/operations.dart';
-import 'package:hungryzone/presentation/bloc/home_bloc/home_screen_bloc.dart';
 import 'package:hungryzone/presentation/screens/add_food_screen.dart';
-import 'package:hungryzone/presentation/screens/profile_screen.dart';
-import 'package:openapi/openapi.dart';
 
 import '../../const/const.dart';
-import '../widgets/bottom_navigator.dart';
 import '../widgets/side_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,35 +35,30 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Hungry Zone'),
       ),
 
-      body: SingleChildScrollView(
-        child: Column(
+      body: ListView(physics: const BouncingScrollPhysics(), children: [
+        Column(
           children: [
             catgoryStatusList(context),
-            SizedBox(
-              height: 45,
-              child: Row(
-                children: const [
-                  Text(
-                    'Fresh recommendations',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              height: 500,
-              color: Color.fromARGB(255, 249, 251, 252),
-              child: GridView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  itemCount: 11,
-                  itemBuilder: ((context, index) =>
-                      Card(color: Color.fromARGB(255, 218, 218, 218)))),
-            ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Fresh recommendations',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+                itemsGrid(),
+              ],
+            )
           ],
         ),
-      ),
+      ]),
       //bottomNavigationBar: BottombarWidgets(),
 
       floatingActionButton: FloatingActionButton(
@@ -80,6 +70,23 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
+    );
+  }
+
+// foods grid view
+  Widget itemsGrid() {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      gridDelegate:
+          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemCount: 31,
+      itemBuilder: ((context, index) => InkWell(
+            child: const Card(
+              color: Color.fromARGB(255, 218, 218, 218),
+            ),
+            onTap: () {},
+          )),
     );
   }
 

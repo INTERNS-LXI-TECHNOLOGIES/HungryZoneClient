@@ -20,7 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isNumberValid = true;
   final GlobalKey<FormState> _validKey = GlobalKey();
@@ -35,11 +35,32 @@ class _LoginPageState extends State<LoginPage> {
             debugPrint(token.toString());
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => MainScreen()));
+            phoneNumberController.clear();
+            passwordController.clear();
           } else if (state is AuthLaodingState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Authentication loading'),
+                backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+            phoneNumberController.clear();
+            passwordController.clear();
           } else if (state is AuthErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Authentication Failed'),
+                backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+            phoneNumberController.clear();
+            passwordController.clear();
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('eeeth nthh state'),
                 backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating,
               ),
@@ -116,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                /// EMAIL
+                                /// PhoneNumber validation
                                 TextFormField(
                                   style: const TextStyle(fontSize: 15),
                                   keyboardType: TextInputType.phone,
@@ -132,10 +153,11 @@ class _LoginPageState extends State<LoginPage> {
                                   validator: (value) {
                                     String pattern =
                                         r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
+
                                     RegExp regExp = RegExp(pattern);
                                     if (value == null || value.isEmpty) {
                                       isNumberValid = false;
-                                      //return 'enter mobile number';
+                                      return 'required field';
                                     } else if (!regExp.hasMatch(value)) {
                                       isNumberValid = false;
                                       return 'Please enter valid mobile number';
@@ -164,23 +186,30 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 35),
 
-                          /// LOGIN BUTTON
+                          ///
+                          ///
+                          ///
+                          ///
+                          ///
+                          /// LOGIN TRIGGER BUTTON
+                          ///
                           MaterialButton(
-                            onPressed: () {
-                              _validKey.currentState!.validate();
-                              if (isNumberValid == true) {
+                            onPressed: () async {
+                              bool isValid = _validKey.currentState!.validate();
+                              if (isNumberValid == true || isValid == true) {
                                 LoginVM loginUserVM = loginUser(
-                                    userName: nameController.text,
+                                    userName: phoneNumberController.text,
                                     password: passwordController.text);
                                 BlocProvider.of<AuthBloc>(context)
                                     .add(LogedInEvent(userLogin: loginUserVM));
-
-                                nameController.clear();
+                                await Future.delayed(
+                                    const Duration(seconds: 3));
+                                phoneNumberController.clear();
                                 passwordController.clear();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Enter valid phone number'),
+                                    content: Text('Login faild'),
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                   ),
