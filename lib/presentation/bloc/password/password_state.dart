@@ -17,3 +17,12 @@ class ForgotPasswordLoadError extends PasswordState {
   String error;
   ForgotPasswordLoadError({required this.error});
 }
+
+class ForgotPasswordFinishLoading extends PasswordState {}
+
+class ForgotPasswordFinishLoaded extends PasswordState {}
+
+class ForgotPasswordFinishLoadError extends PasswordState {
+  String error;
+  ForgotPasswordFinishLoadError({required this.error});
+}

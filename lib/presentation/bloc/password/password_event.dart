@@ -13,3 +13,10 @@ class ForgotPasswordEvent extends PasswordEvent {
   @override
   List<Object> get props => [];
 }
+
+class ForgotPasswordKeyEvent extends PasswordEvent {
+  KeyAndPasswordVM newPasswordBody;
+  ForgotPasswordKeyEvent({required this.newPasswordBody});
+  @override
+  List<Object> get props => [];
+}

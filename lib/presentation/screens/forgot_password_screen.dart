@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:openapi/openapi.dart';
 
 import '../../const/const.dart';
 import '../bloc/password/password_bloc.dart';
@@ -10,6 +11,8 @@ class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
 
   TextEditingController emailController = TextEditingController();
+  TextEditingController keyController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
   bool isValid = false;
   final GlobalKey<FormState> _validKey = GlobalKey();
 
@@ -31,6 +34,29 @@ class ForgotPasswordScreen extends StatelessWidget {
           );
           await Future.delayed(const Duration(seconds: 1));
           Navigator.of(context).pop();
+        } else if (state is ForgotPasswordFinishLoaded) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Reset password Suceessful'),
+              backgroundColor: Colors.blue,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          await Future.delayed(const Duration(seconds: 2));
+          keyController.clear();
+          newPasswordController.clear();
+          Navigator.of(context).pop();
+        } else if (state is ForgotPasswordFinishLoadError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Reset password Failed'),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          await Future.delayed(const Duration(seconds: 2));
+          keyController.clear();
+          newPasswordController.clear();
         }
       },
       child: Scaffold(
@@ -135,11 +161,72 @@ class ForgotPasswordScreen extends StatelessWidget {
                           /// LOGIN BUTTON
                           MaterialButton(
                             onPressed: () {
-                              _validKey.currentState!.validate();
-                              if (isValid == true) {
+                              bool isValidate =
+                                  _validKey.currentState!.validate();
+                              if (isValid == true || isValidate == true) {
                                 BlocProvider.of<PasswordBloc>(context).add(
                                     ForgotPasswordEvent(
                                         emailId: emailController.text));
+                              } else {}
+                              //Navigator.of(context).pop();
+                            },
+                            height: 45,
+                            minWidth: 240,
+                            textColor: Colors.white,
+                            color: Colors.green.shade700,
+                            shape: const StadiumBorder(),
+                            child: const Text(
+                              'Reset Password',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          //
+                          //field for change password key
+                          TextFormField(
+                            controller: keyController,
+                            decoration: const InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                border: InputBorder.none,
+                                hintText: "Enter key",
+                                hintStyle: TextStyle(color: Colors.grey)),
+                          ),
+
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          TextFormField(
+                            controller: newPasswordController,
+                            decoration: const InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                border: InputBorder.none,
+                                hintText: "New password",
+                                hintStyle: TextStyle(color: Colors.grey)),
+                          ),
+                          const SizedBox(
+                            height: 35,
+                          ),
+                          //
+                          //
+                          //reset passwword and Newpppassword model
+                          MaterialButton(
+                            onPressed: () {
+                              bool isValidate =
+                                  _validKey.currentState!.validate();
+                              if (isValid == true || isValidate == true) {
+                                KeyAndPasswordVMBuilder newPasswordBody =
+                                    KeyAndPasswordVMBuilder();
+                                newPasswordBody.key = keyController.text;
+
+                                newPasswordBody.newPassword =
+                                    newPasswordController.text;
+                                KeyAndPasswordVM newPasswordFinish =
+                                    newPasswordBody.build();
+                                BlocProvider.of<PasswordBloc>(context).add(
+                                    ForgotPasswordKeyEvent(
+                                        newPasswordBody: newPasswordFinish));
                               } else {}
                               //Navigator.of(context).pop();
                             },

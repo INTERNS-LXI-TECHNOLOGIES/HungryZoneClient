@@ -7,9 +7,10 @@ part 'password_state.dart';
 
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   PasswordBloc() : super(PasswordInitial()) {
-    on<ForgotPasswordEvent>(_FrorgotPasswordReset);
+    on<ForgotPasswordEvent>(_ForgotPasswordReset);
+    on<ForgotPasswordKeyEvent>(_ForgotPasswordResetFinish);
   }
-  _FrorgotPasswordReset(
+  _ForgotPasswordReset(
       ForgotPasswordEvent event, Emitter<PasswordState> emit) async {
     try {
       if (event.emailId != null || event.emailId.isNotEmpty) {
@@ -18,7 +19,6 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
             .getAccountResourceApi()
             .requestPasswordReset(body: body);
         if (resonse.statusCode == 200 || resonse.statusCode == 201) {
-          emit(ForgotPasswordLoaded());
         } else {
           emit(ForgotPasswordLoadError(error: 'something went wrong'));
         }
@@ -27,6 +27,28 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       }
     } catch (e) {
       emit(ForgotPasswordLoadError(error: e.toString()));
+    }
+  }
+
+  _ForgotPasswordResetFinish(
+      ForgotPasswordKeyEvent event, Emitter<PasswordState> emit) async {
+    try {
+      if (event.newPasswordBody != null ||
+          event.newPasswordBody.key!.isNotEmpty &&
+              event.newPasswordBody.newPassword!.isNotEmpty) {
+        final response = await Openapi()
+            .getAccountResourceApi()
+            .finishPasswordReset(keyAndPasswordVM: event.newPasswordBody);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          emit(ForgotPasswordLoaded());
+        } else {
+          emit(ForgotPasswordFinishLoadError(error: 'something went wrong'));
+        }
+      } else {
+        emit(ForgotPasswordFinishLoadError(error: 'body is empty'));
+      }
+    } catch (e) {
+      emit(ForgotPasswordFinishLoadError(error: e.toString()));
     }
   }
 }
