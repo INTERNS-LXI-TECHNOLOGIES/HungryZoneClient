@@ -115,7 +115,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                           /// Text Fields
                           Container(
                             margin: const EdgeInsets.symmetric(horizontal: 25),
-                            height: 80,
+                            height: 60,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 color: Colors.white,
@@ -156,9 +156,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 35),
+                          const SizedBox(height: 15),
 
-                          /// LOGIN BUTTON
+                          /// send maiil button
                           MaterialButton(
                             onPressed: () {
                               bool isValidate =
@@ -176,34 +176,65 @@ class ForgotPasswordScreen extends StatelessWidget {
                             color: Colors.green.shade700,
                             shape: const StadiumBorder(),
                             child: const Text(
-                              'Reset Password',
+                              'Send mail',
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ),
+                          const SizedBox(height: 15),
                           //
                           //field for change password key
-                          TextFormField(
-                            controller: keyController,
-                            decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
-                                border: InputBorder.none,
-                                hintText: "Enter key",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 25),
+                            height: 60,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.4),
+                                      blurRadius: 20,
+                                      spreadRadius: 10,
+                                      offset: const Offset(0, 10)),
+                                ]),
+                            child: TextFormField(
+                              controller: keyController,
+                              decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
+                                  border: InputBorder.none,
+                                  hintText: "Enter key",
+                                  hintStyle: TextStyle(color: Colors.grey)),
+                            ),
                           ),
 
                           const SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
-                            controller: newPasswordController,
-                            decoration: const InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
-                                border: InputBorder.none,
-                                hintText: "New password",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 25),
+                            height: 60,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.4),
+                                      blurRadius: 20,
+                                      spreadRadius: 10,
+                                      offset: const Offset(0, 10)),
+                                ]),
+                            child: TextFormField(
+                              controller: newPasswordController,
+                              decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
+                                  border: InputBorder.none,
+                                  hintText: "New password",
+                                  hintStyle: TextStyle(color: Colors.grey)),
+                            ),
                           ),
                           const SizedBox(
                             height: 35,
