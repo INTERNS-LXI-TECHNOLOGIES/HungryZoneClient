@@ -79,33 +79,30 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             child: Column(
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: const [
-                        // #signup_text
-                        Text(
-                          "Hunger Zone",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(color: Colors.white, fontSize: 32.5),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: const [
+                      //  #welcome
+                      Text(
+                        "Hunger Zone",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(color: Colors.white, fontSize: 32.5),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
 
-                        // #welcome
-                        Text(
-                          "Sign Up",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                      ],
-                    ),
+                      //singnup
+                      Text(
+                        "Sign Up",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ],
                   ),
                 ),
                 Container(
@@ -118,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 70,
+                        height: 50,
                       ),
 
                       // #text_field
