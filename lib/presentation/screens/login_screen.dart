@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Container(
-                  height: 370,
+                  height: 330,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 35),
                   child: Column(
@@ -102,7 +102,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Expanded(
-                  flex: 3,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
@@ -120,70 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 60),
 
                           /// Text Fields
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 25),
-                            height: 120,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.4),
-                                      blurRadius: 20,
-                                      spreadRadius: 10,
-                                      offset: const Offset(0, 10)),
-                                ]),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                /// PhoneNumber validation
-                                TextFormField(
-                                  style: const TextStyle(fontSize: 15),
-                                  keyboardType: TextInputType.phone,
-                                  controller: phoneNumberController,
-                                  decoration: const InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      border: InputBorder.none,
-                                      hintText: 'Phonenumber',
-                                      isCollapsed: false,
-                                      hintStyle: TextStyle(
-                                          fontSize: 14, color: Colors.grey)),
-                                  validator: (value) {
-                                    String pattern =
-                                        r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
-
-                                    RegExp regExp = RegExp(pattern);
-                                    if (value == null || value.isEmpty) {
-                                      isNumberValid = false;
-                                      return 'required field';
-                                    } else if (!regExp.hasMatch(value)) {
-                                      isNumberValid = false;
-                                      return 'Please enter valid mobile number';
-                                    }
-
-                                    //api.number(value);
-                                    return null;
-                                  },
-                                ),
-                                const Divider(color: Colors.black54, height: 1),
-
-                                /// PASSWORD
-                                TextField(
-                                  controller: passwordController,
-                                  decoration: const InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      border: InputBorder.none,
-                                      hintText: 'Password',
-                                      isCollapsed: false,
-                                      hintStyle: TextStyle(
-                                          fontSize: 14, color: Colors.grey)),
-                                ),
-                              ],
-                            ),
-                          ),
+                          textFieldLogin(context),
                           const SizedBox(height: 35),
 
                           ///
@@ -193,43 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                           ///
                           /// LOGIN TRIGGER BUTTON
                           ///
-                          MaterialButton(
-                            onPressed: () async {
-                              bool isValid = _validKey.currentState!.validate();
-                              if (isNumberValid == true || isValid == true) {
-                                LoginVM loginUserVM = loginUser(
-                                    userName: phoneNumberController.text,
-                                    password: passwordController.text);
-                                BlocProvider.of<AuthBloc>(context)
-                                    .add(LogedInEvent(userLogin: loginUserVM));
-                                await Future.delayed(
-                                    const Duration(seconds: 3));
-                                phoneNumberController.clear();
-                                passwordController.clear();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Login faild'),
-                                    backgroundColor: Colors.red,
-                                    behavior: SnackBarBehavior.floating,
-                                  ),
-                                );
-                              }
-
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => MainScreen()));
-                            },
-                            height: 45,
-                            minWidth: 240,
-                            textColor: Colors.white,
-                            color: Colors.green.shade700,
-                            shape: const StadiumBorder(),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          buttonLogin(context),
                           SizedBox(
                             height: 35,
                             child: Row(
@@ -261,24 +161,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           //SIGNUP BUTTON
                           const SizedBox(height: 15),
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => SignUpPage()));
-                            },
-                            height: 45,
-                            minWidth: 240,
-                            textColor: Colors.white,
-                            color: Colors.green.shade700,
-                            shape: const StadiumBorder(),
-                            child: const Text(
-                              'Sign up',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(height: 25),
-                          const SizedBox(height: 15),
+
                           //demo button
                           MaterialButton(
                             onPressed: () {
@@ -297,6 +180,10 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
 
+                          const SizedBox(height: 25),
+                          const SizedBox(height: 15),
+                          textSpanSignup(context),
+
                           const SizedBox(height: 50),
                         ],
                       )),
@@ -307,6 +194,134 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Row textSpanSignup(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: 'New user ',
+          style: const TextStyle(fontSize: 15, color: Colors.grey),
+          children: <TextSpan>[
+            TextSpan(
+                text: ' Sign up ',
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.cyan),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                  }),
+            const TextSpan(text: ' here '),
+          ],
+        ),
+      ),
+    ]);
+  }
+
+  MaterialButton buttonLogin(BuildContext context) {
+    return MaterialButton(
+      onPressed: () {
+        bool isValid = _validKey.currentState!.validate();
+        if (isNumberValid == true || isValid == true) {
+          LoginVM loginUserVM = loginUser(
+              userName: phoneNumberController.text,
+              password: passwordController.text);
+          BlocProvider.of<AuthBloc>(context)
+              .add(LogedInEvent(userLogin: loginUserVM));
+          // await Future.delayed(
+          //     const Duration(seconds: 3));
+          phoneNumberController.clear();
+          passwordController.clear();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login faild'),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+
+        // Navigator.of(context).push(MaterialPageRoute(
+        //     builder: (context) => MainScreen()));
+      },
+      height: 45,
+      minWidth: 240,
+      textColor: Colors.white,
+      color: Colors.green.shade700,
+      shape: const StadiumBorder(),
+      child: const Text(
+        'Login',
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Container textFieldLogin(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 25),
+      height: 120,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                blurRadius: 20,
+                spreadRadius: 10,
+                offset: const Offset(0, 10)),
+          ]),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          /// PhoneNumber validation
+          TextFormField(
+            style: const TextStyle(fontSize: 15),
+            keyboardType: TextInputType.phone,
+            controller: phoneNumberController,
+            decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: 'Phonenumber',
+                isCollapsed: false,
+                hintStyle: TextStyle(fontSize: 14, color: Colors.grey)),
+            validator: (value) {
+              String pattern =
+                  r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
+
+              RegExp regExp = RegExp(pattern);
+              if (value == null || value.isEmpty) {
+                isNumberValid = false;
+                return 'required field';
+              } else if (!regExp.hasMatch(value)) {
+                isNumberValid = false;
+                return 'Please enter valid mobile number';
+              }
+
+              //api.number(value);
+              return null;
+            },
+          ),
+          const Divider(color: Colors.black54, height: 1),
+
+          /// PASSWORD
+          TextField(
+            controller: passwordController,
+            decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: 'Password',
+                isCollapsed: false,
+                hintStyle: TextStyle(fontSize: 14, color: Colors.grey)),
+          ),
+        ],
       ),
     );
   }
