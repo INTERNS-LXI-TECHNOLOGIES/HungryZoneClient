@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Container(
-                  height: 330,
+                  height: MediaQuery.of(context).size.width / 1.3,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 35),
                   child: Column(
@@ -266,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
   Container textFieldLogin(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 25),
-      height: 120,
+      height: MediaQuery.of(context).size.width / 3,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: Colors.white,

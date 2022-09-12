@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_const, no_leading_underscores_for_local_identifiers
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryzone/database/model/operations.dart';
@@ -60,6 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 behavior: SnackBarBehavior.floating,
               ),
             );
+            log('error :${state.error!}');
           }
         },
         child: SingleChildScrollView(
@@ -110,6 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width * 1.5,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -118,13 +122,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 60,
+                        height: 100,
                       ),
 
                       // #text_field
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
-                        height: MediaQuery.of(context).size.height * 0.5,
+                        height: MediaQuery.of(context).size.width,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -140,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: textFields(),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 20,
                       ),
 
                       // #signup_button
@@ -222,112 +226,115 @@ class _SignUpPageState extends State<SignUpPage> {
     return Form(
       key: _validKey,
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: firstNameController,
-              validator: (value) {
-                if (value!.isEmpty || value == null) {
-                  return 'enter your name';
-                } else {
-                  isValid = true;
+        child: Container(
+          height: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextFormField(
+                controller: firstNameController,
+                validator: (value) {
+                  if (value!.isEmpty || value == null) {
+                    return 'enter your name';
+                  } else {
+                    isValid = true;
 
-                  return '';
-                }
-              },
-              decoration: const InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  border: InputBorder.none,
-                  hintText: "First Name",
-                  hintStyle: const TextStyle(color: Colors.grey)),
-            ),
-            const Divider(
-              thickness: 0.5,
-              height: 10,
-            ),
-            TextFormField(
-              controller: lastNameController,
-              decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  border: InputBorder.none,
-                  hintText: "Last Name",
-                  hintStyle: TextStyle(color: Colors.grey)),
-            ),
-            const Divider(
-              thickness: 0.5,
-              height: 10,
-            ),
-            TextFormField(
-              controller: emailController,
-              validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                RegExp regExp = RegExp(pattern);
-                if (value!.isEmpty || value == null) {
-                  return 'enter your mail id';
-                } else if ((!regExp.hasMatch(value))) {
-                  return 'enter valid mail id';
-                } else {
-                  isValid = true;
+                    return '';
+                  }
+                },
+                decoration: const InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    border: InputBorder.none,
+                    hintText: "First Name",
+                    hintStyle: const TextStyle(color: Colors.grey)),
+              ),
+              const Divider(
+                thickness: 0.5,
+                height: 8,
+              ),
+              TextFormField(
+                controller: lastNameController,
+                decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    border: InputBorder.none,
+                    hintText: "Last Name",
+                    hintStyle: TextStyle(color: Colors.grey)),
+              ),
+              const Divider(
+                thickness: 0.5,
+                height: 10,
+              ),
+              TextFormField(
+                controller: emailController,
+                validator: (value) {
+                  String pattern =
+                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                  RegExp regExp = RegExp(pattern);
+                  if (value!.isEmpty || value == null) {
+                    return 'enter your mail id';
+                  } else if ((!regExp.hasMatch(value))) {
+                    return 'enter valid mail id';
+                  } else {
+                    isValid = true;
 
-                  return '';
-                }
-              },
-              decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  border: InputBorder.none,
-                  hintText: "Email",
-                  hintStyle: TextStyle(color: Colors.grey)),
-            ),
-            const Divider(
-              thickness: 0.5,
-              height: 10,
-            ),
-            TextFormField(
-              controller: phoneNumberController,
-              validator: (value) {
-                String pattern =
-                    r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
-                RegExp regExp = RegExp(pattern);
-                if (value!.isEmpty || value == null) {
-                  return 'enter your mail id';
-                } else if ((!regExp.hasMatch(value))) {
-                  return 'enter valid phone number';
-                } else {
-                  isValid = true;
+                    return '';
+                  }
+                },
+                decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    border: InputBorder.none,
+                    hintText: "Email",
+                    hintStyle: TextStyle(color: Colors.grey)),
+              ),
+              const Divider(
+                thickness: 0.5,
+                height: 10,
+              ),
+              TextFormField(
+                controller: phoneNumberController,
+                validator: (value) {
+                  String pattern =
+                      r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
+                  RegExp regExp = RegExp(pattern);
+                  if (value!.isEmpty || value == null) {
+                    return 'enter your mail id';
+                  } else if ((!regExp.hasMatch(value))) {
+                    return 'enter valid phone number';
+                  } else {
+                    isValid = true;
 
-                  return '';
-                }
-              },
-              decoration: const InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  border: InputBorder.none,
-                  hintText: "Phone",
-                  hintStyle: const TextStyle(color: Colors.grey)),
-            ),
-            const Divider(
-              thickness: 0.5,
-              height: 10,
-            ),
-            TextFormField(
-              controller: passwordController,
-              validator: (value) {
-                if (value!.isEmpty || value == null) {
-                  return 'enter your password';
-                } else {
-                  isValid = true;
+                    return '';
+                  }
+                },
+                decoration: const InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    border: InputBorder.none,
+                    hintText: "Phone",
+                    hintStyle: const TextStyle(color: Colors.grey)),
+              ),
+              const Divider(
+                thickness: 0.5,
+                height: 10,
+              ),
+              TextFormField(
+                controller: passwordController,
+                validator: (value) {
+                  if (value!.isEmpty || value == null) {
+                    return 'enter your password';
+                  } else {
+                    isValid = true;
 
-                  return '';
-                }
-              },
-              decoration: const InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  border: InputBorder.none,
-                  hintText: "Password",
-                  hintStyle: const TextStyle(color: Colors.grey)),
-            ),
-          ],
+                    return '';
+                  }
+                },
+                decoration: const InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    border: InputBorder.none,
+                    hintText: "Password",
+                    hintStyle: const TextStyle(color: Colors.grey)),
+              ),
+            ],
+          ),
         ),
       ),
     );

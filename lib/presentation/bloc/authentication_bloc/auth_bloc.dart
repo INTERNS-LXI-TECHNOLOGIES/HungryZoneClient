@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
 _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
   try {
-    if (event.userLogin!.password.isNotEmpty ||
+    if (event.userLogin!.password.isNotEmpty &&
         event.userLogin!.username.isNotEmpty) {
       final token = await Openapi()
           .getUserJwtControllerApi()
@@ -42,7 +42,7 @@ _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
         (emit(AuthErrorState(error: token.statusMessage)));
       }
     } else {
-      emit(AuthLaodingState());
+      emit(AuthErrorState(error: 'error'));
     }
   } catch (e) {
     (emit(AuthErrorState(error: e.toString())));
