@@ -31,6 +31,7 @@ _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
           .getUserJwtControllerApi()
           .authorize(loginVM: event.userLogin!);
       debugPrint("token--$token");
+      debugPrint("response--${token.statusCode}");
 
       if (token.statusCode == 200 || token.statusCode == 201) {
         if (token.data!.idToken!.isNotEmpty || token.data!.idToken != null) {
@@ -39,7 +40,7 @@ _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
           emit(AuthSuccessState(token: token));
         }
       } else {
-        (emit(AuthErrorState(error: token.statusMessage)));
+        (emit(AuthErrorState(error: token.statusCode.toString())));
       }
     } else {
       emit(AuthErrorState(error: 'error'));

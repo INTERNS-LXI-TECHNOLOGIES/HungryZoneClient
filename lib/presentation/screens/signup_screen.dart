@@ -44,8 +44,8 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             );
             Future.delayed(const Duration(seconds: 1));
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const LoginPage()));
+            Navigator.of(context).pop();
+            // MaterialPageRoute(builder: (context) => const LoginPage()));
           } else if (state is RegisterLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -250,7 +250,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               const Divider(
                 thickness: 0.5,
-                height: 8,
+                height: 10,
               ),
               TextFormField(
                 controller: lastNameController,

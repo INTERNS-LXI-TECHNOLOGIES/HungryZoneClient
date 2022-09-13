@@ -33,6 +33,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         final response = await Openapi()
             .getAccountResourceApi()
             .registerAccount(managedUserVM: user);
+        debugPrint("token--$response and statusCode => ${response.statusCode}");
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           emit(RegisterLoaded());

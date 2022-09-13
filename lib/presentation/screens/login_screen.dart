@@ -130,6 +130,8 @@ class _LoginPageState extends State<LoginPage> {
                           /// LOGIN TRIGGER BUTTON
                           ///
                           buttonLogin(context),
+                          //
+                          //forgot password button
                           SizedBox(
                             height: 35,
                             child: Row(
@@ -232,12 +234,10 @@ class _LoginPageState extends State<LoginPage> {
           LoginVM loginUserVM = loginUser(
               userName: phoneNumberController.text,
               password: passwordController.text);
+
+          debugPrint(loginUserVM.toString());
           BlocProvider.of<AuthBloc>(context)
               .add(LogedInEvent(userLogin: loginUserVM));
-          // await Future.delayed(
-          //     const Duration(seconds: 3));
-          phoneNumberController.clear();
-          passwordController.clear();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -247,9 +247,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           );
         }
-
-        // Navigator.of(context).push(MaterialPageRoute(
-        //     builder: (context) => MainScreen()));
       },
       height: 45,
       minWidth: 240,

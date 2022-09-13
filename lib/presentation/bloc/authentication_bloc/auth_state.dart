@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 part of 'auth_bloc.dart';
 
 @immutable
-abstract class AuthState extends Equatable {}
+abstract class AuthState {}
 
 class AuthInitial extends AuthState {
   @override
@@ -23,8 +25,6 @@ class AuthSuccessState extends AuthState {
 class AuthErrorState extends AuthState {
   String? error;
   AuthErrorState({required this.error});
-  @override
-  List<Object?> get props => [toString()];
 }
 
 class ForgetPasswordLoading extends AuthState {
