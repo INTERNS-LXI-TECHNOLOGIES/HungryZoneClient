@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hungryzone/const/const.dart';
-import 'package:hungryzone/presentation/bloc/sign_up/signup_bloc.dart';
 import 'package:hungryzone/presentation/screens/forgot_password_screen.dart';
-import 'package:hungryzone/presentation/screens/home_screen.dart';
 import 'package:openapi/openapi.dart';
 
 import '../bloc/authentication_bloc/auth_bloc.dart';

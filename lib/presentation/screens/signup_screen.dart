@@ -45,7 +45,8 @@ class _SignUpPageState extends State<SignUpPage> {
             );
             Future.delayed(const Duration(seconds: 1));
             Navigator.of(context).pop();
-            // MaterialPageRoute(builder: (context) => const LoginPage()));
+            clearController();
+            MaterialPageRoute(builder: (context) => const LoginPage());
           } else if (state is RegisterLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -54,6 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 behavior: SnackBarBehavior.floating,
               ),
             );
+            clearController();
           } else if (state is RegisterLoadError) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -63,6 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             );
             log('error :${state.error!}');
+            clearController();
           }
         },
         child: SingleChildScrollView(
@@ -148,66 +151,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
 
                       // #signup_button
-                      MaterialButton(
-                        onPressed: () {
-                          _validKey.currentState!.validate();
-                          if (isValid == true) {
-                            final registerUser = onUserAdd();
-                            BlocProvider.of<SignupBloc>(context)
-                                .add(RegisterUserEvent(user: registerUser));
-                            firstNameController.clear();
-                            lastNameController.clear();
-                            emailController.clear();
-                            phoneNumberController.clear();
-                            passwordController.clear();
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("signup not done"),
-                                backgroundColor: Colors.red,
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
-                            // debugPrint("signup not done");
-                            // firstNameController.clear();
-                            // lastNameController.clear();
-                            // emailController.clear();
-                            // phoneNumberController.clear();
-                            // passwordController.clear();
-                          }
-                        },
-                        height: 45,
-                        minWidth: 240,
-                        shape: const StadiumBorder(),
-                        color: Colors.green.shade700,
-                        child: const Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      buttonSignUp(context),
                       const SizedBox(
                         height: 15,
                       ),
 
-                      // MaterialButton(
-                      //   onPressed: () {
-                      //     Navigator.of(context).pop();
-                      //   },
-                      //   height: 45,
-                      //   minWidth: 240,
-                      //   shape: const StadiumBorder(),
-                      //   color: Colors.green.shade700,
-                      //   child: const Text(
-                      //     "Login",
-                      //     style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: 14,
-                      //         fontWeight: FontWeight.bold),
-                      //   ),
-                      // ),
                       const SizedBox(
                         height: 15,
                       ),
@@ -220,6 +168,48 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  MaterialButton buttonSignUp(BuildContext context) {
+    return MaterialButton(
+      onPressed: () {
+        bool isSignup = _validKey.currentState!.validate();
+        debugPrint(isSignup.toString());
+        if (isSignup == true) {
+          final registerUser = onUserAdd();
+          BlocProvider.of<SignupBloc>(context)
+              .add(RegisterUserEvent(user: registerUser));
+          debugPrint('..............triggred');
+          clearController();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("signup not done"),
+              backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+          clearController();
+        }
+      },
+      height: 45,
+      minWidth: 240,
+      shape: const StadiumBorder(),
+      color: Colors.green.shade700,
+      child: const Text(
+        "Sign Up",
+        style: TextStyle(
+            color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  clearController() {
+    firstNameController.clear();
+    lastNameController.clear();
+    emailController.clear();
+    phoneNumberController.clear();
+    passwordController.clear();
   }
 
   Form textFields() {
@@ -346,21 +336,7 @@ class _SignUpPageState extends State<SignUpPage> {
     final _emailId = emailController.text;
     final _phoneNumber = phoneNumberController.text;
     final _passwords = passwordController.text;
-    /* if (_firstName.isEmpty ||
-        _lastName.isEmpty ||
-        _emailId.isEmpty ||
-        _phoneNumber.isEmpty ||
-        _passwords.isEmpty) {
-      return;
-    } else {
-      final _user = UserModel(
-          firstName: _firstName,
-          lastName: _lastName,
-          emailId: _emailId,
-          phoneNumber: _phoneNumber,
-          passwords: _passwords);
-      addUser(_user);
-    }*/
+
     ManagedUserVMBuilder userBuilder = ManagedUserVMBuilder();
     userBuilder.firstName = _firstName;
     userBuilder.lastName = _lastName;
