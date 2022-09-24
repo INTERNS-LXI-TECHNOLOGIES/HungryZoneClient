@@ -87,7 +87,6 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 Expanded(
                   child: Container(
-                    height: 300,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
                     child: Column(
@@ -96,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       children: const [
                         // #signup_text
                         Text(
-                          "Hunger Zone",
+                          "Hungry Zone",
                           textAlign: TextAlign.right,
                           style: TextStyle(color: Colors.white, fontSize: 32.5),
                         ),

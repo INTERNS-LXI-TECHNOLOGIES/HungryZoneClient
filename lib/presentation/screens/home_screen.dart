@@ -2,6 +2,7 @@ import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryzone/database/model/operations.dart';
 import 'package:hungryzone/presentation/screens/add_food_screen.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../const/const.dart';
 import '../widgets/side_drawer.dart';
@@ -38,7 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(physics: const BouncingScrollPhysics(), children: [
         Column(
           children: [
-            catgoryStatusList(context),
+            catgoryStatusList(context)
+                .animate()
+                .fadeIn(delay: 300.ms, duration: 500.ms),
+            //.then()
+            //.slide(duration: 400.ms),
             Column(
               children: [
                 SizedBox(

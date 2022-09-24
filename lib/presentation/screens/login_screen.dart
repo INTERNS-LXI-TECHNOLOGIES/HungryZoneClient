@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: const [
-                      Text('Hunger Zone',
+                      Text('Hungry Zone',
                           style:
                               TextStyle(color: Colors.white, fontSize: 32.5)),
                       SizedBox(height: 7.5),
@@ -150,16 +150,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
 
-                          /// TEXT
-                          // const Text(
-                          //   'Login with SNS',
-                          //   style: TextStyle(
-                          //       color: Colors.grey,
-                          //       fontSize: 14,
-                          //       fontWeight: FontWeight.bold),
-                          // ),
-
-                          //SIGNUP BUTTON
                           const SizedBox(height: 15),
 
                           //demo button
