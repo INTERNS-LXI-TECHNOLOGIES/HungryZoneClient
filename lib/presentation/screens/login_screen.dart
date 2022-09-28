@@ -47,8 +47,8 @@ class _LoginPageState extends State<LoginPage> {
             passwordController.clear();
           } else if (state is AuthErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Authentication Failed'),
+              SnackBar(
+                content: Text('Authentication Failed - ${state.error}'),
                 backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating,
               ),
@@ -82,21 +82,25 @@ class _LoginPageState extends State<LoginPage> {
             ),
             child: Column(
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.width / 1.3,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 35),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: const [
-                      Text('Hungry Zone',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 32.5)),
-                      SizedBox(height: 7.5),
-                      Text('Login',
-                          style: TextStyle(color: Colors.white, fontSize: 18)),
-                    ],
+                Expanded(
+                  child: Container(
+                    // height: MediaQuery.of(context).size.width / 1.3,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 35),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: const [
+                        Text('Hungry Zone',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 32.5)),
+                        SizedBox(height: 7.5),
+                        Text('Login',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 18)),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
@@ -193,12 +197,13 @@ class _LoginPageState extends State<LoginPage> {
       RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: 'New user ',
+          text: 'New user ? ',
           style: const TextStyle(fontSize: 15, color: Colors.grey),
           children: <TextSpan>[
             TextSpan(
                 text: ' Sign up ',
                 style: const TextStyle(
+                    decoration: TextDecoration.underline,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.cyan),
@@ -269,7 +274,7 @@ class _LoginPageState extends State<LoginPage> {
           /// PhoneNumber validation
           TextFormField(
             style: const TextStyle(fontSize: 15),
-            keyboardType: TextInputType.phone,
+            //keyboardType: TextInputType.phone,
             controller: phoneNumberController,
             decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -277,22 +282,22 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'Phonenumber',
                 isCollapsed: false,
                 hintStyle: TextStyle(fontSize: 14, color: Colors.grey)),
-            validator: (value) {
-              String pattern =
-                  r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
+            // validator: (value) {
+            //   String pattern =
+            //       r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
 
-              RegExp regExp = RegExp(pattern);
-              if (value == null || value.isEmpty) {
-                isNumberValid = false;
-                return 'required field';
-              } else if (!regExp.hasMatch(value)) {
-                isNumberValid = false;
-                return 'Please enter valid mobile number';
-              }
+            //   RegExp regExp = RegExp(pattern);
+            //   if (value == null || value.isEmpty) {
+            //     isNumberValid = false;
+            //     return 'required field';
+            //   } else if (!regExp.hasMatch(value)) {
+            //     isNumberValid = false;
+            //     return 'Please enter valid mobile number';
+            //   }
 
-              //api.number(value);
-              return null;
-            },
+            //   //api.number(value);
+            //   return null;
+            // },
           ),
           const Divider(color: Colors.black54, height: 1),
 
