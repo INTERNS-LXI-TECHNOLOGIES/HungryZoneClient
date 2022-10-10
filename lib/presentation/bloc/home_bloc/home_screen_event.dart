@@ -8,9 +8,7 @@ abstract class HomeScreenEvent extends Equatable {
 }
 
 // ignore: must_be_immutable
-class CategoryIndexEvent extends HomeScreenEvent {
+class AllCategoryListEvent extends HomeScreenEvent {
   int? cateIndex;
-  CategoryIndexEvent({required int index}) {
-    cateIndex = index;
-  }
+  AllCategoryListEvent();
 }

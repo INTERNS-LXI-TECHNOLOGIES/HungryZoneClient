@@ -12,6 +12,11 @@ void main() {
       // TODO
     });
 
+    // String userLogin
+    test('to test the property `userLogin`', () async {
+      // TODO
+    });
+
     // DateTime chatDate
     test('to test the property `chatDate`', () async {
       // TODO

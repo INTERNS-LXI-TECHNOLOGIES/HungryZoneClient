@@ -99,7 +99,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAllOrders**
-> BuiltList<OrderDTO> getAllOrders()
+> BuiltList<OrderDTO> getAllOrders(eagerload)
 
 
 
@@ -108,9 +108,10 @@ No authorization required
 import 'package:openapi/api.dart';
 
 final api = Openapi().getOrderResourceApi();
+final bool eagerload = true; // bool | 
 
 try {
-    final response = api.getAllOrders();
+    final response = api.getAllOrders(eagerload);
     print(response);
 } catch on DioError (e) {
     print('Exception when calling OrderResourceApi->getAllOrders: $e\n');
@@ -118,7 +119,10 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **eagerload** | **bool**|  | [optional] [default to false]
 
 ### Return type
 

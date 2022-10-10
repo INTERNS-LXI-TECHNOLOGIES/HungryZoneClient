@@ -17,5 +17,10 @@ void main() {
       // TODO
     });
 
+    // String imageUrl
+    test('to test the property `imageUrl`', () async {
+      // TODO
+    });
+
   });
 }

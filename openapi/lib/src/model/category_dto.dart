@@ -12,12 +12,16 @@ part 'category_dto.g.dart';
 /// Properties:
 /// * [id] 
 /// * [name] 
+/// * [imageUrl] 
 abstract class CategoryDTO implements Built<CategoryDTO, CategoryDTOBuilder> {
     @BuiltValueField(wireName: r'id')
     int? get id;
 
     @BuiltValueField(wireName: r'name')
     String get name;
+
+    @BuiltValueField(wireName: r'imageUrl')
+    String? get imageUrl;
 
     CategoryDTO._();
 
@@ -51,6 +55,12 @@ class _$CategoryDTOSerializer implements StructuredSerializer<CategoryDTO> {
             ..add(r'name')
             ..add(serializers.serialize(object.name,
                 specifiedType: const FullType(String)));
+        if (object.imageUrl != null) {
+            result
+                ..add(r'imageUrl')
+                ..add(serializers.serialize(object.imageUrl,
+                    specifiedType: const FullType(String)));
+        }
         return result;
     }
 
@@ -75,6 +85,11 @@ class _$CategoryDTOSerializer implements StructuredSerializer<CategoryDTO> {
                     final valueDes = serializers.deserialize(value,
                         specifiedType: const FullType(String)) as String;
                     result.name = valueDes;
+                    break;
+                case r'imageUrl':
+                    final valueDes = serializers.deserialize(value,
+                        specifiedType: const FullType(String)) as String;
+                    result.imageUrl = valueDes;
                     break;
             }
         }

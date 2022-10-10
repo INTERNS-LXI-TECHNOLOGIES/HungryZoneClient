@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **orderStatus** | **String** |  | 
 **donor** | [**UserExtraDTO**](UserExtraDTO.md) |  | [optional] 
 **recipient** | [**UserExtraDTO**](UserExtraDTO.md) |  | [optional] 
+**foods** | [**BuiltSet&lt;FoodDTO&gt;**](FoodDTO.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

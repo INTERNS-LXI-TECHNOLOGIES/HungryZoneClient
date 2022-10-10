@@ -48,7 +48,9 @@ class _BagScreenState extends State<BagScreen> {
                         .then(
                             delay:
                                 2000.ms) // sets delay to 1400ms (800+400+200)
-                        .blur() // inherits the 1400ms delay
+                        .blur(
+                          end: 2,
+                        ) // inherits the 1400ms delay
                         // Explicitly setting delay overrides the inherited value.
                         // This move effect will run BEFORE the initial fade:
                         .move(delay: 0.ms)),

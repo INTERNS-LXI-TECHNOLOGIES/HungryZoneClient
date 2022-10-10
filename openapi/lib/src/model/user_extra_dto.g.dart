@@ -10,7 +10,7 @@ class _$UserExtraDTO extends UserExtraDTO {
   @override
   final int? id;
   @override
-  final int phoneNumber;
+  final String phoneNumber;
   @override
   final String address;
   @override
@@ -92,9 +92,9 @@ class UserExtraDTOBuilder
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  int? _phoneNumber;
-  int? get phoneNumber => _$this._phoneNumber;
-  set phoneNumber(int? phoneNumber) => _$this._phoneNumber = phoneNumber;
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
   String? _address;
   String? get address => _$this._address;

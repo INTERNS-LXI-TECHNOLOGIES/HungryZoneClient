@@ -4,7 +4,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hungryzone/database/model/operations.dart';
 import 'package:hungryzone/database/model/user_model.dart';
 import 'package:hungryzone/presentation/screens/login_screen.dart';
 import 'package:openapi/openapi.dart';

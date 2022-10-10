@@ -9,6 +9,7 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional] 
+**userLogin** | **String** |  | 
 **chatDate** | [**DateTime**](DateTime.md) |  | 
 **textMessage** | **String** |  | 
 **users** | [**BuiltSet&lt;UserExtraDTO&gt;**](UserExtraDTO.md) |  | [optional] 

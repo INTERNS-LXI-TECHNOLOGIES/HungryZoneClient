@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **expiry** | [**DateTime**](DateTime.md) |  | 
 **remainingQty** | **int** |  | 
 **description** | **String** |  | [optional] 
+**imageUrl** | **String** |  | [optional] 
 **category** | [**CategoryDTO**](CategoryDTO.md) |  | [optional] 
 **donor** | [**UserExtraDTO**](UserExtraDTO.md) |  | [optional] 
-**order** | [**OrderDTO**](OrderDTO.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

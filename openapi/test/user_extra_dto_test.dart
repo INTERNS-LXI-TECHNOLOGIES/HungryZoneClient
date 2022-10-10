@@ -12,7 +12,7 @@ void main() {
       // TODO
     });
 
-    // int phoneNumber
+    // String phoneNumber
     test('to test the property `phoneNumber`', () async {
       // TODO
     });

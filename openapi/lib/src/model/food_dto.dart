@@ -3,7 +3,6 @@
 //
 
 import 'package:openapi/src/model/category_dto.dart';
-import 'package:openapi/src/model/order_dto.dart';
 import 'package:openapi/src/model/user_extra_dto.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -18,9 +17,9 @@ part 'food_dto.g.dart';
 /// * [expiry] 
 /// * [remainingQty] 
 /// * [description] 
+/// * [imageUrl] 
 /// * [category] 
 /// * [donor] 
-/// * [order] 
 abstract class FoodDTO implements Built<FoodDTO, FoodDTOBuilder> {
     @BuiltValueField(wireName: r'id')
     int? get id;
@@ -37,14 +36,14 @@ abstract class FoodDTO implements Built<FoodDTO, FoodDTOBuilder> {
     @BuiltValueField(wireName: r'description')
     String? get description;
 
+    @BuiltValueField(wireName: r'imageUrl')
+    String? get imageUrl;
+
     @BuiltValueField(wireName: r'category')
     CategoryDTO? get category;
 
     @BuiltValueField(wireName: r'donor')
     UserExtraDTO? get donor;
-
-    @BuiltValueField(wireName: r'order')
-    OrderDTO? get order;
 
     FoodDTO._();
 
@@ -92,6 +91,12 @@ class _$FoodDTOSerializer implements StructuredSerializer<FoodDTO> {
                 ..add(serializers.serialize(object.description,
                     specifiedType: const FullType(String)));
         }
+        if (object.imageUrl != null) {
+            result
+                ..add(r'imageUrl')
+                ..add(serializers.serialize(object.imageUrl,
+                    specifiedType: const FullType(String)));
+        }
         if (object.category != null) {
             result
                 ..add(r'category')
@@ -103,12 +108,6 @@ class _$FoodDTOSerializer implements StructuredSerializer<FoodDTO> {
                 ..add(r'donor')
                 ..add(serializers.serialize(object.donor,
                     specifiedType: const FullType(UserExtraDTO)));
-        }
-        if (object.order != null) {
-            result
-                ..add(r'order')
-                ..add(serializers.serialize(object.order,
-                    specifiedType: const FullType(OrderDTO)));
         }
         return result;
     }
@@ -150,6 +149,11 @@ class _$FoodDTOSerializer implements StructuredSerializer<FoodDTO> {
                         specifiedType: const FullType(String)) as String;
                     result.description = valueDes;
                     break;
+                case r'imageUrl':
+                    final valueDes = serializers.deserialize(value,
+                        specifiedType: const FullType(String)) as String;
+                    result.imageUrl = valueDes;
+                    break;
                 case r'category':
                     final valueDes = serializers.deserialize(value,
                         specifiedType: const FullType(CategoryDTO)) as CategoryDTO;
@@ -159,11 +163,6 @@ class _$FoodDTOSerializer implements StructuredSerializer<FoodDTO> {
                     final valueDes = serializers.deserialize(value,
                         specifiedType: const FullType(UserExtraDTO)) as UserExtraDTO;
                     result.donor.replace(valueDes);
-                    break;
-                case r'order':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(OrderDTO)) as OrderDTO;
-                    result.order.replace(valueDes);
                     break;
             }
         }

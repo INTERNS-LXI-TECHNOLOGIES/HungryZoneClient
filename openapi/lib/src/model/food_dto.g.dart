@@ -18,11 +18,11 @@ class _$FoodDTO extends FoodDTO {
   @override
   final String? description;
   @override
+  final String? imageUrl;
+  @override
   final CategoryDTO? category;
   @override
   final UserExtraDTO? donor;
-  @override
-  final OrderDTO? order;
 
   factory _$FoodDTO([void Function(FoodDTOBuilder)? updates]) =>
       (new FoodDTOBuilder()..update(updates))._build();
@@ -33,9 +33,9 @@ class _$FoodDTO extends FoodDTO {
       required this.expiry,
       required this.remainingQty,
       this.description,
+      this.imageUrl,
       this.category,
-      this.donor,
-      this.order})
+      this.donor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'FoodDTO', 'name');
     BuiltValueNullFieldError.checkNotNull(expiry, r'FoodDTO', 'expiry');
@@ -59,9 +59,9 @@ class _$FoodDTO extends FoodDTO {
         expiry == other.expiry &&
         remainingQty == other.remainingQty &&
         description == other.description &&
+        imageUrl == other.imageUrl &&
         category == other.category &&
-        donor == other.donor &&
-        order == other.order;
+        donor == other.donor;
   }
 
   @override
@@ -75,9 +75,9 @@ class _$FoodDTO extends FoodDTO {
                             expiry.hashCode),
                         remainingQty.hashCode),
                     description.hashCode),
-                category.hashCode),
-            donor.hashCode),
-        order.hashCode));
+                imageUrl.hashCode),
+            category.hashCode),
+        donor.hashCode));
   }
 
   @override
@@ -88,9 +88,9 @@ class _$FoodDTO extends FoodDTO {
           ..add('expiry', expiry)
           ..add('remainingQty', remainingQty)
           ..add('description', description)
+          ..add('imageUrl', imageUrl)
           ..add('category', category)
-          ..add('donor', donor)
-          ..add('order', order))
+          ..add('donor', donor))
         .toString();
   }
 }
@@ -118,6 +118,10 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
 
+  String? _imageUrl;
+  String? get imageUrl => _$this._imageUrl;
+  set imageUrl(String? imageUrl) => _$this._imageUrl = imageUrl;
+
   CategoryDTOBuilder? _category;
   CategoryDTOBuilder get category =>
       _$this._category ??= new CategoryDTOBuilder();
@@ -126,10 +130,6 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
   UserExtraDTOBuilder? _donor;
   UserExtraDTOBuilder get donor => _$this._donor ??= new UserExtraDTOBuilder();
   set donor(UserExtraDTOBuilder? donor) => _$this._donor = donor;
-
-  OrderDTOBuilder? _order;
-  OrderDTOBuilder get order => _$this._order ??= new OrderDTOBuilder();
-  set order(OrderDTOBuilder? order) => _$this._order = order;
 
   FoodDTOBuilder() {
     FoodDTO._defaults(this);
@@ -143,9 +143,9 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
       _expiry = $v.expiry;
       _remainingQty = $v.remainingQty;
       _description = $v.description;
+      _imageUrl = $v.imageUrl;
       _category = $v.category?.toBuilder();
       _donor = $v.donor?.toBuilder();
-      _order = $v.order?.toBuilder();
       _$v = null;
     }
     return this;
@@ -178,9 +178,9 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
               remainingQty: BuiltValueNullFieldError.checkNotNull(
                   remainingQty, r'FoodDTO', 'remainingQty'),
               description: description,
+              imageUrl: imageUrl,
               category: _category?.build(),
-              donor: _donor?.build(),
-              order: _order?.build());
+              donor: _donor?.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -188,8 +188,6 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
         _category?.build();
         _$failedField = 'donor';
         _donor?.build();
-        _$failedField = 'order';
-        _order?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'FoodDTO', _$failedField, e.toString());

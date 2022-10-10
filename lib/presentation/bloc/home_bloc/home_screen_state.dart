@@ -12,7 +12,7 @@ class HomeScreenInitial extends HomeScreenState {}
 class CateLoadingState extends HomeScreenState {}
 
 // ignore: must_be_immutable
-class CateIndexLoaded extends HomeScreenState {
-  int? cateIndex;
-  CateIndexLoaded({required this.cateIndex});
+class AllCategoryLoaded extends HomeScreenState {
+  List<CategoryDTO>? allCateList;
+  AllCategoryLoaded({required this.allCateList});
 }

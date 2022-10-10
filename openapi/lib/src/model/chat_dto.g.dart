@@ -10,6 +10,8 @@ class _$ChatDTO extends ChatDTO {
   @override
   final int? id;
   @override
+  final String userLogin;
+  @override
   final DateTime chatDate;
   @override
   final String textMessage;
@@ -20,8 +22,13 @@ class _$ChatDTO extends ChatDTO {
       (new ChatDTOBuilder()..update(updates))._build();
 
   _$ChatDTO._(
-      {this.id, required this.chatDate, required this.textMessage, this.users})
+      {this.id,
+      required this.userLogin,
+      required this.chatDate,
+      required this.textMessage,
+      this.users})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(userLogin, r'ChatDTO', 'userLogin');
     BuiltValueNullFieldError.checkNotNull(chatDate, r'ChatDTO', 'chatDate');
     BuiltValueNullFieldError.checkNotNull(
         textMessage, r'ChatDTO', 'textMessage');
@@ -39,6 +46,7 @@ class _$ChatDTO extends ChatDTO {
     if (identical(other, this)) return true;
     return other is ChatDTO &&
         id == other.id &&
+        userLogin == other.userLogin &&
         chatDate == other.chatDate &&
         textMessage == other.textMessage &&
         users == other.users;
@@ -47,7 +55,10 @@ class _$ChatDTO extends ChatDTO {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, id.hashCode), chatDate.hashCode), textMessage.hashCode),
+        $jc(
+            $jc($jc($jc(0, id.hashCode), userLogin.hashCode),
+                chatDate.hashCode),
+            textMessage.hashCode),
         users.hashCode));
   }
 
@@ -55,6 +66,7 @@ class _$ChatDTO extends ChatDTO {
   String toString() {
     return (newBuiltValueToStringHelper(r'ChatDTO')
           ..add('id', id)
+          ..add('userLogin', userLogin)
           ..add('chatDate', chatDate)
           ..add('textMessage', textMessage)
           ..add('users', users))
@@ -68,6 +80,10 @@ class ChatDTOBuilder implements Builder<ChatDTO, ChatDTOBuilder> {
   int? _id;
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
+
+  String? _userLogin;
+  String? get userLogin => _$this._userLogin;
+  set userLogin(String? userLogin) => _$this._userLogin = userLogin;
 
   DateTime? _chatDate;
   DateTime? get chatDate => _$this._chatDate;
@@ -90,6 +106,7 @@ class ChatDTOBuilder implements Builder<ChatDTO, ChatDTOBuilder> {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
+      _userLogin = $v.userLogin;
       _chatDate = $v.chatDate;
       _textMessage = $v.textMessage;
       _users = $v.users?.toBuilder();
@@ -118,6 +135,8 @@ class ChatDTOBuilder implements Builder<ChatDTO, ChatDTOBuilder> {
       _$result = _$v ??
           new _$ChatDTO._(
               id: id,
+              userLogin: BuiltValueNullFieldError.checkNotNull(
+                  userLogin, r'ChatDTO', 'userLogin'),
               chatDate: BuiltValueNullFieldError.checkNotNull(
                   chatDate, r'ChatDTO', 'chatDate'),
               textMessage: BuiltValueNullFieldError.checkNotNull(

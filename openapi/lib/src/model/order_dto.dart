@@ -2,6 +2,8 @@
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
 
+import 'package:openapi/src/model/food_dto.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:openapi/src/model/user_extra_dto.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -17,6 +19,7 @@ part 'order_dto.g.dart';
 /// * [orderStatus] 
 /// * [donor] 
 /// * [recipient] 
+/// * [foods] 
 abstract class OrderDTO implements Built<OrderDTO, OrderDTOBuilder> {
     @BuiltValueField(wireName: r'id')
     int? get id;
@@ -35,6 +38,9 @@ abstract class OrderDTO implements Built<OrderDTO, OrderDTOBuilder> {
 
     @BuiltValueField(wireName: r'recipient')
     UserExtraDTO? get recipient;
+
+    @BuiltValueField(wireName: r'foods')
+    BuiltSet<FoodDTO>? get foods;
 
     OrderDTO._();
 
@@ -88,6 +94,12 @@ class _$OrderDTOSerializer implements StructuredSerializer<OrderDTO> {
                 ..add(serializers.serialize(object.recipient,
                     specifiedType: const FullType(UserExtraDTO)));
         }
+        if (object.foods != null) {
+            result
+                ..add(r'foods')
+                ..add(serializers.serialize(object.foods,
+                    specifiedType: const FullType(BuiltSet, [FullType(FoodDTO)])));
+        }
         return result;
     }
 
@@ -132,6 +144,11 @@ class _$OrderDTOSerializer implements StructuredSerializer<OrderDTO> {
                     final valueDes = serializers.deserialize(value,
                         specifiedType: const FullType(UserExtraDTO)) as UserExtraDTO;
                     result.recipient.replace(valueDes);
+                    break;
+                case r'foods':
+                    final valueDes = serializers.deserialize(value,
+                        specifiedType: const FullType(BuiltSet, [FullType(FoodDTO)])) as BuiltSet<FoodDTO>;
+                    result.foods.replace(valueDes);
                     break;
             }
         }

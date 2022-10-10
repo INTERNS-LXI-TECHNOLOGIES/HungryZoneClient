@@ -32,6 +32,11 @@ void main() {
       // TODO
     });
 
+    // String imageUrl
+    test('to test the property `imageUrl`', () async {
+      // TODO
+    });
+
     // CategoryDTO category
     test('to test the property `category`', () async {
       // TODO
@@ -39,11 +44,6 @@ void main() {
 
     // UserExtraDTO donor
     test('to test the property `donor`', () async {
-      // TODO
-    });
-
-    // OrderDTO order
-    test('to test the property `order`', () async {
       // TODO
     });
 

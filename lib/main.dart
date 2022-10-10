@@ -54,7 +54,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: const SplashScreen(),
+          home: const Directionality(
+              textDirection: TextDirection.rtl, child: SplashScreen()),
           routes: {
             'splashscreen': ((context) => const SplashScreen()),
             'homescreen': (context) => const HomeScreen(),

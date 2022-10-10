@@ -37,5 +37,10 @@ void main() {
       // TODO
     });
 
+    // BuiltSet<FoodDTO> foods
+    test('to test the property `foods`', () async {
+      // TODO
+    });
+
   });
 }

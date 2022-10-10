@@ -90,12 +90,9 @@ Class | Method | HTTP request | Description
 [*CategoryResourceApi*](doc\CategoryResourceApi.md) | [**getCategory**](doc\CategoryResourceApi.md#getcategory) | **GET** /api/categories/{id} | 
 [*CategoryResourceApi*](doc\CategoryResourceApi.md) | [**partialUpdateCategory**](doc\CategoryResourceApi.md#partialupdatecategory) | **PATCH** /api/categories/{id} | 
 [*CategoryResourceApi*](doc\CategoryResourceApi.md) | [**updateCategory**](doc\CategoryResourceApi.md#updatecategory) | **PUT** /api/categories/{id} | 
-[*ChatResourceApi*](doc\ChatResourceApi.md) | [**createChat**](doc\ChatResourceApi.md#createchat) | **POST** /api/chats | 
 [*ChatResourceApi*](doc\ChatResourceApi.md) | [**deleteChat**](doc\ChatResourceApi.md#deletechat) | **DELETE** /api/chats/{id} | 
 [*ChatResourceApi*](doc\ChatResourceApi.md) | [**getAllChats**](doc\ChatResourceApi.md#getallchats) | **GET** /api/chats | 
 [*ChatResourceApi*](doc\ChatResourceApi.md) | [**getChat**](doc\ChatResourceApi.md#getchat) | **GET** /api/chats/{id} | 
-[*ChatResourceApi*](doc\ChatResourceApi.md) | [**partialUpdateChat**](doc\ChatResourceApi.md#partialupdatechat) | **PATCH** /api/chats/{id} | 
-[*ChatResourceApi*](doc\ChatResourceApi.md) | [**updateChat**](doc\ChatResourceApi.md#updatechat) | **PUT** /api/chats/{id} | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**createFood**](doc\FoodResourceApi.md#createfood) | **POST** /api/foods | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**deleteFood**](doc\FoodResourceApi.md#deletefood) | **DELETE** /api/foods/{id} | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**getAllFoods**](doc\FoodResourceApi.md#getallfoods) | **GET** /api/foods | 

@@ -8,6 +8,7 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
+import 'package:openapi/src/api_util.dart';
 import 'package:openapi/src/model/order_dto.dart';
 
 class OrderResourceApi {
@@ -162,6 +163,7 @@ class OrderResourceApi {
   /// 
   ///
   /// Parameters:
+  /// * [eagerload] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -172,6 +174,7 @@ class OrderResourceApi {
   /// Returns a [Future] containing a [Response] with a [BuiltList<OrderDTO>] as data
   /// Throws [DioError] if API call or serialization fails
   Future<Response<BuiltList<OrderDTO>>> getAllOrders({ 
+    bool? eagerload = false,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -192,9 +195,14 @@ class OrderResourceApi {
       validateStatus: validateStatus,
     );
 
+    final _queryParameters = <String, dynamic>{
+      if (eagerload != null) r'eagerload': encodeQueryParameter(_serializers, eagerload, const FullType(bool)),
+    };
+
     final _response = await _dio.request<Object>(
       _path,
       options: _options,
+      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

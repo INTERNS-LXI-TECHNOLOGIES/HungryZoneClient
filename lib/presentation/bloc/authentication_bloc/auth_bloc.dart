@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hungryzone/main.dart';
-import 'package:meta/meta.dart';
 import 'package:openapi/openapi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

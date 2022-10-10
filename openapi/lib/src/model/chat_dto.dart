@@ -13,12 +13,16 @@ part 'chat_dto.g.dart';
 ///
 /// Properties:
 /// * [id] 
+/// * [userLogin] 
 /// * [chatDate] 
 /// * [textMessage] 
 /// * [users] 
 abstract class ChatDTO implements Built<ChatDTO, ChatDTOBuilder> {
     @BuiltValueField(wireName: r'id')
     int? get id;
+
+    @BuiltValueField(wireName: r'userLogin')
+    String get userLogin;
 
     @BuiltValueField(wireName: r'chatDate')
     DateTime get chatDate;
@@ -58,6 +62,10 @@ class _$ChatDTOSerializer implements StructuredSerializer<ChatDTO> {
                     specifiedType: const FullType(int)));
         }
         result
+            ..add(r'userLogin')
+            ..add(serializers.serialize(object.userLogin,
+                specifiedType: const FullType(String)));
+        result
             ..add(r'chatDate')
             ..add(serializers.serialize(object.chatDate,
                 specifiedType: const FullType(DateTime)));
@@ -90,6 +98,11 @@ class _$ChatDTOSerializer implements StructuredSerializer<ChatDTO> {
                     final valueDes = serializers.deserialize(value,
                         specifiedType: const FullType(int)) as int;
                     result.id = valueDes;
+                    break;
+                case r'userLogin':
+                    final valueDes = serializers.deserialize(value,
+                        specifiedType: const FullType(String)) as String;
+                    result.userLogin = valueDes;
                     break;
                 case r'chatDate':
                     final valueDes = serializers.deserialize(value,

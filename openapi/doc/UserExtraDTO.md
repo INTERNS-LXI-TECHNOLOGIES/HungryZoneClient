@@ -9,7 +9,7 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | [optional] 
-**phoneNumber** | **int** |  | 
+**phoneNumber** | **String** |  | 
 **address** | **String** |  | 
 **locationAtXAxis** | **String** |  | 
 **locationAtYAxis** | **String** |  | 

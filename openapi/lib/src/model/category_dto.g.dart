@@ -11,11 +11,13 @@ class _$CategoryDTO extends CategoryDTO {
   final int? id;
   @override
   final String name;
+  @override
+  final String? imageUrl;
 
   factory _$CategoryDTO([void Function(CategoryDTOBuilder)? updates]) =>
       (new CategoryDTOBuilder()..update(updates))._build();
 
-  _$CategoryDTO._({this.id, required this.name}) : super._() {
+  _$CategoryDTO._({this.id, required this.name, this.imageUrl}) : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'CategoryDTO', 'name');
   }
 
@@ -29,19 +31,23 @@ class _$CategoryDTO extends CategoryDTO {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is CategoryDTO && id == other.id && name == other.name;
+    return other is CategoryDTO &&
+        id == other.id &&
+        name == other.name &&
+        imageUrl == other.imageUrl;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, id.hashCode), name.hashCode));
+    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), imageUrl.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'CategoryDTO')
           ..add('id', id)
-          ..add('name', name))
+          ..add('name', name)
+          ..add('imageUrl', imageUrl))
         .toString();
   }
 }
@@ -57,6 +63,10 @@ class CategoryDTOBuilder implements Builder<CategoryDTO, CategoryDTOBuilder> {
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  String? _imageUrl;
+  String? get imageUrl => _$this._imageUrl;
+  set imageUrl(String? imageUrl) => _$this._imageUrl = imageUrl;
+
   CategoryDTOBuilder() {
     CategoryDTO._defaults(this);
   }
@@ -66,6 +76,7 @@ class CategoryDTOBuilder implements Builder<CategoryDTO, CategoryDTOBuilder> {
     if ($v != null) {
       _id = $v.id;
       _name = $v.name;
+      _imageUrl = $v.imageUrl;
       _$v = null;
     }
     return this;
@@ -90,7 +101,8 @@ class CategoryDTOBuilder implements Builder<CategoryDTO, CategoryDTOBuilder> {
         new _$CategoryDTO._(
             id: id,
             name: BuiltValueNullFieldError.checkNotNull(
-                name, r'CategoryDTO', 'name'));
+                name, r'CategoryDTO', 'name'),
+            imageUrl: imageUrl);
     replace(_$result);
     return _$result;
   }

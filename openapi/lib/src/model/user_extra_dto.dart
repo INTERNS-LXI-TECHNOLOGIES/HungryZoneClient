@@ -22,7 +22,7 @@ abstract class UserExtraDTO implements Built<UserExtraDTO, UserExtraDTOBuilder> 
     int? get id;
 
     @BuiltValueField(wireName: r'phoneNumber')
-    int get phoneNumber;
+    String get phoneNumber;
 
     @BuiltValueField(wireName: r'address')
     String get address;
@@ -67,7 +67,7 @@ class _$UserExtraDTOSerializer implements StructuredSerializer<UserExtraDTO> {
         result
             ..add(r'phoneNumber')
             ..add(serializers.serialize(object.phoneNumber,
-                specifiedType: const FullType(int)));
+                specifiedType: const FullType(String)));
         result
             ..add(r'address')
             ..add(serializers.serialize(object.address,
@@ -108,7 +108,7 @@ class _$UserExtraDTOSerializer implements StructuredSerializer<UserExtraDTO> {
                     break;
                 case r'phoneNumber':
                     final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(int)) as int;
+                        specifiedType: const FullType(String)) as String;
                     result.phoneNumber = valueDes;
                     break;
                 case r'address':
