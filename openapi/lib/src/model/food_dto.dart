@@ -2,6 +2,7 @@
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
 
+// ignore_for_file: unused_element
 import 'package:openapi/src/model/category_dto.dart';
 import 'package:openapi/src/model/user_extra_dto.dart';
 import 'package:built_value/built_value.dart';
@@ -20,153 +21,210 @@ part 'food_dto.g.dart';
 /// * [imageUrl] 
 /// * [category] 
 /// * [donor] 
+@BuiltValue()
 abstract class FoodDTO implements Built<FoodDTO, FoodDTOBuilder> {
-    @BuiltValueField(wireName: r'id')
-    int? get id;
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
-    @BuiltValueField(wireName: r'name')
-    String get name;
+  @BuiltValueField(wireName: r'name')
+  String get name;
 
-    @BuiltValueField(wireName: r'expiry')
-    DateTime get expiry;
+  @BuiltValueField(wireName: r'expiry')
+  DateTime get expiry;
 
-    @BuiltValueField(wireName: r'remainingQty')
-    int get remainingQty;
+  @BuiltValueField(wireName: r'remainingQty')
+  int get remainingQty;
 
-    @BuiltValueField(wireName: r'description')
-    String? get description;
+  @BuiltValueField(wireName: r'description')
+  String? get description;
 
-    @BuiltValueField(wireName: r'imageUrl')
-    String? get imageUrl;
+  @BuiltValueField(wireName: r'imageUrl')
+  String? get imageUrl;
 
-    @BuiltValueField(wireName: r'category')
-    CategoryDTO? get category;
+  @BuiltValueField(wireName: r'category')
+  CategoryDTO? get category;
 
-    @BuiltValueField(wireName: r'donor')
-    UserExtraDTO? get donor;
+  @BuiltValueField(wireName: r'donor')
+  UserExtraDTO? get donor;
 
-    FoodDTO._();
+  FoodDTO._();
 
-    @BuiltValueHook(initializeBuilder: true)
-    static void _defaults(FoodDTOBuilder b) => b;
+  factory FoodDTO([void updates(FoodDTOBuilder b)]) = _$FoodDTO;
 
-    factory FoodDTO([void updates(FoodDTOBuilder b)]) = _$FoodDTO;
+  @BuiltValueHook(initializeBuilder: true)
+  static void _defaults(FoodDTOBuilder b) => b;
 
-    @BuiltValueSerializer(custom: true)
-    static Serializer<FoodDTO> get serializer => _$FoodDTOSerializer();
+  @BuiltValueSerializer(custom: true)
+  static Serializer<FoodDTO> get serializer => _$FoodDTOSerializer();
 }
 
-class _$FoodDTOSerializer implements StructuredSerializer<FoodDTO> {
-    @override
-    final Iterable<Type> types = const [FoodDTO, _$FoodDTO];
+class _$FoodDTOSerializer implements PrimitiveSerializer<FoodDTO> {
+  @override
+  final Iterable<Type> types = const [FoodDTO, _$FoodDTO];
 
-    @override
-    final String wireName = r'FoodDTO';
+  @override
+  final String wireName = r'FoodDTO';
 
-    @override
-    Iterable<Object?> serialize(Serializers serializers, FoodDTO object,
-        {FullType specifiedType = FullType.unspecified}) {
-        final result = <Object?>[];
-        if (object.id != null) {
-            result
-                ..add(r'id')
-                ..add(serializers.serialize(object.id,
-                    specifiedType: const FullType(int)));
-        }
-        result
-            ..add(r'name')
-            ..add(serializers.serialize(object.name,
-                specifiedType: const FullType(String)));
-        result
-            ..add(r'expiry')
-            ..add(serializers.serialize(object.expiry,
-                specifiedType: const FullType(DateTime)));
-        result
-            ..add(r'remainingQty')
-            ..add(serializers.serialize(object.remainingQty,
-                specifiedType: const FullType(int)));
-        if (object.description != null) {
-            result
-                ..add(r'description')
-                ..add(serializers.serialize(object.description,
-                    specifiedType: const FullType(String)));
-        }
-        if (object.imageUrl != null) {
-            result
-                ..add(r'imageUrl')
-                ..add(serializers.serialize(object.imageUrl,
-                    specifiedType: const FullType(String)));
-        }
-        if (object.category != null) {
-            result
-                ..add(r'category')
-                ..add(serializers.serialize(object.category,
-                    specifiedType: const FullType(CategoryDTO)));
-        }
-        if (object.donor != null) {
-            result
-                ..add(r'donor')
-                ..add(serializers.serialize(object.donor,
-                    specifiedType: const FullType(UserExtraDTO)));
-        }
-        return result;
+  Iterable<Object?> _serializeProperties(
+    Serializers serializers,
+    FoodDTO object, {
+    FullType specifiedType = FullType.unspecified,
+  }) sync* {
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
     }
-
-    @override
-    FoodDTO deserialize(Serializers serializers, Iterable<Object?> serialized,
-        {FullType specifiedType = FullType.unspecified}) {
-        final result = FoodDTOBuilder();
-
-        final iterator = serialized.iterator;
-        while (iterator.moveNext()) {
-            final key = iterator.current as String;
-            iterator.moveNext();
-            final Object? value = iterator.current;
-            
-            switch (key) {
-                case r'id':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(int)) as int;
-                    result.id = valueDes;
-                    break;
-                case r'name':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.name = valueDes;
-                    break;
-                case r'expiry':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(DateTime)) as DateTime;
-                    result.expiry = valueDes;
-                    break;
-                case r'remainingQty':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(int)) as int;
-                    result.remainingQty = valueDes;
-                    break;
-                case r'description':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.description = valueDes;
-                    break;
-                case r'imageUrl':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.imageUrl = valueDes;
-                    break;
-                case r'category':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(CategoryDTO)) as CategoryDTO;
-                    result.category.replace(valueDes);
-                    break;
-                case r'donor':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(UserExtraDTO)) as UserExtraDTO;
-                    result.donor.replace(valueDes);
-                    break;
-            }
-        }
-        return result.build();
+    yield r'name';
+    yield serializers.serialize(
+      object.name,
+      specifiedType: const FullType(String),
+    );
+    yield r'expiry';
+    yield serializers.serialize(
+      object.expiry,
+      specifiedType: const FullType(DateTime),
+    );
+    yield r'remainingQty';
+    yield serializers.serialize(
+      object.remainingQty,
+      specifiedType: const FullType(int),
+    );
+    if (object.description != null) {
+      yield r'description';
+      yield serializers.serialize(
+        object.description,
+        specifiedType: const FullType(String),
+      );
     }
+    if (object.imageUrl != null) {
+      yield r'imageUrl';
+      yield serializers.serialize(
+        object.imageUrl,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.category != null) {
+      yield r'category';
+      yield serializers.serialize(
+        object.category,
+        specifiedType: const FullType(CategoryDTO),
+      );
+    }
+    if (object.donor != null) {
+      yield r'donor';
+      yield serializers.serialize(
+        object.donor,
+        specifiedType: const FullType(UserExtraDTO),
+      );
+    }
+  }
+
+  @override
+  Object serialize(
+    Serializers serializers,
+    FoodDTO object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+  }
+
+  void _deserializeProperties(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+    required List<Object?> serializedList,
+    required FoodDTOBuilder result,
+    required List<Object?> unhandled,
+  }) {
+    for (var i = 0; i < serializedList.length; i += 2) {
+      final key = serializedList[i] as String;
+      final value = serializedList[i + 1];
+      switch (key) {
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
+          break;
+        case r'name':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.name = valueDes;
+          break;
+        case r'expiry':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(DateTime),
+          ) as DateTime;
+          result.expiry = valueDes;
+          break;
+        case r'remainingQty':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.remainingQty = valueDes;
+          break;
+        case r'description':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.description = valueDes;
+          break;
+        case r'imageUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.imageUrl = valueDes;
+          break;
+        case r'category':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(CategoryDTO),
+          ) as CategoryDTO;
+          result.category.replace(valueDes);
+          break;
+        case r'donor':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(UserExtraDTO),
+          ) as UserExtraDTO;
+          result.donor.replace(valueDes);
+          break;
+        default:
+          unhandled.add(key);
+          unhandled.add(value);
+          break;
+      }
+    }
+  }
+
+  @override
+  FoodDTO deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    final result = FoodDTOBuilder();
+    final serializedList = (serialized as Iterable<Object?>).toList();
+    final unhandled = <Object?>[];
+    _deserializeProperties(
+      serializers,
+      serialized,
+      specifiedType: specifiedType,
+      serializedList: serializedList,
+      unhandled: unhandled,
+      result: result,
+    );
+    return result.build();
+  }
 }
 

@@ -113,22 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // CurvedDrawer drawerWidget() {
-  //   return CurvedDrawer(
-  //     color: Colors.white,
-  //     labelColor: Colors.black54,
-  //     width: 100,
-  //     items: const <DrawerItem>[
-  //       DrawerItem(icon: Icon(Icons.shopping_bag)),
-  //       //Optional Label Text
-  //       DrawerItem(icon: Icon(Icons.shopping_bag)),
-  //     ],
-  //     onTap: (index) {
-  //       //Handle button tap
-  //     },
-  //   );
-  // }
-
   Container catgoryStatusList(BuildContext context) {
     //  BlocProvider.of<HomeScreenBloc>(context).add(AllCategoryListEvent());
     return Container(

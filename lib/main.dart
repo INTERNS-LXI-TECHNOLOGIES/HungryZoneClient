@@ -16,6 +16,8 @@ import 'presentation/screens/splash_screen.dart';
 const SHARED_PREFERENCES_KEY = 'User login auth';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitDown]);
   Hive.initFlutter();
   if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());

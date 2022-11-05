@@ -2,6 +2,7 @@
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
 
+// ignore_for_file: unused_element
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -19,169 +20,229 @@ part 'user.g.dart';
 /// * [langKey] 
 /// * [imageUrl] 
 /// * [resetDate] 
+@BuiltValue()
 abstract class User implements Built<User, UserBuilder> {
-    @BuiltValueField(wireName: r'id')
-    int? get id;
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
-    @BuiltValueField(wireName: r'login')
-    String get login;
+  @BuiltValueField(wireName: r'login')
+  String get login;
 
-    @BuiltValueField(wireName: r'firstName')
-    String? get firstName;
+  @BuiltValueField(wireName: r'firstName')
+  String? get firstName;
 
-    @BuiltValueField(wireName: r'lastName')
-    String? get lastName;
+  @BuiltValueField(wireName: r'lastName')
+  String? get lastName;
 
-    @BuiltValueField(wireName: r'email')
-    String? get email;
+  @BuiltValueField(wireName: r'email')
+  String? get email;
 
-    @BuiltValueField(wireName: r'activated')
-    bool get activated;
+  @BuiltValueField(wireName: r'activated')
+  bool get activated;
 
-    @BuiltValueField(wireName: r'langKey')
-    String? get langKey;
+  @BuiltValueField(wireName: r'langKey')
+  String? get langKey;
 
-    @BuiltValueField(wireName: r'imageUrl')
-    String? get imageUrl;
+  @BuiltValueField(wireName: r'imageUrl')
+  String? get imageUrl;
 
-    @BuiltValueField(wireName: r'resetDate')
-    DateTime? get resetDate;
+  @BuiltValueField(wireName: r'resetDate')
+  DateTime? get resetDate;
 
-    User._();
+  User._();
 
-    @BuiltValueHook(initializeBuilder: true)
-    static void _defaults(UserBuilder b) => b;
+  factory User([void updates(UserBuilder b)]) = _$User;
 
-    factory User([void updates(UserBuilder b)]) = _$User;
+  @BuiltValueHook(initializeBuilder: true)
+  static void _defaults(UserBuilder b) => b;
 
-    @BuiltValueSerializer(custom: true)
-    static Serializer<User> get serializer => _$UserSerializer();
+  @BuiltValueSerializer(custom: true)
+  static Serializer<User> get serializer => _$UserSerializer();
 }
 
-class _$UserSerializer implements StructuredSerializer<User> {
-    @override
-    final Iterable<Type> types = const [User, _$User];
+class _$UserSerializer implements PrimitiveSerializer<User> {
+  @override
+  final Iterable<Type> types = const [User, _$User];
 
-    @override
-    final String wireName = r'User';
+  @override
+  final String wireName = r'User';
 
-    @override
-    Iterable<Object?> serialize(Serializers serializers, User object,
-        {FullType specifiedType = FullType.unspecified}) {
-        final result = <Object?>[];
-        if (object.id != null) {
-            result
-                ..add(r'id')
-                ..add(serializers.serialize(object.id,
-                    specifiedType: const FullType(int)));
-        }
-        result
-            ..add(r'login')
-            ..add(serializers.serialize(object.login,
-                specifiedType: const FullType(String)));
-        if (object.firstName != null) {
-            result
-                ..add(r'firstName')
-                ..add(serializers.serialize(object.firstName,
-                    specifiedType: const FullType(String)));
-        }
-        if (object.lastName != null) {
-            result
-                ..add(r'lastName')
-                ..add(serializers.serialize(object.lastName,
-                    specifiedType: const FullType(String)));
-        }
-        if (object.email != null) {
-            result
-                ..add(r'email')
-                ..add(serializers.serialize(object.email,
-                    specifiedType: const FullType(String)));
-        }
-        result
-            ..add(r'activated')
-            ..add(serializers.serialize(object.activated,
-                specifiedType: const FullType(bool)));
-        if (object.langKey != null) {
-            result
-                ..add(r'langKey')
-                ..add(serializers.serialize(object.langKey,
-                    specifiedType: const FullType(String)));
-        }
-        if (object.imageUrl != null) {
-            result
-                ..add(r'imageUrl')
-                ..add(serializers.serialize(object.imageUrl,
-                    specifiedType: const FullType(String)));
-        }
-        if (object.resetDate != null) {
-            result
-                ..add(r'resetDate')
-                ..add(serializers.serialize(object.resetDate,
-                    specifiedType: const FullType(DateTime)));
-        }
-        return result;
+  Iterable<Object?> _serializeProperties(
+    Serializers serializers,
+    User object, {
+    FullType specifiedType = FullType.unspecified,
+  }) sync* {
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
     }
-
-    @override
-    User deserialize(Serializers serializers, Iterable<Object?> serialized,
-        {FullType specifiedType = FullType.unspecified}) {
-        final result = UserBuilder();
-
-        final iterator = serialized.iterator;
-        while (iterator.moveNext()) {
-            final key = iterator.current as String;
-            iterator.moveNext();
-            final Object? value = iterator.current;
-            
-            switch (key) {
-                case r'id':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(int)) as int;
-                    result.id = valueDes;
-                    break;
-                case r'login':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.login = valueDes;
-                    break;
-                case r'firstName':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.firstName = valueDes;
-                    break;
-                case r'lastName':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.lastName = valueDes;
-                    break;
-                case r'email':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.email = valueDes;
-                    break;
-                case r'activated':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(bool)) as bool;
-                    result.activated = valueDes;
-                    break;
-                case r'langKey':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.langKey = valueDes;
-                    break;
-                case r'imageUrl':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(String)) as String;
-                    result.imageUrl = valueDes;
-                    break;
-                case r'resetDate':
-                    final valueDes = serializers.deserialize(value,
-                        specifiedType: const FullType(DateTime)) as DateTime;
-                    result.resetDate = valueDes;
-                    break;
-            }
-        }
-        return result.build();
+    yield r'login';
+    yield serializers.serialize(
+      object.login,
+      specifiedType: const FullType(String),
+    );
+    if (object.firstName != null) {
+      yield r'firstName';
+      yield serializers.serialize(
+        object.firstName,
+        specifiedType: const FullType(String),
+      );
     }
+    if (object.lastName != null) {
+      yield r'lastName';
+      yield serializers.serialize(
+        object.lastName,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.email != null) {
+      yield r'email';
+      yield serializers.serialize(
+        object.email,
+        specifiedType: const FullType(String),
+      );
+    }
+    yield r'activated';
+    yield serializers.serialize(
+      object.activated,
+      specifiedType: const FullType(bool),
+    );
+    if (object.langKey != null) {
+      yield r'langKey';
+      yield serializers.serialize(
+        object.langKey,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.imageUrl != null) {
+      yield r'imageUrl';
+      yield serializers.serialize(
+        object.imageUrl,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.resetDate != null) {
+      yield r'resetDate';
+      yield serializers.serialize(
+        object.resetDate,
+        specifiedType: const FullType(DateTime),
+      );
+    }
+  }
+
+  @override
+  Object serialize(
+    Serializers serializers,
+    User object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+  }
+
+  void _deserializeProperties(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+    required List<Object?> serializedList,
+    required UserBuilder result,
+    required List<Object?> unhandled,
+  }) {
+    for (var i = 0; i < serializedList.length; i += 2) {
+      final key = serializedList[i] as String;
+      final value = serializedList[i + 1];
+      switch (key) {
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
+          break;
+        case r'login':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.login = valueDes;
+          break;
+        case r'firstName':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.firstName = valueDes;
+          break;
+        case r'lastName':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.lastName = valueDes;
+          break;
+        case r'email':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.email = valueDes;
+          break;
+        case r'activated':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
+          result.activated = valueDes;
+          break;
+        case r'langKey':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.langKey = valueDes;
+          break;
+        case r'imageUrl':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.imageUrl = valueDes;
+          break;
+        case r'resetDate':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(DateTime),
+          ) as DateTime;
+          result.resetDate = valueDes;
+          break;
+        default:
+          unhandled.add(key);
+          unhandled.add(value);
+          break;
+      }
+    }
+  }
+
+  @override
+  User deserialize(
+    Serializers serializers,
+    Object serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
+    final result = UserBuilder();
+    final serializedList = (serialized as Iterable<Object?>).toList();
+    final unhandled = <Object?>[];
+    _deserializeProperties(
+      serializers,
+      serialized,
+      specifiedType: specifiedType,
+      serializedList: serializedList,
+      unhandled: unhandled,
+      result: result,
+    );
+    return result.build();
+  }
 }
 

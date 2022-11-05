@@ -12,3 +12,8 @@ class AllCategoryListEvent extends HomeScreenEvent {
   int? cateIndex;
   AllCategoryListEvent();
 }
+
+class AllFoodListEvent extends HomeScreenEvent {
+  int? cateIndex;
+  AllFoodListEvent();
+}
