@@ -14,7 +14,9 @@ import 'package:openapi/src/api/cart_item_resource_api.dart';
 import 'package:openapi/src/api/cart_resource_api.dart';
 import 'package:openapi/src/api/category_resource_api.dart';
 import 'package:openapi/src/api/chat_resource_api.dart';
+import 'package:openapi/src/api/food_item_resource_api.dart';
 import 'package:openapi/src/api/food_resource_api.dart';
+import 'package:openapi/src/api/message_resource_api.dart';
 import 'package:openapi/src/api/order_resource_api.dart';
 import 'package:openapi/src/api/public_user_resource_api.dart';
 import 'package:openapi/src/api/user_extra_resource_api.dart';
@@ -105,10 +107,22 @@ class Openapi {
     return ChatResourceApi(dio, serializers);
   }
 
+  /// Get FoodItemResourceApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  FoodItemResourceApi getFoodItemResourceApi() {
+    return FoodItemResourceApi(dio, serializers);
+  }
+
   /// Get FoodResourceApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   FoodResourceApi getFoodResourceApi() {
     return FoodResourceApi(dio, serializers);
+  }
+
+  /// Get MessageResourceApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  MessageResourceApi getMessageResourceApi() {
+    return MessageResourceApi(dio, serializers);
   }
 
   /// Get OrderResourceApi instance, base route and serializer can be overridden by a given but be careful,

@@ -17,6 +17,7 @@ part 'order_dto.g.dart';
 /// * [id] 
 /// * [orderDate] 
 /// * [quantity] 
+/// * [unit] 
 /// * [orderStatus] 
 /// * [donor] 
 /// * [recipient] 
@@ -31,6 +32,9 @@ abstract class OrderDTO implements Built<OrderDTO, OrderDTOBuilder> {
 
   @BuiltValueField(wireName: r'quantity')
   int get quantity;
+
+  @BuiltValueField(wireName: r'unit')
+  String get unit;
 
   @BuiltValueField(wireName: r'orderStatus')
   String get orderStatus;
@@ -83,6 +87,11 @@ class _$OrderDTOSerializer implements PrimitiveSerializer<OrderDTO> {
     yield serializers.serialize(
       object.quantity,
       specifiedType: const FullType(int),
+    );
+    yield r'unit';
+    yield serializers.serialize(
+      object.unit,
+      specifiedType: const FullType(String),
     );
     yield r'orderStatus';
     yield serializers.serialize(
@@ -153,6 +162,13 @@ class _$OrderDTOSerializer implements PrimitiveSerializer<OrderDTO> {
             specifiedType: const FullType(int),
           ) as int;
           result.quantity = valueDes;
+          break;
+        case r'unit':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.unit = valueDes;
           break;
         case r'orderStatus':
           final valueDes = serializers.deserialize(

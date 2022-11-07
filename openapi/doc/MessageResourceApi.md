@@ -1,4 +1,4 @@
-# openapi.api.ChatResourceApi
+# openapi.api.MessageResourceApi
 
 ## Load the API package
 ```dart
@@ -9,16 +9,16 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createChat**](ChatResourceApi.md#createchat) | **POST** /api/chats | 
-[**deleteChat**](ChatResourceApi.md#deletechat) | **DELETE** /api/chats/{id} | 
-[**getAllChats**](ChatResourceApi.md#getallchats) | **GET** /api/chats | 
-[**getChat**](ChatResourceApi.md#getchat) | **GET** /api/chats/{id} | 
-[**partialUpdateChat**](ChatResourceApi.md#partialupdatechat) | **PATCH** /api/chats/{id} | 
-[**updateChat**](ChatResourceApi.md#updatechat) | **PUT** /api/chats/{id} | 
+[**createMessage**](MessageResourceApi.md#createmessage) | **POST** /api/messages | 
+[**deleteMessage**](MessageResourceApi.md#deletemessage) | **DELETE** /api/messages/{id} | 
+[**getAllMessages**](MessageResourceApi.md#getallmessages) | **GET** /api/messages | 
+[**getMessage**](MessageResourceApi.md#getmessage) | **GET** /api/messages/{id} | 
+[**partialUpdateMessage**](MessageResourceApi.md#partialupdatemessage) | **PATCH** /api/messages/{id} | 
+[**updateMessage**](MessageResourceApi.md#updatemessage) | **PUT** /api/messages/{id} | 
 
 
-# **createChat**
-> ChatDTO createChat(chatDTO)
+# **createMessage**
+> MessageDTO createMessage(messageDTO)
 
 
 
@@ -26,14 +26,14 @@ Method | HTTP request | Description
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
-final ChatDTO chatDTO = ; // ChatDTO | 
+final api = Openapi().getMessageResourceApi();
+final MessageDTO messageDTO = ; // MessageDTO | 
 
 try {
-    final response = api.createChat(chatDTO);
+    final response = api.createMessage(messageDTO);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->createChat: $e\n');
+    print('Exception when calling MessageResourceApi->createMessage: $e\n');
 }
 ```
 
@@ -41,11 +41,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chatDTO** | [**ChatDTO**](ChatDTO.md)|  | 
+ **messageDTO** | [**MessageDTO**](MessageDTO.md)|  | 
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**MessageDTO**](MessageDTO.md)
 
 ### Authorization
 
@@ -58,8 +58,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteChat**
-> deleteChat(id)
+# **deleteMessage**
+> deleteMessage(id)
 
 
 
@@ -67,13 +67,13 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getMessageResourceApi();
 final int id = 789; // int | 
 
 try {
-    api.deleteChat(id);
+    api.deleteMessage(id);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->deleteChat: $e\n');
+    print('Exception when calling MessageResourceApi->deleteMessage: $e\n');
 }
 ```
 
@@ -98,8 +98,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllChats**
-> BuiltList<ChatDTO> getAllChats(eagerload)
+# **getAllMessages**
+> BuiltList<MessageDTO> getAllMessages()
 
 
 
@@ -107,26 +107,22 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
-final bool eagerload = true; // bool | 
+final api = Openapi().getMessageResourceApi();
 
 try {
-    final response = api.getAllChats(eagerload);
+    final response = api.getAllMessages();
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->getAllChats: $e\n');
+    print('Exception when calling MessageResourceApi->getAllMessages: $e\n');
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **eagerload** | **bool**|  | [optional] [default to false]
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**BuiltList&lt;ChatDTO&gt;**](ChatDTO.md)
+[**BuiltList&lt;MessageDTO&gt;**](MessageDTO.md)
 
 ### Authorization
 
@@ -139,8 +135,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getChat**
-> ChatDTO getChat(id)
+# **getMessage**
+> MessageDTO getMessage(id)
 
 
 
@@ -148,14 +144,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getMessageResourceApi();
 final int id = 789; // int | 
 
 try {
-    final response = api.getChat(id);
+    final response = api.getMessage(id);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->getChat: $e\n');
+    print('Exception when calling MessageResourceApi->getMessage: $e\n');
 }
 ```
 
@@ -167,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**MessageDTO**](MessageDTO.md)
 
 ### Authorization
 
@@ -180,8 +176,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **partialUpdateChat**
-> ChatDTO partialUpdateChat(id, chatDTO)
+# **partialUpdateMessage**
+> MessageDTO partialUpdateMessage(id, messageDTO)
 
 
 
@@ -189,15 +185,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getMessageResourceApi();
 final int id = 789; // int | 
-final ChatDTO chatDTO = ; // ChatDTO | 
+final MessageDTO messageDTO = ; // MessageDTO | 
 
 try {
-    final response = api.partialUpdateChat(id, chatDTO);
+    final response = api.partialUpdateMessage(id, messageDTO);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->partialUpdateChat: $e\n');
+    print('Exception when calling MessageResourceApi->partialUpdateMessage: $e\n');
 }
 ```
 
@@ -206,11 +202,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **chatDTO** | [**ChatDTO**](ChatDTO.md)|  | 
+ **messageDTO** | [**MessageDTO**](MessageDTO.md)|  | 
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**MessageDTO**](MessageDTO.md)
 
 ### Authorization
 
@@ -223,8 +219,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateChat**
-> ChatDTO updateChat(id, chatDTO)
+# **updateMessage**
+> MessageDTO updateMessage(id, messageDTO)
 
 
 
@@ -232,15 +228,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getMessageResourceApi();
 final int id = 789; // int | 
-final ChatDTO chatDTO = ; // ChatDTO | 
+final MessageDTO messageDTO = ; // MessageDTO | 
 
 try {
-    final response = api.updateChat(id, chatDTO);
+    final response = api.updateMessage(id, messageDTO);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->updateChat: $e\n');
+    print('Exception when calling MessageResourceApi->updateMessage: $e\n');
 }
 ```
 
@@ -249,11 +245,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **chatDTO** | [**ChatDTO**](ChatDTO.md)|  | 
+ **messageDTO** | [**MessageDTO**](MessageDTO.md)|  | 
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**MessageDTO**](MessageDTO.md)
 
 ### Authorization
 

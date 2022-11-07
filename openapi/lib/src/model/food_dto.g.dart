@@ -14,11 +14,11 @@ class _$FoodDTO extends FoodDTO {
   @override
   final DateTime expiry;
   @override
-  final int remainingQty;
-  @override
   final String? description;
   @override
   final String? imageUrl;
+  @override
+  final FoodItemDTO? food;
   @override
   final CategoryDTO? category;
   @override
@@ -31,16 +31,14 @@ class _$FoodDTO extends FoodDTO {
       {this.id,
       required this.name,
       required this.expiry,
-      required this.remainingQty,
       this.description,
       this.imageUrl,
+      this.food,
       this.category,
       this.donor})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(name, r'FoodDTO', 'name');
     BuiltValueNullFieldError.checkNotNull(expiry, r'FoodDTO', 'expiry');
-    BuiltValueNullFieldError.checkNotNull(
-        remainingQty, r'FoodDTO', 'remainingQty');
   }
 
   @override
@@ -57,9 +55,9 @@ class _$FoodDTO extends FoodDTO {
         id == other.id &&
         name == other.name &&
         expiry == other.expiry &&
-        remainingQty == other.remainingQty &&
         description == other.description &&
         imageUrl == other.imageUrl &&
+        food == other.food &&
         category == other.category &&
         donor == other.donor;
   }
@@ -73,9 +71,9 @@ class _$FoodDTO extends FoodDTO {
                     $jc(
                         $jc($jc($jc(0, id.hashCode), name.hashCode),
                             expiry.hashCode),
-                        remainingQty.hashCode),
-                    description.hashCode),
-                imageUrl.hashCode),
+                        description.hashCode),
+                    imageUrl.hashCode),
+                food.hashCode),
             category.hashCode),
         donor.hashCode));
   }
@@ -86,9 +84,9 @@ class _$FoodDTO extends FoodDTO {
           ..add('id', id)
           ..add('name', name)
           ..add('expiry', expiry)
-          ..add('remainingQty', remainingQty)
           ..add('description', description)
           ..add('imageUrl', imageUrl)
+          ..add('food', food)
           ..add('category', category)
           ..add('donor', donor))
         .toString();
@@ -110,10 +108,6 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
   DateTime? get expiry => _$this._expiry;
   set expiry(DateTime? expiry) => _$this._expiry = expiry;
 
-  int? _remainingQty;
-  int? get remainingQty => _$this._remainingQty;
-  set remainingQty(int? remainingQty) => _$this._remainingQty = remainingQty;
-
   String? _description;
   String? get description => _$this._description;
   set description(String? description) => _$this._description = description;
@@ -121,6 +115,10 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
   String? _imageUrl;
   String? get imageUrl => _$this._imageUrl;
   set imageUrl(String? imageUrl) => _$this._imageUrl = imageUrl;
+
+  FoodItemDTOBuilder? _food;
+  FoodItemDTOBuilder get food => _$this._food ??= new FoodItemDTOBuilder();
+  set food(FoodItemDTOBuilder? food) => _$this._food = food;
 
   CategoryDTOBuilder? _category;
   CategoryDTOBuilder get category =>
@@ -141,9 +139,9 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
       _id = $v.id;
       _name = $v.name;
       _expiry = $v.expiry;
-      _remainingQty = $v.remainingQty;
       _description = $v.description;
       _imageUrl = $v.imageUrl;
+      _food = $v.food?.toBuilder();
       _category = $v.category?.toBuilder();
       _donor = $v.donor?.toBuilder();
       _$v = null;
@@ -175,15 +173,16 @@ class FoodDTOBuilder implements Builder<FoodDTO, FoodDTOBuilder> {
                   name, r'FoodDTO', 'name'),
               expiry: BuiltValueNullFieldError.checkNotNull(
                   expiry, r'FoodDTO', 'expiry'),
-              remainingQty: BuiltValueNullFieldError.checkNotNull(
-                  remainingQty, r'FoodDTO', 'remainingQty'),
               description: description,
               imageUrl: imageUrl,
+              food: _food?.build(),
               category: _category?.build(),
               donor: _donor?.build());
     } catch (_) {
       late String _$failedField;
       try {
+        _$failedField = 'food';
+        _food?.build();
         _$failedField = 'category';
         _category?.build();
         _$failedField = 'donor';

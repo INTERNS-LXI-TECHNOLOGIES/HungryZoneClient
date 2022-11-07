@@ -13,6 +13,7 @@ import 'presentation/bloc/authentication_bloc/auth_bloc.dart';
 
 import 'presentation/screens/splash_screen.dart';
 
+//eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MDI1MDI2NH0.rBn5dwmEVQO8heeTbH1uH7ghWcOJa63dj_LfdFJNjfImi-G0W-LFw7CneTbcYU6xzPx6_d7ShdV5ql_7AwZF8A
 const SHARED_PREFERENCES_KEY = 'User login auth';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

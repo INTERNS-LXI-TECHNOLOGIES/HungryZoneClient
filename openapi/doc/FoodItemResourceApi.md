@@ -1,4 +1,4 @@
-# openapi.api.ChatResourceApi
+# openapi.api.FoodItemResourceApi
 
 ## Load the API package
 ```dart
@@ -9,16 +9,16 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createChat**](ChatResourceApi.md#createchat) | **POST** /api/chats | 
-[**deleteChat**](ChatResourceApi.md#deletechat) | **DELETE** /api/chats/{id} | 
-[**getAllChats**](ChatResourceApi.md#getallchats) | **GET** /api/chats | 
-[**getChat**](ChatResourceApi.md#getchat) | **GET** /api/chats/{id} | 
-[**partialUpdateChat**](ChatResourceApi.md#partialupdatechat) | **PATCH** /api/chats/{id} | 
-[**updateChat**](ChatResourceApi.md#updatechat) | **PUT** /api/chats/{id} | 
+[**createFoodItem**](FoodItemResourceApi.md#createfooditem) | **POST** /api/food-items | 
+[**deleteFoodItem**](FoodItemResourceApi.md#deletefooditem) | **DELETE** /api/food-items/{id} | 
+[**getAllFoodItems**](FoodItemResourceApi.md#getallfooditems) | **GET** /api/food-items | 
+[**getFoodItem**](FoodItemResourceApi.md#getfooditem) | **GET** /api/food-items/{id} | 
+[**partialUpdateFoodItem**](FoodItemResourceApi.md#partialupdatefooditem) | **PATCH** /api/food-items/{id} | 
+[**updateFoodItem**](FoodItemResourceApi.md#updatefooditem) | **PUT** /api/food-items/{id} | 
 
 
-# **createChat**
-> ChatDTO createChat(chatDTO)
+# **createFoodItem**
+> FoodItemDTO createFoodItem(foodItemDTO)
 
 
 
@@ -26,14 +26,14 @@ Method | HTTP request | Description
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
-final ChatDTO chatDTO = ; // ChatDTO | 
+final api = Openapi().getFoodItemResourceApi();
+final FoodItemDTO foodItemDTO = ; // FoodItemDTO | 
 
 try {
-    final response = api.createChat(chatDTO);
+    final response = api.createFoodItem(foodItemDTO);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->createChat: $e\n');
+    print('Exception when calling FoodItemResourceApi->createFoodItem: $e\n');
 }
 ```
 
@@ -41,11 +41,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **chatDTO** | [**ChatDTO**](ChatDTO.md)|  | 
+ **foodItemDTO** | [**FoodItemDTO**](FoodItemDTO.md)|  | 
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**FoodItemDTO**](FoodItemDTO.md)
 
 ### Authorization
 
@@ -58,8 +58,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteChat**
-> deleteChat(id)
+# **deleteFoodItem**
+> deleteFoodItem(id)
 
 
 
@@ -67,13 +67,13 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getFoodItemResourceApi();
 final int id = 789; // int | 
 
 try {
-    api.deleteChat(id);
+    api.deleteFoodItem(id);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->deleteChat: $e\n');
+    print('Exception when calling FoodItemResourceApi->deleteFoodItem: $e\n');
 }
 ```
 
@@ -98,8 +98,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllChats**
-> BuiltList<ChatDTO> getAllChats(eagerload)
+# **getAllFoodItems**
+> BuiltList<FoodItemDTO> getAllFoodItems()
 
 
 
@@ -107,26 +107,22 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
-final bool eagerload = true; // bool | 
+final api = Openapi().getFoodItemResourceApi();
 
 try {
-    final response = api.getAllChats(eagerload);
+    final response = api.getAllFoodItems();
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->getAllChats: $e\n');
+    print('Exception when calling FoodItemResourceApi->getAllFoodItems: $e\n');
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **eagerload** | **bool**|  | [optional] [default to false]
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**BuiltList&lt;ChatDTO&gt;**](ChatDTO.md)
+[**BuiltList&lt;FoodItemDTO&gt;**](FoodItemDTO.md)
 
 ### Authorization
 
@@ -139,8 +135,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getChat**
-> ChatDTO getChat(id)
+# **getFoodItem**
+> FoodItemDTO getFoodItem(id)
 
 
 
@@ -148,14 +144,14 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getFoodItemResourceApi();
 final int id = 789; // int | 
 
 try {
-    final response = api.getChat(id);
+    final response = api.getFoodItem(id);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->getChat: $e\n');
+    print('Exception when calling FoodItemResourceApi->getFoodItem: $e\n');
 }
 ```
 
@@ -167,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**FoodItemDTO**](FoodItemDTO.md)
 
 ### Authorization
 
@@ -180,8 +176,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **partialUpdateChat**
-> ChatDTO partialUpdateChat(id, chatDTO)
+# **partialUpdateFoodItem**
+> FoodItemDTO partialUpdateFoodItem(id, foodItemDTO)
 
 
 
@@ -189,15 +185,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getFoodItemResourceApi();
 final int id = 789; // int | 
-final ChatDTO chatDTO = ; // ChatDTO | 
+final FoodItemDTO foodItemDTO = ; // FoodItemDTO | 
 
 try {
-    final response = api.partialUpdateChat(id, chatDTO);
+    final response = api.partialUpdateFoodItem(id, foodItemDTO);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->partialUpdateChat: $e\n');
+    print('Exception when calling FoodItemResourceApi->partialUpdateFoodItem: $e\n');
 }
 ```
 
@@ -206,11 +202,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **chatDTO** | [**ChatDTO**](ChatDTO.md)|  | 
+ **foodItemDTO** | [**FoodItemDTO**](FoodItemDTO.md)|  | 
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**FoodItemDTO**](FoodItemDTO.md)
 
 ### Authorization
 
@@ -223,8 +219,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateChat**
-> ChatDTO updateChat(id, chatDTO)
+# **updateFoodItem**
+> FoodItemDTO updateFoodItem(id, foodItemDTO)
 
 
 
@@ -232,15 +228,15 @@ No authorization required
 ```dart
 import 'package:openapi/api.dart';
 
-final api = Openapi().getChatResourceApi();
+final api = Openapi().getFoodItemResourceApi();
 final int id = 789; // int | 
-final ChatDTO chatDTO = ; // ChatDTO | 
+final FoodItemDTO foodItemDTO = ; // FoodItemDTO | 
 
 try {
-    final response = api.updateChat(id, chatDTO);
+    final response = api.updateFoodItem(id, foodItemDTO);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling ChatResourceApi->updateChat: $e\n');
+    print('Exception when calling FoodItemResourceApi->updateFoodItem: $e\n');
 }
 ```
 
@@ -249,11 +245,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**|  | 
- **chatDTO** | [**ChatDTO**](ChatDTO.md)|  | 
+ **foodItemDTO** | [**FoodItemDTO**](FoodItemDTO.md)|  | 
 
 ### Return type
 
-[**ChatDTO**](ChatDTO.md)
+[**FoodItemDTO**](FoodItemDTO.md)
 
 ### Authorization
 

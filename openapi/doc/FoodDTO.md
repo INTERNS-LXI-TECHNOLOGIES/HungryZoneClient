@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **name** | **String** |  | 
 **expiry** | [**DateTime**](DateTime.md) |  | 
-**remainingQty** | **int** |  | 
 **description** | **String** |  | [optional] 
 **imageUrl** | **String** |  | [optional] 
+**food** | [**FoodItemDTO**](FoodItemDTO.md) |  | [optional] 
 **category** | [**CategoryDTO**](CategoryDTO.md) |  | [optional] 
 **donor** | [**UserExtraDTO**](UserExtraDTO.md) |  | [optional] 
 

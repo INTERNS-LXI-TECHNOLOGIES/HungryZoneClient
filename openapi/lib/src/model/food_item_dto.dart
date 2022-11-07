@@ -3,55 +3,49 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:built_collection/built_collection.dart';
-import 'package:openapi/src/model/user_extra_dto.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'chat_dto.g.dart';
+part 'food_item_dto.g.dart';
 
-/// ChatDTO
+/// FoodItemDTO
 ///
 /// Properties:
 /// * [id] 
-/// * [chatDate] 
-/// * [textMessage] 
-/// * [users] 
+/// * [quandity] 
+/// * [unit] 
 @BuiltValue()
-abstract class ChatDTO implements Built<ChatDTO, ChatDTOBuilder> {
+abstract class FoodItemDTO implements Built<FoodItemDTO, FoodItemDTOBuilder> {
   @BuiltValueField(wireName: r'id')
   int? get id;
 
-  @BuiltValueField(wireName: r'chatDate')
-  DateTime get chatDate;
+  @BuiltValueField(wireName: r'quandity')
+  int get quandity;
 
-  @BuiltValueField(wireName: r'textMessage')
-  String get textMessage;
+  @BuiltValueField(wireName: r'unit')
+  String get unit;
 
-  @BuiltValueField(wireName: r'users')
-  BuiltSet<UserExtraDTO>? get users;
+  FoodItemDTO._();
 
-  ChatDTO._();
-
-  factory ChatDTO([void updates(ChatDTOBuilder b)]) = _$ChatDTO;
+  factory FoodItemDTO([void updates(FoodItemDTOBuilder b)]) = _$FoodItemDTO;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ChatDTOBuilder b) => b;
+  static void _defaults(FoodItemDTOBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ChatDTO> get serializer => _$ChatDTOSerializer();
+  static Serializer<FoodItemDTO> get serializer => _$FoodItemDTOSerializer();
 }
 
-class _$ChatDTOSerializer implements PrimitiveSerializer<ChatDTO> {
+class _$FoodItemDTOSerializer implements PrimitiveSerializer<FoodItemDTO> {
   @override
-  final Iterable<Type> types = const [ChatDTO, _$ChatDTO];
+  final Iterable<Type> types = const [FoodItemDTO, _$FoodItemDTO];
 
   @override
-  final String wireName = r'ChatDTO';
+  final String wireName = r'FoodItemDTO';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    ChatDTO object, {
+    FoodItemDTO object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     if (object.id != null) {
@@ -61,29 +55,22 @@ class _$ChatDTOSerializer implements PrimitiveSerializer<ChatDTO> {
         specifiedType: const FullType(int),
       );
     }
-    yield r'chatDate';
+    yield r'quandity';
     yield serializers.serialize(
-      object.chatDate,
-      specifiedType: const FullType(DateTime),
+      object.quandity,
+      specifiedType: const FullType(int),
     );
-    yield r'textMessage';
+    yield r'unit';
     yield serializers.serialize(
-      object.textMessage,
+      object.unit,
       specifiedType: const FullType(String),
     );
-    if (object.users != null) {
-      yield r'users';
-      yield serializers.serialize(
-        object.users,
-        specifiedType: const FullType(BuiltSet, [FullType(UserExtraDTO)]),
-      );
-    }
   }
 
   @override
   Object serialize(
     Serializers serializers,
-    ChatDTO object, {
+    FoodItemDTO object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -94,7 +81,7 @@ class _$ChatDTOSerializer implements PrimitiveSerializer<ChatDTO> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required ChatDTOBuilder result,
+    required FoodItemDTOBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -108,26 +95,19 @@ class _$ChatDTOSerializer implements PrimitiveSerializer<ChatDTO> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'chatDate':
+        case r'quandity':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateTime),
-          ) as DateTime;
-          result.chatDate = valueDes;
+            specifiedType: const FullType(int),
+          ) as int;
+          result.quandity = valueDes;
           break;
-        case r'textMessage':
+        case r'unit':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
-          result.textMessage = valueDes;
-          break;
-        case r'users':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(UserExtraDTO)]),
-          ) as BuiltSet<UserExtraDTO>;
-          result.users.replace(valueDes);
+          result.unit = valueDes;
           break;
         default:
           unhandled.add(key);
@@ -138,12 +118,12 @@ class _$ChatDTOSerializer implements PrimitiveSerializer<ChatDTO> {
   }
 
   @override
-  ChatDTO deserialize(
+  FoodItemDTO deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = ChatDTOBuilder();
+    final result = FoodItemDTOBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(

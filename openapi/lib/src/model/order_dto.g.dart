@@ -14,6 +14,8 @@ class _$OrderDTO extends OrderDTO {
   @override
   final int quantity;
   @override
+  final String unit;
+  @override
   final String orderStatus;
   @override
   final UserExtraDTO? donor;
@@ -29,6 +31,7 @@ class _$OrderDTO extends OrderDTO {
       {this.id,
       required this.orderDate,
       required this.quantity,
+      required this.unit,
       required this.orderStatus,
       this.donor,
       this.recipient,
@@ -36,6 +39,7 @@ class _$OrderDTO extends OrderDTO {
       : super._() {
     BuiltValueNullFieldError.checkNotNull(orderDate, r'OrderDTO', 'orderDate');
     BuiltValueNullFieldError.checkNotNull(quantity, r'OrderDTO', 'quantity');
+    BuiltValueNullFieldError.checkNotNull(unit, r'OrderDTO', 'unit');
     BuiltValueNullFieldError.checkNotNull(
         orderStatus, r'OrderDTO', 'orderStatus');
   }
@@ -54,6 +58,7 @@ class _$OrderDTO extends OrderDTO {
         id == other.id &&
         orderDate == other.orderDate &&
         quantity == other.quantity &&
+        unit == other.unit &&
         orderStatus == other.orderStatus &&
         donor == other.donor &&
         recipient == other.recipient &&
@@ -66,8 +71,10 @@ class _$OrderDTO extends OrderDTO {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, id.hashCode), orderDate.hashCode),
-                        quantity.hashCode),
+                    $jc(
+                        $jc($jc($jc(0, id.hashCode), orderDate.hashCode),
+                            quantity.hashCode),
+                        unit.hashCode),
                     orderStatus.hashCode),
                 donor.hashCode),
             recipient.hashCode),
@@ -80,6 +87,7 @@ class _$OrderDTO extends OrderDTO {
           ..add('id', id)
           ..add('orderDate', orderDate)
           ..add('quantity', quantity)
+          ..add('unit', unit)
           ..add('orderStatus', orderStatus)
           ..add('donor', donor)
           ..add('recipient', recipient)
@@ -102,6 +110,10 @@ class OrderDTOBuilder implements Builder<OrderDTO, OrderDTOBuilder> {
   int? _quantity;
   int? get quantity => _$this._quantity;
   set quantity(int? quantity) => _$this._quantity = quantity;
+
+  String? _unit;
+  String? get unit => _$this._unit;
+  set unit(String? unit) => _$this._unit = unit;
 
   String? _orderStatus;
   String? get orderStatus => _$this._orderStatus;
@@ -131,6 +143,7 @@ class OrderDTOBuilder implements Builder<OrderDTO, OrderDTOBuilder> {
       _id = $v.id;
       _orderDate = $v.orderDate;
       _quantity = $v.quantity;
+      _unit = $v.unit;
       _orderStatus = $v.orderStatus;
       _donor = $v.donor?.toBuilder();
       _recipient = $v.recipient?.toBuilder();
@@ -164,6 +177,8 @@ class OrderDTOBuilder implements Builder<OrderDTO, OrderDTOBuilder> {
                   orderDate, r'OrderDTO', 'orderDate'),
               quantity: BuiltValueNullFieldError.checkNotNull(
                   quantity, r'OrderDTO', 'quantity'),
+              unit: BuiltValueNullFieldError.checkNotNull(
+                  unit, r'OrderDTO', 'unit'),
               orderStatus: BuiltValueNullFieldError.checkNotNull(
                   orderStatus, r'OrderDTO', 'orderStatus'),
               donor: _donor?.build(),

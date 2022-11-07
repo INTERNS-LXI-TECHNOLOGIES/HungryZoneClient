@@ -20,10 +20,12 @@ import 'package:openapi/src/model/cart_item_dto.dart';
 import 'package:openapi/src/model/category_dto.dart';
 import 'package:openapi/src/model/chat_dto.dart';
 import 'package:openapi/src/model/food_dto.dart';
+import 'package:openapi/src/model/food_item_dto.dart';
 import 'package:openapi/src/model/jwt_token.dart';
 import 'package:openapi/src/model/key_and_password_vm.dart';
 import 'package:openapi/src/model/login_vm.dart';
 import 'package:openapi/src/model/managed_user_vm.dart';
+import 'package:openapi/src/model/message_dto.dart';
 import 'package:openapi/src/model/order_dto.dart';
 import 'package:openapi/src/model/password_change_dto.dart';
 import 'package:openapi/src/model/user.dart';
@@ -39,10 +41,12 @@ part 'serializers.g.dart';
   CategoryDTO,
   ChatDTO,
   FoodDTO,
+  FoodItemDTO,
   JWTToken,
   KeyAndPasswordVM,
   LoginVM,
   ManagedUserVM,
+  MessageDTO,
   OrderDTO,
   PasswordChangeDTO,
   User,
@@ -63,6 +67,10 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<CategoryDTO>(),
       )
       ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(MessageDTO)]),
+        () => ListBuilder<MessageDTO>(),
+      )
+      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(AdminUserDTO)]),
         () => ListBuilder<AdminUserDTO>(),
       )
@@ -77,6 +85,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(CartItemDTO)]),
         () => ListBuilder<CartItemDTO>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(FoodItemDTO)]),
+        () => ListBuilder<FoodItemDTO>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(String)]),

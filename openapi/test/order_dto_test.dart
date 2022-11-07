@@ -22,6 +22,11 @@ void main() {
       // TODO
     });
 
+    // String unit
+    test('to test the property `unit`', () async {
+      // TODO
+    });
+
     // String orderStatus
     test('to test the property `orderStatus`', () async {
       // TODO

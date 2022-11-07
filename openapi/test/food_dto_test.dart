@@ -22,11 +22,6 @@ void main() {
       // TODO
     });
 
-    // int remainingQty
-    test('to test the property `remainingQty`', () async {
-      // TODO
-    });
-
     // String description
     test('to test the property `description`', () async {
       // TODO
@@ -34,6 +29,11 @@ void main() {
 
     // String imageUrl
     test('to test the property `imageUrl`', () async {
+      // TODO
+    });
+
+    // FoodItemDTO food
+    test('to test the property `food`', () async {
       // TODO
     });
 

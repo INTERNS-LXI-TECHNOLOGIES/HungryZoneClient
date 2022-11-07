@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:openapi/src/model/food_item_dto.dart';
 import 'package:openapi/src/model/category_dto.dart';
 import 'package:openapi/src/model/user_extra_dto.dart';
 import 'package:built_value/built_value.dart';
@@ -16,9 +17,9 @@ part 'food_dto.g.dart';
 /// * [id] 
 /// * [name] 
 /// * [expiry] 
-/// * [remainingQty] 
 /// * [description] 
 /// * [imageUrl] 
+/// * [food] 
 /// * [category] 
 /// * [donor] 
 @BuiltValue()
@@ -32,14 +33,14 @@ abstract class FoodDTO implements Built<FoodDTO, FoodDTOBuilder> {
   @BuiltValueField(wireName: r'expiry')
   DateTime get expiry;
 
-  @BuiltValueField(wireName: r'remainingQty')
-  int get remainingQty;
-
   @BuiltValueField(wireName: r'description')
   String? get description;
 
   @BuiltValueField(wireName: r'imageUrl')
   String? get imageUrl;
+
+  @BuiltValueField(wireName: r'food')
+  FoodItemDTO? get food;
 
   @BuiltValueField(wireName: r'category')
   CategoryDTO? get category;
@@ -87,11 +88,6 @@ class _$FoodDTOSerializer implements PrimitiveSerializer<FoodDTO> {
       object.expiry,
       specifiedType: const FullType(DateTime),
     );
-    yield r'remainingQty';
-    yield serializers.serialize(
-      object.remainingQty,
-      specifiedType: const FullType(int),
-    );
     if (object.description != null) {
       yield r'description';
       yield serializers.serialize(
@@ -104,6 +100,13 @@ class _$FoodDTOSerializer implements PrimitiveSerializer<FoodDTO> {
       yield serializers.serialize(
         object.imageUrl,
         specifiedType: const FullType(String),
+      );
+    }
+    if (object.food != null) {
+      yield r'food';
+      yield serializers.serialize(
+        object.food,
+        specifiedType: const FullType(FoodItemDTO),
       );
     }
     if (object.category != null) {
@@ -164,13 +167,6 @@ class _$FoodDTOSerializer implements PrimitiveSerializer<FoodDTO> {
           ) as DateTime;
           result.expiry = valueDes;
           break;
-        case r'remainingQty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.remainingQty = valueDes;
-          break;
         case r'description':
           final valueDes = serializers.deserialize(
             value,
@@ -184,6 +180,13 @@ class _$FoodDTOSerializer implements PrimitiveSerializer<FoodDTO> {
             specifiedType: const FullType(String),
           ) as String;
           result.imageUrl = valueDes;
+          break;
+        case r'food':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(FoodItemDTO),
+          ) as FoodItemDTO;
+          result.food.replace(valueDes);
           break;
         case r'category':
           final valueDes = serializers.deserialize(

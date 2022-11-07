@@ -8,22 +8,21 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:openapi/src/api_util.dart';
-import 'package:openapi/src/model/chat_dto.dart';
+import 'package:openapi/src/model/food_item_dto.dart';
 
-class ChatResourceApi {
+class FoodItemResourceApi {
 
   final Dio _dio;
 
   final Serializers _serializers;
 
-  const ChatResourceApi(this._dio, this._serializers);
+  const FoodItemResourceApi(this._dio, this._serializers);
 
-  /// createChat
+  /// createFoodItem
   /// 
   ///
   /// Parameters:
-  /// * [chatDTO] 
+  /// * [foodItemDTO] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -31,10 +30,10 @@ class ChatResourceApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [ChatDTO] as data
+  /// Returns a [Future] containing a [Response] with a [FoodItemDTO] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<ChatDTO>> createChat({ 
-    required ChatDTO chatDTO,
+  Future<Response<FoodItemDTO>> createFoodItem({ 
+    required FoodItemDTO foodItemDTO,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -42,7 +41,7 @@ class ChatResourceApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/chats';
+    final _path = r'/api/food-items';
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -59,8 +58,8 @@ class ChatResourceApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(ChatDTO);
-      _bodyData = _serializers.serialize(chatDTO, specifiedType: _type);
+      const _type = FullType(FoodItemDTO);
+      _bodyData = _serializers.serialize(foodItemDTO, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioError(
@@ -82,14 +81,14 @@ class ChatResourceApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    ChatDTO _responseData;
+    FoodItemDTO _responseData;
 
     try {
-      const _responseType = FullType(ChatDTO);
+      const _responseType = FullType(FoodItemDTO);
       _responseData = _serializers.deserialize(
         _response.data!,
         specifiedType: _responseType,
-      ) as ChatDTO;
+      ) as FoodItemDTO;
 
     } catch (error, stackTrace) {
       throw DioError(
@@ -100,7 +99,7 @@ class ChatResourceApi {
       )..stackTrace = stackTrace;
     }
 
-    return Response<ChatDTO>(
+    return Response<FoodItemDTO>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -112,7 +111,7 @@ class ChatResourceApi {
     );
   }
 
-  /// deleteChat
+  /// deleteFoodItem
   /// 
   ///
   /// Parameters:
@@ -126,7 +125,7 @@ class ChatResourceApi {
   ///
   /// Returns a [Future]
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<void>> deleteChat({ 
+  Future<Response<void>> deleteFoodItem({ 
     required int id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -135,7 +134,7 @@ class ChatResourceApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/chats/{id}'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/food-items/{id}'.replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -159,11 +158,10 @@ class ChatResourceApi {
     return _response;
   }
 
-  /// getAllChats
+  /// getAllFoodItems
   /// 
   ///
   /// Parameters:
-  /// * [eagerload] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -171,10 +169,9 @@ class ChatResourceApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [BuiltList<ChatDTO>] as data
+  /// Returns a [Future] containing a [Response] with a [BuiltList<FoodItemDTO>] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<BuiltList<ChatDTO>>> getAllChats({ 
-    bool? eagerload = false,
+  Future<Response<BuiltList<FoodItemDTO>>> getAllFoodItems({ 
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -182,86 +179,7 @@ class ChatResourceApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/chats';
-    final _options = Options(
-      method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
-      validateStatus: validateStatus,
-    );
-
-    final _queryParameters = <String, dynamic>{
-      if (eagerload != null) r'eagerload': encodeQueryParameter(_serializers, eagerload, const FullType(bool)),
-    };
-
-    final _response = await _dio.request<Object>(
-      _path,
-      options: _options,
-      queryParameters: _queryParameters,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-
-    BuiltList<ChatDTO> _responseData;
-
-    try {
-      const _responseType = FullType(BuiltList, [FullType(ChatDTO)]);
-      _responseData = _serializers.deserialize(
-        _response.data!,
-        specifiedType: _responseType,
-      ) as BuiltList<ChatDTO>;
-
-    } catch (error, stackTrace) {
-      throw DioError(
-        requestOptions: _response.requestOptions,
-        response: _response,
-        type: DioErrorType.other,
-        error: error,
-      )..stackTrace = stackTrace;
-    }
-
-    return Response<BuiltList<ChatDTO>>(
-      data: _responseData,
-      headers: _response.headers,
-      isRedirect: _response.isRedirect,
-      requestOptions: _response.requestOptions,
-      redirects: _response.redirects,
-      statusCode: _response.statusCode,
-      statusMessage: _response.statusMessage,
-      extra: _response.extra,
-    );
-  }
-
-  /// getChat
-  /// 
-  ///
-  /// Parameters:
-  /// * [id] 
-  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
-  /// * [headers] - Can be used to add additional headers to the request
-  /// * [extras] - Can be used to add flags to the request
-  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
-  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
-  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
-  ///
-  /// Returns a [Future] containing a [Response] with a [ChatDTO] as data
-  /// Throws [DioError] if API call or serialization fails
-  Future<Response<ChatDTO>> getChat({ 
-    required int id,
-    CancelToken? cancelToken,
-    Map<String, dynamic>? headers,
-    Map<String, dynamic>? extra,
-    ValidateStatus? validateStatus,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final _path = r'/api/chats/{id}'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/food-items';
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -282,14 +200,14 @@ class ChatResourceApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    ChatDTO _responseData;
+    BuiltList<FoodItemDTO> _responseData;
 
     try {
-      const _responseType = FullType(ChatDTO);
+      const _responseType = FullType(BuiltList, [FullType(FoodItemDTO)]);
       _responseData = _serializers.deserialize(
         _response.data!,
         specifiedType: _responseType,
-      ) as ChatDTO;
+      ) as BuiltList<FoodItemDTO>;
 
     } catch (error, stackTrace) {
       throw DioError(
@@ -300,7 +218,7 @@ class ChatResourceApi {
       )..stackTrace = stackTrace;
     }
 
-    return Response<ChatDTO>(
+    return Response<BuiltList<FoodItemDTO>>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -312,12 +230,11 @@ class ChatResourceApi {
     );
   }
 
-  /// partialUpdateChat
+  /// getFoodItem
   /// 
   ///
   /// Parameters:
   /// * [id] 
-  /// * [chatDTO] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -325,11 +242,10 @@ class ChatResourceApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [ChatDTO] as data
+  /// Returns a [Future] containing a [Response] with a [FoodItemDTO] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<ChatDTO>> partialUpdateChat({ 
+  Future<Response<FoodItemDTO>> getFoodItem({ 
     required int id,
-    required ChatDTO chatDTO,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -337,7 +253,83 @@ class ChatResourceApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/chats/{id}'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/food-items/{id}'.replaceAll('{' r'id' '}', id.toString());
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{
+        ...?headers,
+      },
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    FoodItemDTO _responseData;
+
+    try {
+      const _responseType = FullType(FoodItemDTO);
+      _responseData = _serializers.deserialize(
+        _response.data!,
+        specifiedType: _responseType,
+      ) as FoodItemDTO;
+
+    } catch (error, stackTrace) {
+      throw DioError(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioErrorType.other,
+        error: error,
+      )..stackTrace = stackTrace;
+    }
+
+    return Response<FoodItemDTO>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// partialUpdateFoodItem
+  /// 
+  ///
+  /// Parameters:
+  /// * [id] 
+  /// * [foodItemDTO] 
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [FoodItemDTO] as data
+  /// Throws [DioError] if API call or serialization fails
+  Future<Response<FoodItemDTO>> partialUpdateFoodItem({ 
+    required int id,
+    required FoodItemDTO foodItemDTO,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _path = r'/api/food-items/{id}'.replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{
@@ -354,8 +346,8 @@ class ChatResourceApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(ChatDTO);
-      _bodyData = _serializers.serialize(chatDTO, specifiedType: _type);
+      const _type = FullType(FoodItemDTO);
+      _bodyData = _serializers.serialize(foodItemDTO, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioError(
@@ -377,14 +369,14 @@ class ChatResourceApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    ChatDTO _responseData;
+    FoodItemDTO _responseData;
 
     try {
-      const _responseType = FullType(ChatDTO);
+      const _responseType = FullType(FoodItemDTO);
       _responseData = _serializers.deserialize(
         _response.data!,
         specifiedType: _responseType,
-      ) as ChatDTO;
+      ) as FoodItemDTO;
 
     } catch (error, stackTrace) {
       throw DioError(
@@ -395,7 +387,7 @@ class ChatResourceApi {
       )..stackTrace = stackTrace;
     }
 
-    return Response<ChatDTO>(
+    return Response<FoodItemDTO>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -407,12 +399,12 @@ class ChatResourceApi {
     );
   }
 
-  /// updateChat
+  /// updateFoodItem
   /// 
   ///
   /// Parameters:
   /// * [id] 
-  /// * [chatDTO] 
+  /// * [foodItemDTO] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -420,11 +412,11 @@ class ChatResourceApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [ChatDTO] as data
+  /// Returns a [Future] containing a [Response] with a [FoodItemDTO] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<ChatDTO>> updateChat({ 
+  Future<Response<FoodItemDTO>> updateFoodItem({ 
     required int id,
-    required ChatDTO chatDTO,
+    required FoodItemDTO foodItemDTO,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -432,7 +424,7 @@ class ChatResourceApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/chats/{id}'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/food-items/{id}'.replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'PUT',
       headers: <String, dynamic>{
@@ -449,8 +441,8 @@ class ChatResourceApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(ChatDTO);
-      _bodyData = _serializers.serialize(chatDTO, specifiedType: _type);
+      const _type = FullType(FoodItemDTO);
+      _bodyData = _serializers.serialize(foodItemDTO, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioError(
@@ -472,14 +464,14 @@ class ChatResourceApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    ChatDTO _responseData;
+    FoodItemDTO _responseData;
 
     try {
-      const _responseType = FullType(ChatDTO);
+      const _responseType = FullType(FoodItemDTO);
       _responseData = _serializers.deserialize(
         _response.data!,
         specifiedType: _responseType,
-      ) as ChatDTO;
+      ) as FoodItemDTO;
 
     } catch (error, stackTrace) {
       throw DioError(
@@ -490,7 +482,7 @@ class ChatResourceApi {
       )..stackTrace = stackTrace;
     }
 
-    return Response<ChatDTO>(
+    return Response<FoodItemDTO>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

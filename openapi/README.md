@@ -90,15 +90,30 @@ Class | Method | HTTP request | Description
 [*CategoryResourceApi*](doc\CategoryResourceApi.md) | [**getCategory**](doc\CategoryResourceApi.md#getcategory) | **GET** /api/categories/{id} | 
 [*CategoryResourceApi*](doc\CategoryResourceApi.md) | [**partialUpdateCategory**](doc\CategoryResourceApi.md#partialupdatecategory) | **PATCH** /api/categories/{id} | 
 [*CategoryResourceApi*](doc\CategoryResourceApi.md) | [**updateCategory**](doc\CategoryResourceApi.md#updatecategory) | **PUT** /api/categories/{id} | 
+[*ChatResourceApi*](doc\ChatResourceApi.md) | [**createChat**](doc\ChatResourceApi.md#createchat) | **POST** /api/chats | 
 [*ChatResourceApi*](doc\ChatResourceApi.md) | [**deleteChat**](doc\ChatResourceApi.md#deletechat) | **DELETE** /api/chats/{id} | 
 [*ChatResourceApi*](doc\ChatResourceApi.md) | [**getAllChats**](doc\ChatResourceApi.md#getallchats) | **GET** /api/chats | 
 [*ChatResourceApi*](doc\ChatResourceApi.md) | [**getChat**](doc\ChatResourceApi.md#getchat) | **GET** /api/chats/{id} | 
+[*ChatResourceApi*](doc\ChatResourceApi.md) | [**partialUpdateChat**](doc\ChatResourceApi.md#partialupdatechat) | **PATCH** /api/chats/{id} | 
+[*ChatResourceApi*](doc\ChatResourceApi.md) | [**updateChat**](doc\ChatResourceApi.md#updatechat) | **PUT** /api/chats/{id} | 
+[*FoodItemResourceApi*](doc\FoodItemResourceApi.md) | [**createFoodItem**](doc\FoodItemResourceApi.md#createfooditem) | **POST** /api/food-items | 
+[*FoodItemResourceApi*](doc\FoodItemResourceApi.md) | [**deleteFoodItem**](doc\FoodItemResourceApi.md#deletefooditem) | **DELETE** /api/food-items/{id} | 
+[*FoodItemResourceApi*](doc\FoodItemResourceApi.md) | [**getAllFoodItems**](doc\FoodItemResourceApi.md#getallfooditems) | **GET** /api/food-items | 
+[*FoodItemResourceApi*](doc\FoodItemResourceApi.md) | [**getFoodItem**](doc\FoodItemResourceApi.md#getfooditem) | **GET** /api/food-items/{id} | 
+[*FoodItemResourceApi*](doc\FoodItemResourceApi.md) | [**partialUpdateFoodItem**](doc\FoodItemResourceApi.md#partialupdatefooditem) | **PATCH** /api/food-items/{id} | 
+[*FoodItemResourceApi*](doc\FoodItemResourceApi.md) | [**updateFoodItem**](doc\FoodItemResourceApi.md#updatefooditem) | **PUT** /api/food-items/{id} | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**createFood**](doc\FoodResourceApi.md#createfood) | **POST** /api/foods | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**deleteFood**](doc\FoodResourceApi.md#deletefood) | **DELETE** /api/foods/{id} | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**getAllFoods**](doc\FoodResourceApi.md#getallfoods) | **GET** /api/foods | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**getFood**](doc\FoodResourceApi.md#getfood) | **GET** /api/foods/{id} | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**partialUpdateFood**](doc\FoodResourceApi.md#partialupdatefood) | **PATCH** /api/foods/{id} | 
 [*FoodResourceApi*](doc\FoodResourceApi.md) | [**updateFood**](doc\FoodResourceApi.md#updatefood) | **PUT** /api/foods/{id} | 
+[*MessageResourceApi*](doc\MessageResourceApi.md) | [**createMessage**](doc\MessageResourceApi.md#createmessage) | **POST** /api/messages | 
+[*MessageResourceApi*](doc\MessageResourceApi.md) | [**deleteMessage**](doc\MessageResourceApi.md#deletemessage) | **DELETE** /api/messages/{id} | 
+[*MessageResourceApi*](doc\MessageResourceApi.md) | [**getAllMessages**](doc\MessageResourceApi.md#getallmessages) | **GET** /api/messages | 
+[*MessageResourceApi*](doc\MessageResourceApi.md) | [**getMessage**](doc\MessageResourceApi.md#getmessage) | **GET** /api/messages/{id} | 
+[*MessageResourceApi*](doc\MessageResourceApi.md) | [**partialUpdateMessage**](doc\MessageResourceApi.md#partialupdatemessage) | **PATCH** /api/messages/{id} | 
+[*MessageResourceApi*](doc\MessageResourceApi.md) | [**updateMessage**](doc\MessageResourceApi.md#updatemessage) | **PUT** /api/messages/{id} | 
 [*OrderResourceApi*](doc\OrderResourceApi.md) | [**createOrder**](doc\OrderResourceApi.md#createorder) | **POST** /api/orders | 
 [*OrderResourceApi*](doc\OrderResourceApi.md) | [**deleteOrder**](doc\OrderResourceApi.md#deleteorder) | **DELETE** /api/orders/{id} | 
 [*OrderResourceApi*](doc\OrderResourceApi.md) | [**getAllOrders**](doc\OrderResourceApi.md#getallorders) | **GET** /api/orders | 
@@ -129,10 +144,12 @@ Class | Method | HTTP request | Description
  - [CategoryDTO](doc\CategoryDTO.md)
  - [ChatDTO](doc\ChatDTO.md)
  - [FoodDTO](doc\FoodDTO.md)
+ - [FoodItemDTO](doc\FoodItemDTO.md)
  - [JWTToken](doc\JWTToken.md)
  - [KeyAndPasswordVM](doc\KeyAndPasswordVM.md)
  - [LoginVM](doc\LoginVM.md)
  - [ManagedUserVM](doc\ManagedUserVM.md)
+ - [MessageDTO](doc\MessageDTO.md)
  - [OrderDTO](doc\OrderDTO.md)
  - [PasswordChangeDTO](doc\PasswordChangeDTO.md)
  - [User](doc\User.md)

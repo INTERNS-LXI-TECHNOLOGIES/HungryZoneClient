@@ -1,73 +1,90 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat_dto.dart';
+part of 'message_dto.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$ChatDTO extends ChatDTO {
+class _$MessageDTO extends MessageDTO {
   @override
   final int? id;
+  @override
+  final String userLogin;
   @override
   final DateTime chatDate;
   @override
   final String textMessage;
   @override
-  final BuiltSet<UserExtraDTO>? users;
+  final OrderDTO? user;
 
-  factory _$ChatDTO([void Function(ChatDTOBuilder)? updates]) =>
-      (new ChatDTOBuilder()..update(updates))._build();
+  factory _$MessageDTO([void Function(MessageDTOBuilder)? updates]) =>
+      (new MessageDTOBuilder()..update(updates))._build();
 
-  _$ChatDTO._(
-      {this.id, required this.chatDate, required this.textMessage, this.users})
+  _$MessageDTO._(
+      {this.id,
+      required this.userLogin,
+      required this.chatDate,
+      required this.textMessage,
+      this.user})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(chatDate, r'ChatDTO', 'chatDate');
     BuiltValueNullFieldError.checkNotNull(
-        textMessage, r'ChatDTO', 'textMessage');
+        userLogin, r'MessageDTO', 'userLogin');
+    BuiltValueNullFieldError.checkNotNull(chatDate, r'MessageDTO', 'chatDate');
+    BuiltValueNullFieldError.checkNotNull(
+        textMessage, r'MessageDTO', 'textMessage');
   }
 
   @override
-  ChatDTO rebuild(void Function(ChatDTOBuilder) updates) =>
+  MessageDTO rebuild(void Function(MessageDTOBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ChatDTOBuilder toBuilder() => new ChatDTOBuilder()..replace(this);
+  MessageDTOBuilder toBuilder() => new MessageDTOBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is ChatDTO &&
+    return other is MessageDTO &&
         id == other.id &&
+        userLogin == other.userLogin &&
         chatDate == other.chatDate &&
         textMessage == other.textMessage &&
-        users == other.users;
+        user == other.user;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, id.hashCode), chatDate.hashCode), textMessage.hashCode),
-        users.hashCode));
+        $jc(
+            $jc($jc($jc(0, id.hashCode), userLogin.hashCode),
+                chatDate.hashCode),
+            textMessage.hashCode),
+        user.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'ChatDTO')
+    return (newBuiltValueToStringHelper(r'MessageDTO')
           ..add('id', id)
+          ..add('userLogin', userLogin)
           ..add('chatDate', chatDate)
           ..add('textMessage', textMessage)
-          ..add('users', users))
+          ..add('user', user))
         .toString();
   }
 }
 
-class ChatDTOBuilder implements Builder<ChatDTO, ChatDTOBuilder> {
-  _$ChatDTO? _$v;
+class MessageDTOBuilder implements Builder<MessageDTO, MessageDTOBuilder> {
+  _$MessageDTO? _$v;
 
   int? _id;
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
+
+  String? _userLogin;
+  String? get userLogin => _$this._userLogin;
+  set userLogin(String? userLogin) => _$this._userLogin = userLogin;
 
   DateTime? _chatDate;
   DateTime? get chatDate => _$this._chatDate;
@@ -77,60 +94,62 @@ class ChatDTOBuilder implements Builder<ChatDTO, ChatDTOBuilder> {
   String? get textMessage => _$this._textMessage;
   set textMessage(String? textMessage) => _$this._textMessage = textMessage;
 
-  SetBuilder<UserExtraDTO>? _users;
-  SetBuilder<UserExtraDTO> get users =>
-      _$this._users ??= new SetBuilder<UserExtraDTO>();
-  set users(SetBuilder<UserExtraDTO>? users) => _$this._users = users;
+  OrderDTOBuilder? _user;
+  OrderDTOBuilder get user => _$this._user ??= new OrderDTOBuilder();
+  set user(OrderDTOBuilder? user) => _$this._user = user;
 
-  ChatDTOBuilder() {
-    ChatDTO._defaults(this);
+  MessageDTOBuilder() {
+    MessageDTO._defaults(this);
   }
 
-  ChatDTOBuilder get _$this {
+  MessageDTOBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
+      _userLogin = $v.userLogin;
       _chatDate = $v.chatDate;
       _textMessage = $v.textMessage;
-      _users = $v.users?.toBuilder();
+      _user = $v.user?.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(ChatDTO other) {
+  void replace(MessageDTO other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$ChatDTO;
+    _$v = other as _$MessageDTO;
   }
 
   @override
-  void update(void Function(ChatDTOBuilder)? updates) {
+  void update(void Function(MessageDTOBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  ChatDTO build() => _build();
+  MessageDTO build() => _build();
 
-  _$ChatDTO _build() {
-    _$ChatDTO _$result;
+  _$MessageDTO _build() {
+    _$MessageDTO _$result;
     try {
       _$result = _$v ??
-          new _$ChatDTO._(
+          new _$MessageDTO._(
               id: id,
+              userLogin: BuiltValueNullFieldError.checkNotNull(
+                  userLogin, r'MessageDTO', 'userLogin'),
               chatDate: BuiltValueNullFieldError.checkNotNull(
-                  chatDate, r'ChatDTO', 'chatDate'),
+                  chatDate, r'MessageDTO', 'chatDate'),
               textMessage: BuiltValueNullFieldError.checkNotNull(
-                  textMessage, r'ChatDTO', 'textMessage'),
-              users: _users?.build());
+                  textMessage, r'MessageDTO', 'textMessage'),
+              user: _user?.build());
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'users';
-        _users?.build();
+        _$failedField = 'user';
+        _user?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'ChatDTO', _$failedField, e.toString());
+            r'MessageDTO', _$failedField, e.toString());
       }
       rethrow;
     }

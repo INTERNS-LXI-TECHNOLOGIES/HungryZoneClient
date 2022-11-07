@@ -1,9 +1,5 @@
-import 'package:curved_drawer_fork/curved_drawer_fork.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hungryzone/database/model/operations.dart';
-import 'package:hungryzone/presentation/data/catelist.dart';
-import 'package:hungryzone/presentation/screens/add_food_screen.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:openapi/openapi.dart';
 
@@ -31,14 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<CategoryDTO> categoryList = [];
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<HomeScreenBloc>(context).add(AllCategoryListEvent());
-
-    getAllUser();
+    BlocProvider.of<HomeScreenBloc>(context).add(AllCategoryListEvent());
 
     return Scaffold(
-      drawer: sideDrawer(context),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         centerTitle: true,
         // leading: IconButton(
         //   onPressed: () {
@@ -49,19 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: kGreen,
         title: const Text('Hungry Zone'),
       ),
-
+      drawer: sideDrawer(context), // your drawer
       body: _body(context),
-
-      //button to ADD FOOD
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kGreen,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => AddFoodScreen()),
-          );
-        },
-      ),
     );
   }
 
