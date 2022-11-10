@@ -116,6 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(left: 10),
                   child: GestureDetector(
                     onTap: () {
+                      // WidgetsBinding.instance.addPostFrameCallback(){currentSelected = cateIndex;};
+                      //
                       setState(() {
                         currentSelected = cateIndex;
                       });
