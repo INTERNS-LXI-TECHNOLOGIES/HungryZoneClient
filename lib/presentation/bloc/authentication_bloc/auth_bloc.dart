@@ -35,8 +35,9 @@ _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
       if (token.statusCode == 200 || token.statusCode == 201) {
         if (token.data!.idToken!.isNotEmpty || token.data!.idToken != null) {
           final sharedPreference = await SharedPreferences.getInstance();
-          sharedPreference.setString(SHARED_PREFERENCES_KEY, token.toString());
-          sharedPreference.setBool(SHARED_PREFERENCES_KEY, true);
+          sharedPreference.setString(
+              SHARED_PREFERENCES_KEY, token.data!.idToken!);
+          //sharedPreference.setBool(SHARED_PREFERENCES_KEY, true);
           emit(AuthSuccessState(token: token));
         }
       } else {

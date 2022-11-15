@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'login_screen.dart';
 
-//java -jar "D:\My Pro\openapi"\openapi-generator-cli-6.0.0.jar generate --skip-validate-spec -i .\hungryzone.json -g dart-dio -o .\openapi
-
+//java -jar "D:\My Pro\openapi"\openapi-generator-cli-6.2.1.1.jar generate --skip-validate-spec -i .\hungryzone.json -g dart-dio -o .\openapi
+//flutter pub run build_runner build
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 

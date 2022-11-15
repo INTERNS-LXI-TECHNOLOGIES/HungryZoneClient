@@ -12,15 +12,15 @@ part 'food_item_dto.g.dart';
 ///
 /// Properties:
 /// * [id] 
-/// * [quandity] 
+/// * [quantity] 
 /// * [unit] 
 @BuiltValue()
 abstract class FoodItemDTO implements Built<FoodItemDTO, FoodItemDTOBuilder> {
   @BuiltValueField(wireName: r'id')
   int? get id;
 
-  @BuiltValueField(wireName: r'quandity')
-  int get quandity;
+  @BuiltValueField(wireName: r'quantity')
+  int get quantity;
 
   @BuiltValueField(wireName: r'unit')
   String get unit;
@@ -55,9 +55,9 @@ class _$FoodItemDTOSerializer implements PrimitiveSerializer<FoodItemDTO> {
         specifiedType: const FullType(int),
       );
     }
-    yield r'quandity';
+    yield r'quantity';
     yield serializers.serialize(
-      object.quandity,
+      object.quantity,
       specifiedType: const FullType(int),
     );
     yield r'unit';
@@ -95,12 +95,12 @@ class _$FoodItemDTOSerializer implements PrimitiveSerializer<FoodItemDTO> {
           ) as int;
           result.id = valueDes;
           break;
-        case r'quandity':
+        case r'quantity':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(int),
           ) as int;
-          result.quandity = valueDes;
+          result.quantity = valueDes;
           break;
         case r'unit':
           final valueDes = serializers.deserialize(

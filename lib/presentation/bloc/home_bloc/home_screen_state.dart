@@ -16,3 +16,8 @@ class AllCategoryLoaded extends HomeScreenState {
   List<CategoryDTO>? allCateList;
   AllCategoryLoaded({required this.allCateList});
 }
+
+class CateErrorState extends HomeScreenState {
+  String? error;
+  CateErrorState({required this.error});
+}

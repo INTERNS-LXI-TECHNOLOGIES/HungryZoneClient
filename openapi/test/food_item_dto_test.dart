@@ -12,8 +12,8 @@ void main() {
       // TODO
     });
 
-    // int quandity
-    test('to test the property `quandity`', () async {
+    // int quantity
+    test('to test the property `quantity`', () async {
       // TODO
     });
 

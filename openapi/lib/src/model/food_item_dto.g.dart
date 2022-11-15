@@ -10,16 +10,16 @@ class _$FoodItemDTO extends FoodItemDTO {
   @override
   final int? id;
   @override
-  final int quandity;
+  final int quantity;
   @override
   final String unit;
 
   factory _$FoodItemDTO([void Function(FoodItemDTOBuilder)? updates]) =>
       (new FoodItemDTOBuilder()..update(updates))._build();
 
-  _$FoodItemDTO._({this.id, required this.quandity, required this.unit})
+  _$FoodItemDTO._({this.id, required this.quantity, required this.unit})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(quandity, r'FoodItemDTO', 'quandity');
+    BuiltValueNullFieldError.checkNotNull(quantity, r'FoodItemDTO', 'quantity');
     BuiltValueNullFieldError.checkNotNull(unit, r'FoodItemDTO', 'unit');
   }
 
@@ -35,20 +35,20 @@ class _$FoodItemDTO extends FoodItemDTO {
     if (identical(other, this)) return true;
     return other is FoodItemDTO &&
         id == other.id &&
-        quandity == other.quandity &&
+        quantity == other.quantity &&
         unit == other.unit;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, id.hashCode), quandity.hashCode), unit.hashCode));
+    return $jf($jc($jc($jc(0, id.hashCode), quantity.hashCode), unit.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'FoodItemDTO')
           ..add('id', id)
-          ..add('quandity', quandity)
+          ..add('quantity', quantity)
           ..add('unit', unit))
         .toString();
   }
@@ -61,9 +61,9 @@ class FoodItemDTOBuilder implements Builder<FoodItemDTO, FoodItemDTOBuilder> {
   int? get id => _$this._id;
   set id(int? id) => _$this._id = id;
 
-  int? _quandity;
-  int? get quandity => _$this._quandity;
-  set quandity(int? quandity) => _$this._quandity = quandity;
+  int? _quantity;
+  int? get quantity => _$this._quantity;
+  set quantity(int? quantity) => _$this._quantity = quantity;
 
   String? _unit;
   String? get unit => _$this._unit;
@@ -77,7 +77,7 @@ class FoodItemDTOBuilder implements Builder<FoodItemDTO, FoodItemDTOBuilder> {
     final $v = _$v;
     if ($v != null) {
       _id = $v.id;
-      _quandity = $v.quandity;
+      _quantity = $v.quantity;
       _unit = $v.unit;
       _$v = null;
     }
@@ -102,8 +102,8 @@ class FoodItemDTOBuilder implements Builder<FoodItemDTO, FoodItemDTOBuilder> {
     final _$result = _$v ??
         new _$FoodItemDTO._(
             id: id,
-            quandity: BuiltValueNullFieldError.checkNotNull(
-                quandity, r'FoodItemDTO', 'quandity'),
+            quantity: BuiltValueNullFieldError.checkNotNull(
+                quantity, r'FoodItemDTO', 'quantity'),
             unit: BuiltValueNullFieldError.checkNotNull(
                 unit, r'FoodItemDTO', 'unit'));
     replace(_$result);

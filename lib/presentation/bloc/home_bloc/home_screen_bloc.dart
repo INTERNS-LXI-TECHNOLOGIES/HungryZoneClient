@@ -27,13 +27,17 @@ _fetchCategoryList(
   final bearerToken = sharedPreference.getString(SHARED_PREFERENCES_KEY) ?? '';
   debugPrint('category token length => ${bearerToken.length}');
   //Response<BuiltList<CategoryDTO>> allCateList =
-  await Openapi().getCategoryResourceApi().getAllCategories(headers: {
-    'Authorization': 'Bearer $_token}'
-  }).then((value) => {allCateList.addAll(value.data!.asList())});
-  if (allCateList.isNotEmpty) {
-    emit(AllCategoryLoaded(allCateList: allCateList));
-    debugPrint('category list length =>${allCateList.length}');
-  } else {
-    emit(CateLoadingState());
+  try {
+    await Openapi().getCategoryResourceApi().getAllCategories(headers: {
+      'Authorization': 'Bearer $_token}'
+    }).then((value) => {allCateList.addAll(value.data!.asList())});
+    if (allCateList.isNotEmpty) {
+      emit(AllCategoryLoaded(allCateList: allCateList));
+      debugPrint('category list length =>${allCateList.length}');
+    } else {
+      emit(CateLoadingState());
+    }
+  } catch (e) {
+    emit(CateErrorState(error: e.toString()));
   }
 }
