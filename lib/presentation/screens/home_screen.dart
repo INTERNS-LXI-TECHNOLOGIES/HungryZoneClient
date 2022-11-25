@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<CategoryDTO> categoryList = [];
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HomeScreenBloc>(context).add(AllCategoryListEvent());
+    // BlocProvider.of<HomeScreenBloc>(context).add(AllCategoryListEvent());
 
     return Scaffold(
       appBar: AppBar(
@@ -105,74 +105,79 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is AllCategoryLoaded) {
           categoryList = state.allCateList!;
 
-          return ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            itemCount: categoryList.isEmpty ? 5 : categoryList.length,
-            itemBuilder: (ctx, cateIndex) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: GestureDetector(
-                    onTap: () {
-                      // WidgetsBinding.instance.addPostFrameCallback(){currentSelected = cateIndex;};
-                      //
-                      setState(() {
-                        currentSelected = cateIndex;
-                      });
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            color: currentSelected == cateIndex
-                                ? Colors.black
-                                : Colors.blue,
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: const AssetImage('assets/images/logo.jpg'),
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                currentSelected == cateIndex
-                                    ? Colors.black.withOpacity(.5)
-                                    : Colors.black.withOpacity(.85),
-                                BlendMode.darken,
+          return Column(
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: categoryList.isEmpty ? 5 : categoryList.length,
+                itemBuilder: (ctx, cateIndex) {
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: GestureDetector(
+                        onTap: () {
+                          // WidgetsBinding.instance.addPostFrameCallback(){currentSelected = cateIndex;};
+                          //
+                          setState(() {
+                            currentSelected = cateIndex;
+                          });
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: currentSelected == cateIndex
+                                    ? Color.fromARGB(255, 58, 57, 57)
+                                    : Colors.blue,
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: const AssetImage(
+                                      'assets/images/logo.jpg'),
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                    currentSelected == cateIndex
+                                        ? Colors.black.withOpacity(.5)
+                                        : Colors.black.withOpacity(.85),
+                                    BlendMode.darken,
+                                  ),
+                                ),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(categoryList.isNotEmpty
+                                  ? categoryList.first.name
+                                  : 'category'),
+                              // SvgPicture.asset(
+                              //   categoryList[i].icon,
+                              //   height: 24,
+                              //   width: 24,
+                              //   color:
+                              //       currentSelected == i ? Colors.white : Colors.grey,
+                              // ),
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              categoryList.isNotEmpty
+                                  ? categoryList.first.name
+                                  : 'category',
+                              style: TextStyle(
+                                fontWeight: currentSelected == cateIndex
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                               ),
                             ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(categoryList.isNotEmpty
-                              ? categoryList.first.name
-                              : 'category'),
-                          // SvgPicture.asset(
-                          //   categoryList[i].icon,
-                          //   height: 24,
-                          //   width: 24,
-                          //   color:
-                          //       currentSelected == i ? Colors.white : Colors.grey,
-                          // ),
+                          ],
                         ),
-                        const SizedBox(height: 5),
-                        Text(
-                          categoryList.isNotEmpty
-                              ? categoryList.first.name
-                              : 'category',
-                          style: TextStyle(
-                            fontWeight: currentSelected == cateIndex
-                                ? FontWeight.bold
-                                : FontWeight.normal,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ),
+            ],
           );
         } else {
           return const Center(child: CircularProgressIndicator());

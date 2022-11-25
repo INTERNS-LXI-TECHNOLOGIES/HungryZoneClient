@@ -120,44 +120,48 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50))),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 100,
-                      ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 100,
+                        ),
 
-                      // #text_field
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        height: MediaQuery.of(context).size.width,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade300,
-                                blurRadius: 20,
-                                spreadRadius: 10,
-                              )
-                              // offset: const Offset(0, 10))
-                            ]),
-                        child: textFields(),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                        // #text_field
+                        SingleChildScrollView(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            height: MediaQuery.of(context).size.width,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.shade300,
+                                    blurRadius: 20,
+                                    spreadRadius: 10,
+                                  )
+                                  // offset: const Offset(0, 10))
+                                ]),
+                            child: textFields(),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
 
-                      // #signup_button
-                      buttonSignUp(context),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                        // #signup_button
+                        buttonSignUp(context),
+                        const SizedBox(
+                          height: 15,
+                        ),
 
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

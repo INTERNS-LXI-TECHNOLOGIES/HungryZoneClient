@@ -60,6 +60,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         }
       },
       builder: (context, state) => Scaffold(
+        appBar: AppBar(),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height,

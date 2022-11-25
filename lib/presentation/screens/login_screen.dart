@@ -278,7 +278,7 @@ class _LoginPageState extends State<LoginPage> {
             controller: phoneNumberController,
             decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                border: InputBorder.none,
+                border: OutlineInputBorder(),
                 hintText: 'Phonenumber',
                 isCollapsed: false,
                 hintStyle: TextStyle(fontSize: 14, color: Colors.grey)),
@@ -306,7 +306,8 @@ class _LoginPageState extends State<LoginPage> {
             controller: passwordController,
             decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                border: InputBorder.none,
+                //border: InputBorder.none,
+                border: OutlineInputBorder(),
                 hintText: 'Password',
                 isCollapsed: false,
                 hintStyle: TextStyle(fontSize: 14, color: Colors.grey)),
