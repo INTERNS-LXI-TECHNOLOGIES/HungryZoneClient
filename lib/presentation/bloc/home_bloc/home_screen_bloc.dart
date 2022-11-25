@@ -24,20 +24,18 @@ _fetchCategoryList(
   // const _token =
   //     "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3MDI1MDI2NH0.rBn5dwmEVQO8heeTbH1uH7ghWcOJa63dj_LfdFJNjfImi-G0W-LFw7CneTbcYU6xzPx6_d7ShdV5ql_7AwZF8A";
 
-  final bearerToken = sharedPreference.getString(SHARED_PREFERENCES_KEY) ?? '';
+  final String bearerToken =
+      sharedPreference.getString(SHARED_PREFERENCES_KEY)!;
   debugPrint('category token length => ${bearerToken.length}');
+  debugPrint('token from shared preference: $bearerToken');
   //Response<BuiltList<CategoryDTO>> allCateList =
-  try {
-    await Openapi().getCategoryResourceApi().getAllCategories(headers: {
-      'Authorization': 'Bearer $bearerToken}'
-    }).then((value) => {allCateList.addAll(value.data!.asList())});
-    if (allCateList.isNotEmpty) {
-      emit(AllCategoryLoaded(allCateList: allCateList));
-      debugPrint('category list length =>${allCateList.length}');
-    } else {
-      emit(CateLoadingState());
-    }
-  } catch (e) {
-    emit(CateErrorState(error: e.toString()));
+  await Openapi().getCategoryResourceApi().getAllCategories(headers: {
+    'Authorization': 'Bearer $_token}'
+  }).then((value) => {allCateList.addAll(value.data!.asList())});
+  if (allCateList.isNotEmpty) {
+    emit(AllCategoryLoaded(allCateList: allCateList));
+    debugPrint('category list length =>${allCateList.length}');
+  } else {
+    emit(CateLoadingState());
   }
 }
