@@ -30,7 +30,7 @@ _fetchCategoryList(
   debugPrint('token from shared preference: $bearerToken');
   //Response<BuiltList<CategoryDTO>> allCateList =
   await Openapi().getCategoryResourceApi().getAllCategories(headers: {
-    'Authorization': 'Bearer $_token}'
+    'Authorization': 'Bearer $bearerToken}' //you had used _token here before
   }).then((value) => {allCateList.addAll(value.data!.asList())});
   if (allCateList.isNotEmpty) {
     emit(AllCategoryLoaded(allCateList: allCateList));
