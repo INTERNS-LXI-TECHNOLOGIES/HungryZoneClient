@@ -21,3 +21,16 @@ class CateErrorState extends HomeScreenState {
   String? error;
   CateErrorState({required this.error});
 }
+
+class FoodListLoding extends HomeScreenState {}
+
+class FoodListLoaded extends HomeScreenState {
+  List<FoodDTO> foodList = [];
+
+  FoodListLoaded({required this.foodList});
+}
+
+class FoodListError extends HomeScreenState {
+  late String error;
+  FoodListError({required this.error});
+}

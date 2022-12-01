@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     BlocProvider.of<HomeScreenBloc>(context).add(AllCategoryListEvent());
+    BlocProvider.of<HomeScreenBloc>(context).add(AllFoodListEvent());
     super.initState();
   }
 
@@ -80,19 +81,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //  grid view for FOOD
   Widget itemsGrid() {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: 31,
-      itemBuilder: ((context, index) => InkWell(
-            child: const Card(
-              color: Color.fromARGB(255, 218, 218, 218),
-            ),
-            onTap: () {},
-          )),
-    );
+    return BlocBuilder<HomeScreenBloc, HomeScreenState>(
+        builder: (context, state) {
+      if (state is FoodListLoding) {
+      } else if (state is FoodListLoaded) {
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+          itemCount: state.foodList.length,
+          itemBuilder: ((context, index) => InkWell(
+                child: Card(
+                  color: Color.fromARGB(255, 218, 218, 218),
+                  child: Center(child: Text(state.foodList[index].name)),
+                ),
+                onTap: () {},
+              )),
+        );
+      }
+      return const Center(child: CircularProgressIndicator());
+    });
   }
 
   Container catgoryStatusList(BuildContext context) {
@@ -104,80 +113,86 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, state) {
         if (state is AllCategoryLoaded) {
           categoryList = state.allCateList!;
+          debugPrint(' state is cate loaded ');
+          debugPrint(
+              'category list item in home=>${state.allCateList!.length})');
 
-          return Column(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemCount: categoryList.isEmpty ? 5 : categoryList.length,
-                itemBuilder: (ctx, cateIndex) {
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: GestureDetector(
-                        onTap: () {
-                          // WidgetsBinding.instance.addPostFrameCallback(){currentSelected = cateIndex;};
-                          //
-                          setState(() {
-                            currentSelected = cateIndex;
-                          });
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                color: currentSelected == cateIndex
-                                    ? Color.fromARGB(255, 58, 57, 57)
-                                    : Colors.blue,
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                  image: const AssetImage(
-                                      'assets/images/logo.jpg'),
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(
-                                    currentSelected == cateIndex
-                                        ? Colors.black.withOpacity(.5)
-                                        : Colors.black.withOpacity(.85),
-                                    BlendMode.darken,
+          return Container(
+            height: MediaQuery.of(context).size.width / 3,
+            child: Column(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: categoryList.isEmpty ? 5 : categoryList.length,
+                  itemBuilder: (ctx, cateIndex) {
+                    return SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            // WidgetsBinding.instance.addPostFrameCallback(){currentSelected = cateIndex;};
+                            //
+                            // setState(() {
+                            //   currentSelected = cateIndex;
+                            // });
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 100,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  color: currentSelected == cateIndex
+                                      ? Color.fromARGB(255, 58, 57, 57)
+                                      : Colors.blue,
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                    image: const AssetImage(
+                                        'assets/images/logo.jpg'),
+                                    fit: BoxFit.cover,
+                                    colorFilter: ColorFilter.mode(
+                                      currentSelected == cateIndex
+                                          ? Colors.black.withOpacity(.5)
+                                          : Colors.black.withOpacity(.85),
+                                      BlendMode.darken,
+                                    ),
                                   ),
                                 ),
+                                alignment: Alignment.center,
+                                child: Text(categoryList.isNotEmpty
+                                    ? categoryList.first.name
+                                    : 'category'),
+                                // SvgPicture.asset(
+                                //   categoryList[i].icon,
+                                //   height: 24,
+                                //   width: 24,
+                                //   color:
+                                //       currentSelected == i ? Colors.white : Colors.grey,
+                                // ),
                               ),
-                              alignment: Alignment.center,
-                              child: Text(categoryList.isNotEmpty
-                                  ? categoryList.first.name
-                                  : 'category'),
-                              // SvgPicture.asset(
-                              //   categoryList[i].icon,
-                              //   height: 24,
-                              //   width: 24,
-                              //   color:
-                              //       currentSelected == i ? Colors.white : Colors.grey,
-                              // ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              categoryList.isNotEmpty
-                                  ? categoryList.first.name
-                                  : 'category',
-                              style: TextStyle(
-                                fontWeight: currentSelected == cateIndex
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
+                              const SizedBox(height: 5),
+                              Text(
+                                categoryList.isNotEmpty
+                                    ? categoryList.first.name
+                                    : 'category',
+                                style: TextStyle(
+                                  fontWeight: currentSelected == cateIndex
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    );
+                  },
+                ),
+              ],
+            ),
           );
         } else {
           return const Center(child: CircularProgressIndicator());

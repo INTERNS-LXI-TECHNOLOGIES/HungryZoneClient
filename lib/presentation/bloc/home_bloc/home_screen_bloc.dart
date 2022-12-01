@@ -15,7 +15,22 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   }
 }
 
-_fetchFoodList(AllFoodListEvent event, Emitter<HomeScreenState> emit) async {}
+_fetchFoodList(AllFoodListEvent event, Emitter<HomeScreenState> emit) async {
+  List<FoodDTO> foodList = [];
+  final sharedPreference = await SharedPreferences.getInstance();
+  final String bearerToken =
+      sharedPreference.getString(SHARED_PREFERENCES_KEY)!;
+  await Openapi().getFoodResourceApi().getAllFoods(headers: {
+    'Authorization': 'Bearer $bearerToken}'
+  }).then((value) => {foodList.addAll(value.data!.asList())});
+  if (foodList.isEmpty || foodList == null) {
+    emit(FoodListLoding());
+  } else if (foodList.isNotEmpty) {
+    emit(FoodListLoaded(foodList: foodList));
+  } else {
+    emit(FoodListError(error: 'error!!!!'));
+  }
+}
 
 _fetchCategoryList(
     AllCategoryListEvent event, Emitter<HomeScreenState> emit) async {
@@ -30,7 +45,7 @@ _fetchCategoryList(
   debugPrint('token from shared preference: $bearerToken');
   //Response<BuiltList<CategoryDTO>> allCateList =
   await Openapi().getCategoryResourceApi().getAllCategories(headers: {
-    'Authorization': 'Bearer $_token}'
+    'Authorization': 'Bearer $bearerToken}'
   }).then((value) => {allCateList.addAll(value.data!.asList())});
   if (allCateList.isNotEmpty) {
     emit(AllCategoryLoaded(allCateList: allCateList));
