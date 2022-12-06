@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +31,15 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       debugPrint(event.user!.email);
       debugPrint(event.user!.password);
       debugPrint(event.user!.login);
-      if (event.user != null) {
+      if (event.user!.firstName != null) {
         final response = await Openapi()
             .getAccountResourceApi()
             .registerAccount(managedUserVM: event.user!);
+        log(event.user!.firstName!);
         debugPrint("token--$response and statusCode => ${response.statusCode}");
 
         if (response.statusCode == 200 || response.statusCode == 201) {
-          emit(RegisterLoaded());
+          emit(RegisterLoaded(isLoad: true));
         } else {
           emit(RegisterLoadError(error: response.statusMessage));
         }

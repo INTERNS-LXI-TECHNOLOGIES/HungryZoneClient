@@ -18,6 +18,8 @@ class RegisterLoading extends SignupState {
 }
 
 class RegisterLoaded extends SignupState {
+  late bool isLoad;
+  RegisterLoaded({required this.isLoad});
   @override
   List<Object> get props => [];
 }

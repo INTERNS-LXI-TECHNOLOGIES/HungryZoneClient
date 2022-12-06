@@ -35,6 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocListener<SignupBloc, SignupState>(
         listener: (context, state) {
           if (state is RegisterLoaded) {
+            log("loaded state =>${state.isLoad}");
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Registration Sucsess'),
@@ -54,7 +55,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 behavior: SnackBarBehavior.floating,
               ),
             );
-            clearController();
+            // clearController();
           } else if (state is RegisterLoadError) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -64,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             );
             log('error :${state.error!}');
-            clearController();
+            // clearController();
           }
         },
         child: SingleChildScrollView(
@@ -176,13 +177,16 @@ class _SignUpPageState extends State<SignUpPage> {
     return MaterialButton(
       onPressed: () {
         bool isSignup = _validKey.currentState!.validate();
-        debugPrint(isSignup.toString());
+        debugPrint("isSignup=>$isSignup");
         if (isSignup == true) {
-          final registerUser = onUserAdd();
+          ManagedUserVM registerUser = onUserAdd();
+          debugPrint(registerUser.email! +
+              registerUser.login +
+              registerUser.firstName!);
           BlocProvider.of<SignupBloc>(context)
               .add(RegisterUserEvent(user: registerUser));
           debugPrint('..............triggred');
-          clearController();
+          //  clearController();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -191,7 +195,7 @@ class _SignUpPageState extends State<SignUpPage> {
               behavior: SnackBarBehavior.floating,
             ),
           );
-          clearController();
+          // clearController();
         }
       },
       height: 45,
@@ -231,7 +235,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   } else {
                     isValid = true;
 
-                    return '';
+                    return null;
                   }
                 },
                 decoration: const InputDecoration(
@@ -269,7 +273,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   } else {
                     isValid = true;
 
-                    return '';
+                    return null;
                   }
                 },
                 decoration: const InputDecoration(
@@ -295,7 +299,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   } else {
                     isValid = true;
 
-                    return '';
+                    return null;
                   }
                 },
                 decoration: const InputDecoration(
@@ -316,7 +320,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   } else {
                     isValid = true;
 
-                    return '';
+                    return null;
                   }
                 },
                 decoration: const InputDecoration(
@@ -345,6 +349,8 @@ class _SignUpPageState extends State<SignUpPage> {
     userBuilder.email = _emailId;
     userBuilder.password = _passwords;
     userBuilder.login = _phoneNumber;
+    userBuilder.activated = true;
+    userBuilder.langKey = 'en';
 
     ManagedUserVM signupUser = userBuilder.build();
     return signupUser;
