@@ -37,10 +37,7 @@ _checkLoginUser(LogedInEvent event, Emitter<AuthState> emit) async {
         if (token.data!.idToken!.isNotEmpty || token.data!.idToken != null) {
           final sharedPreference = await SharedPreferences.getInstance();
           sharedPreference.setString(
-              SHARED_PREFERENCES_KEY,
-              token.data!
-                  .idToken!); // save token.data.idToken. You had stored token itself before. That was causing the error
-          //Remove this line. It is not needed.=> sharedPreference.setBool(SHARED_PREFERENCES_KEY, true);
+              SHARED_PREFERENCES_KEY, token.data!.idToken!);
           emit(AuthSuccessState(token: token));
         }
       } else {

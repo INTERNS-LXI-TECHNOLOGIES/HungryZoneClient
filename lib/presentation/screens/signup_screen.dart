@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hungryzone/database/model/user_model.dart';
 import 'package:hungryzone/presentation/screens/login_screen.dart';
@@ -69,24 +70,26 @@ class _SignUpPageState extends State<SignUpPage> {
           }
         },
         child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.green.shade900,
-                  kGreen,
-                  Colors.green.shade400,
-                ],
-                begin: Alignment.topRight,
-                end: Alignment.centerLeft,
+          child: Expanded(
+            child: Container(
+              // height: MediaQuery.of(context).size.height,
+              // width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.green.shade900,
+                    kGreen,
+                    Colors.green.shade400,
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.centerLeft,
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
+              child: Column(
+                children: [
+                  Container(
+                    // height: double.infinity,
+                    // width: double.infinity,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
                     child: Column(
@@ -112,60 +115,70 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width * 1.5,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50))),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 100,
-                        ),
+                  SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.width * 2),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width * 2,
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(50),
+                                topRight: Radius.circular(50))),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 50,
+                            ),
 
-                        // #text_field
-                        SingleChildScrollView(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            height: MediaQuery.of(context).size.width,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    blurRadius: 20,
-                                    spreadRadius: 10,
-                                  )
-                                  // offset: const Offset(0, 10))
-                                ]),
-                            child: textFields(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                            // #text_field
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  minHeight:
+                                      MediaQuery.of(context).size.width / 5),
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                // height: MediaQuery.of(context).size.height / 2.5,
+                                //width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.shade300,
+                                        blurRadius: 20,
+                                        spreadRadius: 10,
+                                      )
+                                      // offset: const Offset(0, 10))
+                                    ]),
+                                child: textFields(),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.width / 8,
+                            ),
 
-                        // #signup_button
-                        buttonSignUp(context),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                            // #signup_button
+                            buttonSignUp(context),
+                            // const SizedBox(
+                            //   height: 15,
+                            // ),
 
-                        const SizedBox(
-                          height: 15,
+                            // const SizedBox(
+                            //   height: 15,
+                            // ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -179,10 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
         bool isSignup = _validKey.currentState!.validate();
         debugPrint("isSignup=>$isSignup");
         if (isSignup == true) {
-          ManagedUserVM registerUser = onUserAdd();
-          debugPrint(registerUser.email! +
-              registerUser.login +
-              registerUser.firstName!);
+          final registerUser = onUserAdd();
           BlocProvider.of<SignupBloc>(context)
               .add(RegisterUserEvent(user: registerUser));
           debugPrint('..............triggred');
@@ -221,117 +231,113 @@ class _SignUpPageState extends State<SignUpPage> {
   Form textFields() {
     return Form(
       key: _validKey,
-      child: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextFormField(
-                controller: firstNameController,
-                validator: (value) {
-                  if (value!.isEmpty || value == null) {
-                    return 'enter your name';
-                  } else {
-                    isValid = true;
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          TextFormField(
+            controller: firstNameController,
+            validator: (value) {
+              if (value!.isEmpty || value == null) {
+                return 'enter your name';
+              } else {
+                isValid = true;
 
-                    return null;
-                  }
-                },
-                decoration: const InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    border: InputBorder.none,
-                    hintText: "First Name",
-                    hintStyle: const TextStyle(color: Colors.grey)),
-              ),
-              const Divider(
-                thickness: 0.5,
-                height: 10,
-              ),
-              TextFormField(
-                controller: lastNameController,
-                decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    border: InputBorder.none,
-                    hintText: "Last Name",
-                    hintStyle: TextStyle(color: Colors.grey)),
-              ),
-              const Divider(
-                thickness: 0.5,
-                height: 10,
-              ),
-              TextFormField(
-                controller: emailController,
-                validator: (value) {
-                  String pattern =
-                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                  RegExp regExp = RegExp(pattern);
-                  if (value!.isEmpty || value == null) {
-                    return 'enter your mail id';
-                  } else if ((!regExp.hasMatch(value))) {
-                    return 'enter valid mail id';
-                  } else {
-                    isValid = true;
-
-                    return null;
-                  }
-                },
-                decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                    border: InputBorder.none,
-                    hintText: "Email",
-                    hintStyle: TextStyle(color: Colors.grey)),
-              ),
-              const Divider(
-                thickness: 0.5,
-                height: 10,
-              ),
-              TextFormField(
-                controller: phoneNumberController,
-                validator: (value) {
-                  String pattern =
-                      r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
-                  RegExp regExp = RegExp(pattern);
-                  if (value!.isEmpty || value == null) {
-                    return 'enter your mail id';
-                  } else if ((!regExp.hasMatch(value))) {
-                    return 'enter valid phone number';
-                  } else {
-                    isValid = true;
-
-                    return null;
-                  }
-                },
-                decoration: const InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    border: InputBorder.none,
-                    hintText: "Phone",
-                    hintStyle: const TextStyle(color: Colors.grey)),
-              ),
-              const Divider(
-                thickness: 0.5,
-                height: 10,
-              ),
-              TextFormField(
-                controller: passwordController,
-                validator: (value) {
-                  if (value!.isEmpty || value == null) {
-                    return 'enter your password';
-                  } else {
-                    isValid = true;
-
-                    return null;
-                  }
-                },
-                decoration: const InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                    border: InputBorder.none,
-                    hintText: "Password",
-                    hintStyle: const TextStyle(color: Colors.grey)),
-              ),
-            ],
+                return null;
+              }
+            },
+            decoration: const InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: "First Name",
+                hintStyle: const TextStyle(color: Colors.grey)),
           ),
-        ),
+          const Divider(
+            thickness: 0.5,
+            height: 10,
+          ),
+          TextFormField(
+            controller: lastNameController,
+            decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: "Last Name",
+                hintStyle: TextStyle(color: Colors.grey)),
+          ),
+          const Divider(
+            thickness: 0.5,
+            height: 10,
+          ),
+          TextFormField(
+            controller: emailController,
+            validator: (value) {
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = RegExp(pattern);
+              if (value!.isEmpty || value == null) {
+                return 'enter your mail id';
+              } else if ((!regExp.hasMatch(value))) {
+                return 'enter valid mail id';
+              } else {
+                isValid = true;
+
+                return null;
+              }
+            },
+            decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: "Email",
+                hintStyle: TextStyle(color: Colors.grey)),
+          ),
+          const Divider(
+            thickness: 0.5,
+            height: 10,
+          ),
+          TextFormField(
+            controller: phoneNumberController,
+            validator: (value) {
+              String pattern =
+                  r'^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$';
+              RegExp regExp = RegExp(pattern);
+              if (value!.isEmpty || value == null) {
+                return 'enter your mail id';
+              } else if ((!regExp.hasMatch(value))) {
+                return 'enter valid phone number';
+              } else {
+                isValid = true;
+
+                return null;
+              }
+            },
+            decoration: const InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: "Phone",
+                hintStyle: const TextStyle(color: Colors.grey)),
+          ),
+          const Divider(
+            thickness: 0.5,
+            height: 10,
+          ),
+          TextFormField(
+            controller: passwordController,
+            validator: (value) {
+              if (value!.isEmpty || value == null) {
+                return 'enter your password';
+              } else {
+                isValid = true;
+
+                return null;
+              }
+            },
+            decoration: const InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                border: InputBorder.none,
+                hintText: "Password",
+                hintStyle: const TextStyle(color: Colors.grey)),
+          ),
+        ],
       ),
     );
   }
@@ -350,7 +356,6 @@ class _SignUpPageState extends State<SignUpPage> {
     userBuilder.password = _passwords;
     userBuilder.login = _phoneNumber;
     userBuilder.activated = true;
-    userBuilder.langKey = 'en';
 
     ManagedUserVM signupUser = userBuilder.build();
     return signupUser;
