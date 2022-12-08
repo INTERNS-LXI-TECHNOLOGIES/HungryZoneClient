@@ -3,8 +3,7 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:openapi/src/model/food_dto.dart';
-import 'package:built_collection/built_collection.dart';
+import 'package:openapi/src/model/food_item_dto.dart';
 import 'package:openapi/src/model/user_extra_dto.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -19,9 +18,8 @@ part 'order_dto.g.dart';
 /// * [quantity] 
 /// * [unit] 
 /// * [orderStatus] 
-/// * [donor] 
+/// * [food] 
 /// * [recipient] 
-/// * [foods] 
 @BuiltValue()
 abstract class OrderDTO implements Built<OrderDTO, OrderDTOBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -39,14 +37,11 @@ abstract class OrderDTO implements Built<OrderDTO, OrderDTOBuilder> {
   @BuiltValueField(wireName: r'orderStatus')
   String get orderStatus;
 
-  @BuiltValueField(wireName: r'donor')
-  UserExtraDTO? get donor;
+  @BuiltValueField(wireName: r'food')
+  FoodItemDTO? get food;
 
   @BuiltValueField(wireName: r'recipient')
   UserExtraDTO? get recipient;
-
-  @BuiltValueField(wireName: r'foods')
-  BuiltSet<FoodDTO>? get foods;
 
   OrderDTO._();
 
@@ -98,11 +93,11 @@ class _$OrderDTOSerializer implements PrimitiveSerializer<OrderDTO> {
       object.orderStatus,
       specifiedType: const FullType(String),
     );
-    if (object.donor != null) {
-      yield r'donor';
+    if (object.food != null) {
+      yield r'food';
       yield serializers.serialize(
-        object.donor,
-        specifiedType: const FullType(UserExtraDTO),
+        object.food,
+        specifiedType: const FullType(FoodItemDTO),
       );
     }
     if (object.recipient != null) {
@@ -110,13 +105,6 @@ class _$OrderDTOSerializer implements PrimitiveSerializer<OrderDTO> {
       yield serializers.serialize(
         object.recipient,
         specifiedType: const FullType(UserExtraDTO),
-      );
-    }
-    if (object.foods != null) {
-      yield r'foods';
-      yield serializers.serialize(
-        object.foods,
-        specifiedType: const FullType(BuiltSet, [FullType(FoodDTO)]),
       );
     }
   }
@@ -177,12 +165,12 @@ class _$OrderDTOSerializer implements PrimitiveSerializer<OrderDTO> {
           ) as String;
           result.orderStatus = valueDes;
           break;
-        case r'donor':
+        case r'food':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(UserExtraDTO),
-          ) as UserExtraDTO;
-          result.donor.replace(valueDes);
+            specifiedType: const FullType(FoodItemDTO),
+          ) as FoodItemDTO;
+          result.food.replace(valueDes);
           break;
         case r'recipient':
           final valueDes = serializers.deserialize(
@@ -190,13 +178,6 @@ class _$OrderDTOSerializer implements PrimitiveSerializer<OrderDTO> {
             specifiedType: const FullType(UserExtraDTO),
           ) as UserExtraDTO;
           result.recipient.replace(valueDes);
-          break;
-        case r'foods':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(FoodDTO)]),
-          ) as BuiltSet<FoodDTO>;
-          result.foods.replace(valueDes);
           break;
         default:
           unhandled.add(key);

@@ -18,11 +18,9 @@ class _$OrderDTO extends OrderDTO {
   @override
   final String orderStatus;
   @override
-  final UserExtraDTO? donor;
+  final FoodItemDTO? food;
   @override
   final UserExtraDTO? recipient;
-  @override
-  final BuiltSet<FoodDTO>? foods;
 
   factory _$OrderDTO([void Function(OrderDTOBuilder)? updates]) =>
       (new OrderDTOBuilder()..update(updates))._build();
@@ -33,9 +31,8 @@ class _$OrderDTO extends OrderDTO {
       required this.quantity,
       required this.unit,
       required this.orderStatus,
-      this.donor,
-      this.recipient,
-      this.foods})
+      this.food,
+      this.recipient})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(orderDate, r'OrderDTO', 'orderDate');
     BuiltValueNullFieldError.checkNotNull(quantity, r'OrderDTO', 'quantity');
@@ -60,9 +57,8 @@ class _$OrderDTO extends OrderDTO {
         quantity == other.quantity &&
         unit == other.unit &&
         orderStatus == other.orderStatus &&
-        donor == other.donor &&
-        recipient == other.recipient &&
-        foods == other.foods;
+        food == other.food &&
+        recipient == other.recipient;
   }
 
   @override
@@ -71,14 +67,12 @@ class _$OrderDTO extends OrderDTO {
         $jc(
             $jc(
                 $jc(
-                    $jc(
-                        $jc($jc($jc(0, id.hashCode), orderDate.hashCode),
-                            quantity.hashCode),
-                        unit.hashCode),
-                    orderStatus.hashCode),
-                donor.hashCode),
-            recipient.hashCode),
-        foods.hashCode));
+                    $jc($jc($jc(0, id.hashCode), orderDate.hashCode),
+                        quantity.hashCode),
+                    unit.hashCode),
+                orderStatus.hashCode),
+            food.hashCode),
+        recipient.hashCode));
   }
 
   @override
@@ -89,9 +83,8 @@ class _$OrderDTO extends OrderDTO {
           ..add('quantity', quantity)
           ..add('unit', unit)
           ..add('orderStatus', orderStatus)
-          ..add('donor', donor)
-          ..add('recipient', recipient)
-          ..add('foods', foods))
+          ..add('food', food)
+          ..add('recipient', recipient))
         .toString();
   }
 }
@@ -119,19 +112,15 @@ class OrderDTOBuilder implements Builder<OrderDTO, OrderDTOBuilder> {
   String? get orderStatus => _$this._orderStatus;
   set orderStatus(String? orderStatus) => _$this._orderStatus = orderStatus;
 
-  UserExtraDTOBuilder? _donor;
-  UserExtraDTOBuilder get donor => _$this._donor ??= new UserExtraDTOBuilder();
-  set donor(UserExtraDTOBuilder? donor) => _$this._donor = donor;
+  FoodItemDTOBuilder? _food;
+  FoodItemDTOBuilder get food => _$this._food ??= new FoodItemDTOBuilder();
+  set food(FoodItemDTOBuilder? food) => _$this._food = food;
 
   UserExtraDTOBuilder? _recipient;
   UserExtraDTOBuilder get recipient =>
       _$this._recipient ??= new UserExtraDTOBuilder();
   set recipient(UserExtraDTOBuilder? recipient) =>
       _$this._recipient = recipient;
-
-  SetBuilder<FoodDTO>? _foods;
-  SetBuilder<FoodDTO> get foods => _$this._foods ??= new SetBuilder<FoodDTO>();
-  set foods(SetBuilder<FoodDTO>? foods) => _$this._foods = foods;
 
   OrderDTOBuilder() {
     OrderDTO._defaults(this);
@@ -145,9 +134,8 @@ class OrderDTOBuilder implements Builder<OrderDTO, OrderDTOBuilder> {
       _quantity = $v.quantity;
       _unit = $v.unit;
       _orderStatus = $v.orderStatus;
-      _donor = $v.donor?.toBuilder();
+      _food = $v.food?.toBuilder();
       _recipient = $v.recipient?.toBuilder();
-      _foods = $v.foods?.toBuilder();
       _$v = null;
     }
     return this;
@@ -181,18 +169,15 @@ class OrderDTOBuilder implements Builder<OrderDTO, OrderDTOBuilder> {
                   unit, r'OrderDTO', 'unit'),
               orderStatus: BuiltValueNullFieldError.checkNotNull(
                   orderStatus, r'OrderDTO', 'orderStatus'),
-              donor: _donor?.build(),
-              recipient: _recipient?.build(),
-              foods: _foods?.build());
+              food: _food?.build(),
+              recipient: _recipient?.build());
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'donor';
-        _donor?.build();
+        _$failedField = 'food';
+        _food?.build();
         _$failedField = 'recipient';
         _recipient?.build();
-        _$failedField = 'foods';
-        _foods?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'OrderDTO', _$failedField, e.toString());

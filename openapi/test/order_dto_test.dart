@@ -32,18 +32,13 @@ void main() {
       // TODO
     });
 
-    // UserExtraDTO donor
-    test('to test the property `donor`', () async {
+    // FoodItemDTO food
+    test('to test the property `food`', () async {
       // TODO
     });
 
     // UserExtraDTO recipient
     test('to test the property `recipient`', () async {
-      // TODO
-    });
-
-    // BuiltSet<FoodDTO> foods
-    test('to test the property `foods`', () async {
       // TODO
     });
 

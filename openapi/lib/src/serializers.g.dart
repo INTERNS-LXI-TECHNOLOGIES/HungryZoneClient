@@ -25,9 +25,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(UserDTO.serializer)
       ..add(UserExtraDTO.serializer)
       ..addBuilderFactory(
-          const FullType(BuiltSet, const [const FullType(FoodDTO)]),
-          () => new SetBuilder<FoodDTO>())
-      ..addBuilderFactory(
           const FullType(BuiltSet, const [const FullType(String)]),
           () => new SetBuilder<String>())
       ..addBuilderFactory(

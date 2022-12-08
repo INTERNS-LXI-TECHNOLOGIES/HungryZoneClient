@@ -20,10 +20,11 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<PasswordBloc, PasswordState>(
       listener: (context, state) async {
-        if (state is ForgotPasswordLoaded) {
-          emailController.clear();
-          Navigator.of(context).pop();
-        } else if (state is ForgotPasswordLoading ||
+        // if (state is ForgotPasswordLoaded) {
+        //   emailController.clear();
+        //   Navigator.of(context).pop();
+        // } else
+        if (state is ForgotPasswordLoading ||
             state is ForgotPasswordLoadError) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
