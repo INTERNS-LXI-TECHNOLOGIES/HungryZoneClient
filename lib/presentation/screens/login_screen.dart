@@ -249,6 +249,7 @@ class _LoginPageState extends State<LoginPage> {
             ]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
           children: [
             /// PhoneNumber validation
             TextFormField(

@@ -12,6 +12,7 @@ part 'signup_state.dart';
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc() : super(SignupInitial()) {
     on<RegisterUserEvent>(_regesterUser);
+    on<ActivateAccountEvent>(_checkActiveUser);
   }
   _regesterUser(RegisterUserEvent event, Emitter<SignupState> emit) async {
     try {
@@ -45,6 +46,27 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         }
       } else {
         emit(RegisterLoadError(error: "response.statusMessage"));
+      }
+    } catch (e) {
+      emit(RegisterLoadError(error: e.toString()));
+    }
+  }
+
+  _checkActiveUser(
+      ActivateAccountEvent event, Emitter<SignupState> emit) async {
+    try {
+      emit(SignupInitial());
+      if (event.activeKey.isNotEmpty && event.activeKey != null) {
+        final response = await Openapi()
+            .getAccountResourceApi()
+            .activateAccount(key: event.activeKey);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          emit(ActivateAccountLoaded());
+        } else {
+          emit(RegisterLoadError(error: 'Response Error'));
+        }
+      } else {
+        emit(RegisterLoadError(error: 'Key Error'));
       }
     } catch (e) {
       emit(RegisterLoadError(error: e.toString()));

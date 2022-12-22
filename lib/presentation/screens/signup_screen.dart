@@ -27,6 +27,7 @@ TextEditingController lastNameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
 TextEditingController phoneNumberController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
+TextEditingController activeKeyController = TextEditingController();
 bool isValid = false;
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -45,8 +46,19 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             );
             Future.delayed(const Duration(seconds: 1));
-            Navigator.of(context).pop();
+            _displayTextInputDialog(context);
+            // Navigator.of(context).pop();
             clearController();
+            //
+          } else if (state is ActivateAccountLoaded) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Account Activated'),
+                backgroundColor: Color.fromARGB(255, 252, 252, 252),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+            Future.delayed(const Duration(seconds: 1));
             MaterialPageRoute(builder: (context) => const LoginPage());
           } else if (state is RegisterLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -184,6 +196,36 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('TextField in Dialog'),
+            content: TextField(
+              //  onChanged: (value) {
+              //    setState(() {
+              //      valueText = value;
+              //    });
+              //  },
+              controller: activeKeyController,
+              decoration: const InputDecoration(hintText: "Enter Key"),
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                color: kGreen,
+                textColor: Colors.white,
+                child: const Text('OK'),
+                onPressed: () {
+                  BlocProvider.of<SignupBloc>(context).add(ActivateAccountEvent(
+                      activeKey: activeKeyController.text));
+                },
+              ),
+            ],
+          );
+        });
   }
 
   MaterialButton buttonSignUp(BuildContext context) {
@@ -356,6 +398,7 @@ class _SignUpPageState extends State<SignUpPage> {
     userBuilder.password = _passwords;
     userBuilder.login = _phoneNumber;
     userBuilder.activated = true;
+    userBuilder.langKey = 'en';
 
     ManagedUserVM signupUser = userBuilder.build();
     return signupUser;

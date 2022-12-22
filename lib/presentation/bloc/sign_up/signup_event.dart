@@ -12,3 +12,10 @@ class RegisterUserEvent extends SignupEvent {
   ManagedUserVM? user;
   RegisterUserEvent({required this.user});
 }
+
+class ActivateAccountEvent extends SignupEvent {
+  late final String activeKey;
+  ActivateAccountEvent({required this.activeKey});
+  @override
+  List<Object> get props => [];
+}

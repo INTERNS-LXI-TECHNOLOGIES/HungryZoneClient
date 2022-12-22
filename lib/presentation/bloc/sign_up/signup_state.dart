@@ -30,3 +30,8 @@ class RegisterLoadError extends SignupState {
   @override
   List<Object> get props => [];
 }
+
+class ActivateAccountLoaded extends SignupState {
+  @override
+  List<Object> get props => [];
+}
